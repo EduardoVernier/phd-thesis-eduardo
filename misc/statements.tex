@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+\usepackage[dutch,english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[lining]{libertine}
+\usepackage{scalefnt}
+\usepackage{textcase}
+\usepackage{microtype}
+\pdfcompresslevel=9
+
+\newlength{\mytextwidth}
+\setlength{\mytextwidth}{26pc}
+\newlength{\mytextheight}
+\setlength{\mytextheight}{44pc}
+\usepackage[papersize={148mm,210mm}, width=\mytextwidth, height=\mytextheight, hmarginratio={1:1},vmarginratio={1:1},bindingoffset=0mm]{geometry}
+
+
+\thispagestyle{empty}
+
+\newcommand{\attribute}[1]{\hspace*{1mm}\hfill{\footnotesize\textit{-- #1}}}%
+\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}%
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}%
+
+\newlength{\headerspacing}
+\setlength{\headerspacing}{3mm}
+\begin{document}
+
+\begin{center}
+\spacedallcaps{\textbf{Propositions}}\\
+\vspace{\headerspacing}
+\vspace{\headerspacing}
+\spacedallcaps{Visual Analytics Applied to Image Analysis}\\
+\vspace{\headerspacing}
+\spacedlowsmallcaps{Paulo Eduardo Rauber}\\
+\end{center}
+\rule{\linewidth}{0.2mm}
+\begin{enumerate}
+
+\item In image segmentation, users remain indispensable when the objects of interest resist a rigorous definition, while machines have greater potential for the minutiae involved in delineation. 
+\vfill
+
+\item Evaluation by robot users in benchmark datasets is essential to stimulate the incremental improvement of interactive segmentation techniques.
+\vfill
+
+\item Traditional scalar classification efficacy measures provide very limited feedback, which typically leaves experts unaware of how to improve systems that underperform.
+\vfill
+
+\item Designing and selecting features that enable good generalization is typically harder than choosing a learning algorithm that performs reasonably well.
+\vfill
+
+\item The qualitative visual feedback provided by projections (e.g., regarding the presence of outliers, distribution of observations in the feature space, separation between classes) is very difficult to obtain by non-visual means.
+
+\vfill
+
+\item Choosing appropriate pre-processing steps, architectures, and hyperparameters for artificial neural networks is a challenging task, which is related to the difficulty in interpreting how such networks arrive at decisions.
+\vfill
+
+\item The visualization of representations of observations learned by artificial neural networks may lead to insights about how networks operate that lead to improvements along the classification pipeline.
+\vfill
+
+\item Temporal incoherence leads to incorrect insights, and will affect any of the many dimensionality reduction techniques that are highly sensitive to small changes in their inputs.
+\vfill
+
+\item Visual analytics is capable of providing actionable insights about the design and operation of image analysis methods. 
+\vfill
+
+\item If intelligence is defined as a measure of the ability of an agent to achieve goals in a wide range of environments, then cooperation between users and machines will remain relevant for at least as long as machines lack human-level intelligence.
+\vfill
+
+\end{enumerate}
+\end{document}

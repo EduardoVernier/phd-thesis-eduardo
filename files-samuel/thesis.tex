@@ -1,0 +1,76 @@
+\documentclass[twoside,openright,titlepage,numbers=noenddot,headinclude,footinclude=true,cleardoublepage=empty,BCOR=5mm,fontsize=10pt,dutch,english]{scrbook}
+                
+\newlength{\mytextwidth}
+\setlength{\mytextwidth}{288pt}  % default
+% \setlength{\mytextwidth}{300pt}
+
+\newlength{\mytextheight}
+\setlength{\mytextheight}{525pt} % default
+% \setlength{\mytextheight}{555pt} % default
+
+\setlength{\footskip}{40pt} 
+% \setlength{\footskip}{25pt} % default
+
+
+%%% default
+% \usepackage[papersize={17cm,24cm}, width=\mytextwidth, height=\mytextheight,hmarginratio={1:2},vmarginratio={1:1},bindingoffset=4mm,showframe]{geometry}
+
+% use [showframe] to show the margin frames
+\usepackage[papersize={17cm,24cm},height=\mytextheight,bindingoffset=4mm]{geometry}
+% \usepackage[papersize={17cm,24cm},height=19cm,bindingoffset=4mm,showframe]{geometry}
+% \usepackage[papersize={17cm,24cm},width=13cm,height=19cm,bindingoffset=4mm,showframe]{geometry}
+
+
+\input{classicthesis-config}
+
+\hyphenation{net-works}
+
+\begin{document}
+
+\sloppy
+
+\frenchspacing
+\raggedbottom
+\selectlanguage{english}
+
+\pagenumbering{roman}
+\pagestyle{plain}
+
+% Front matter
+\include{frontback/Titlepage}
+\include{frontback/Titleback}
+\include{frontback/DirtyTitlepageNew}
+
+\pagestyle{scrheadings}
+
+\cleardoublepage\include{frontback/Dedication}
+\cleardoublepage\include{frontback/Abstract}
+\cleardoublepage\include{frontback/Publication}
+\cleardoublepage\include{frontback/Contents}
+
+% Main matter
+\cleardoublepage
+\pagenumbering{arabic}
+
+
+
+\input{chapters/1-introduction/introduction.tex}
+\input{chapters/2-background/background.tex}
+\input{chapters/3-brain-segmentation/brain-segmentation.tex}
+\input{chapters/4-abnormal-hippocampus/abnormal-hippocampus.tex}
+\input{chapters/5-abnormal-asymmetries/abnormal-asymmetries.tex}
+\input{chapters/6-general-brain-anomalies/general-brain-anomalies.tex}
+\input{chapters/7-conclusions/conclusions.tex}
+
+\appendix
+\input{chapters/appendices/notations.tex}
+\input{chapters/appendices/data.tex}
+\input{chapters/appendices/metrics.tex}
+
+% Backmatter
+\backmatter
+\cleardoublepage\input{frontback/Bibliography}
+\cleardoublepage\include{frontback/Acknowledgments}
+\cleardoublepage\include{frontback/Colophon}
+
+\end{document}

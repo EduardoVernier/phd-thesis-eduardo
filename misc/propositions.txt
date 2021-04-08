@@ -1,0 +1,19 @@
+In image segmentation, users remain indispensable when the objects of interest resist a rigorous definition, while machines have greater potential for the minutiae involved in delineation. 
+
+Evaluation by robot users in benchmark datasets is essential to stimulate the incremental improvement of interactive segmentation techniques.
+
+Traditional scalar classification efficacy measures provide very limited feedback, which typically leaves experts unaware of how to improve systems that underperform.
+
+Designing and selecting features that enable good generalization is typically harder than choosing a learning algorithm that performs reasonably well.
+
+The qualitative visual feedback provided by projections (e.g., regarding the presence of outliers, distribution of observations in the feature space, separation between classes) is very difficult to obtain by non-visual means.
+
+Choosing appropriate pre-processing steps, architectures, and hyperparameters for artificial neural networks is a challenging task, which is related to the difficulty in interpreting how such networks arrive at decisions.
+
+The visualization of representations of observations learned by artificial neural networks may lead to insights about how networks operate that lead to improvements along the classification pipeline.
+
+Temporal incoherence leads to incorrect insights, and will affect any of the many dimensionality reduction techniques that are highly sensitive to small changes in their inputs.
+
+Visual analytics is capable of providing actionable insights about the design and operation of image analysis methods.
+
+If intelligence is defined as a measure of the ability of an agent to achieve goals in a wide range of environments, then cooperation between users and machines will remain relevant for at least as long as machines lack human-level intelligence.
