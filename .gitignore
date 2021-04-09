@@ -1,4 +1,4 @@
-thesis.aux
+*.aux
 thesis.bbl
 thesis.blg
 thesis.log
@@ -6,3 +6,6 @@ thesis.out
 thesis.pdf
 thesis.synctex.gz
 thesis.toc
+thesis.fdb_latexmk
+thesis.fls
+frontback/*.aux
