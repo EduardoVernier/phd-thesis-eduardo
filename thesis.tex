@@ -1,5 +1,5 @@
 \documentclass[twoside,openright,titlepage,numbers=noenddot,headinclude,footinclude=true,cleardoublepage=empty,BCOR=5mm,fontsize=10pt,dutch,english]{scrbook}
-                
+                     
 \newlength{\mytextwidth}
 \setlength{\mytextwidth}{288pt}
 
@@ -15,6 +15,10 @@
 %% Eduardo's additions
 \usepackage[utf8]{inputenc}
 \DeclareUnicodeCharacter{2010}{-}% support older LaTeX versions
+\usepackage{rotating}
+%% This fixes the section numbering that wasn't working but the font looks ugly
+%% \RedeclareSectionCommands{section} 
+%% Be careful here
 
 
 \hyphenation{net-works}
@@ -61,3 +65,7 @@
 \cleardoublepage\include{frontback/Colophon}
 
 \end{document}
+
+
+% FIXES:
+% Section number not showing

@@ -1,4 +1,6 @@
 *.aux
+*.fls
+*.log
 thesis.bbl
 thesis.blg
 thesis.log
@@ -8,4 +10,6 @@ thesis.synctex.gz
 thesis.toc
 thesis.fdb_latexmk
 thesis.fls
-frontback/*.aux
+**/*.aux
+**/*.fls
+**/*.log

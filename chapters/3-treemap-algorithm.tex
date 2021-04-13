@@ -1,15 +1,4 @@
-\begingroup
-\let\clearpage\relax
-\let\cleardoublepage\relax
-\let\cleardoublepage\relax
-
-
-\manualmark
-\markboth{\spacedlowsmallcaps{Treemap Algorithm}}{\spacedlowsmallcaps{Treemap Algorithm}} 
-\phantomsection 
-
-\pdfbookmark[0]{Treemap Algorithm}{treemap-algorithm}
-\chapter*{Treemap Algorithm}
+\chapter{Treemap Algorithm}
 
 % https://github.com/EduardoVernier/git-latex
 % A Stable Greedy Insertion Treemap Algorithm for Software Evolution Visualization
@@ -70,7 +59,7 @@ During this, for each $l \in LT$, we compute the total weight of its subtrees $R
 
 \begin{figure}
 \centering
-\includegraphics[width=.3\textwidth]{figures/treemap-algorithm/space-partition.png}
+\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/space-partition.png}
 \caption{Space partitioning from $LT$.}
 \label{fig:space-partition}
 \end{figure}
@@ -83,7 +72,7 @@ To explain our heuristic ${\cal T}_{init}^{direct}$, consider a single-level tre
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=.48\textwidth]{figures/treemap-algorithm/git_example.eps}
+\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/git_example.eps}
 \caption{Building the initial layout tree $LT$ (green: inserted cells).}
 \label{fig:git_example}
 \end{figure}
@@ -102,7 +91,7 @@ After handling all changes in a new revision of $T$, we rebuild ${\cal T}$ from 
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=.45\textwidth]{figures/treemap-algorithm/git_removal.eps}
+\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/git_removal.eps}
 \caption{Removal of nodes (red) from layout tree and its treemap.}
 \label{fig:git_removal}
 \end{figure}
@@ -249,8 +238,3 @@ At a high level, stability is roughly inversely correlated with spatial quality 
 We have presented a new method for computing treemap layouts for time-dependent hierarchies. As discussed earlier, there are only a few methods in the literature that consider quality aspects pertaining to \emph{both} spatial quality and stability of such treemaps. Our contribution, in brief, is proposing a new method that takes both these quality aspects into account; and evaluating our method comprehensively on a broad dataset of 28 time-dependent hierarchies extracted from real-world dynamic dataset (software repositories), against 14 well-known treemapping methods, and using 4 quality metrics. Our results show that our new method strikes a good balance between spatial quality and stability as compared to state-of-the-art methods. Additionally, our method is simple to implement, fast, generic (with respect to the considered dynamic hierarchies), and has no hidden free parameters. More importantly, our method is an addition of a very small set of so-called \emph{stateful} methods that consider the evolution of a dynamic tree sequence when computing suitable treemaps thereof. Most existing treemapping methods are not designed to consider tree state, which arguably makes them suboptimal for handling inherently stateful datasets like dynamic trees.
 
 Several future work directions are possible, as follows. Firstly, it is interesting to extend our evaluation to dynamic hierarchies from other domains than software evolution. This may show how much our proposal can effectively handle such more diverse datasets. Secondly, we argue that more refined quality metrics are needed (in general, for our new method but also any other treemapping methods) to capture the quality of such methods, as perceived by end users and in sync with their tasks. Finally, understanding the trade-off between the (algorithmic) reasons behind spatial quality and stability, \emph{i.e.} what to do to optimally satisfy both these requirements, is an open problem, to which we believe to have contributed to with our current work.
-
-
-\newpage
-
-\endgroup

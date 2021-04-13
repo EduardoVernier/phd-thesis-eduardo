@@ -1,0 +1,214 @@
+\chapter{Introduction}
+\label{chap:intro}
+% +- 35--40 lines per page - font 11pt
+% +- 40--46 lines per page - font 10pt
+% page dimensions with the default margins: % 10.12 x 19.51 cm
+% page dimensions with shorter margins: % 11.62 x 18.45
+
+
+%%%%% OVERALL
+% Brain image analysis
+The brain is the most complex organ in a vertebrate's body and serves the central nervous system (CNS) --- a complex collection of billions of specialized nerves and cells known as neurons that transmit signals between different parts of the body\,\cite{Tortora-2018-Book-Principles,Lent-2004-Book-CemBilhoes}. CNS represents a communication network of the organism that detects and responds to changes in its internal and external environment. Any dysfunctionality can severely impact a person's health and quality of life, resulting in problems as memory loss, motor skills, and mobility.
+
+% good website for reference: https://www.healthline.com/health/brain-disorders
+A \emph{brain disorder} consists of any condition that affects one's brain. These conditions are mainly caused by genetic abnormalities, illness, and traumatic injuries\,\cite{Saladin-2016-Book-HumanAnatomy}. Brain disorders are a major public health problem in the world\,\cite{DiLuca-2014-BrainDisordesCosts}. According to reports presented in 2010 by the European Brain Council --- an alliance of all major European organizations interested in brain diseases --- about one-third of all European citizens had at least one brain disorder\,\cite{Olesen-2012-BrainDisordersCosts,DiLuca-2014-BrainDisordesCosts}. Most cases consist of minor disorders such as migraine, whereas neuromuscular disorders and brain tumors are less prevalent.  However, the diagnoses and treatments for the latter are more complex and very expensive. For example, the cost of the treatment of brain tumors per subject is 33,900 euros on average, whereas the one for migraine is about 662 euros\,\cite{DiLuca-2014-BrainDisordesCosts}.
+
+% Studies have evidenced that several brain disorders --- \eg schizophrenia\,\cite{Csernansky-2004-Psychiatry,Wang-2001-Neuro}, Alzheimer's disease\,\cite{Convit-1997-Neuro}, and epilepsy\,\cite{Farid-2012-Radio,Bernasconi-2003-Brain} --- are characterized by morphological deformations in shape and size of (sub)cortical structures~\cite{Convit-1997-Neuro,Wang-2001-Neuro} in one or both hemispheres. Although many brain regions present several normal hemispheric asymmetries, these deformations result in lesions that deviates from the \emph{normal} hemispheric asymmetry pattern. Consequently, the identification of such abnormal patterns can assist the detection of brain disorders.
+
+Following the above, it is hence clinically crucial to detect brain lesions early for proper diagnosis and treatment. There is a variety of possible treatments, such as chemotherapy and surgical resection. The choice of treatment usually depends on the type of brain lesion, its anatomy, and location\,\cite{Soltaninejad-2017-AutomatedBrainSuperpixel,Seghier-2008-LesionIdentification}. This information is obtained from medical imaging.
+
+
+\section{Medical Imaging}
+\label{sec:medical_images}
+% Importance
+\emph{Medical images} are visual representations of physical features measured from the interior of a body for clinical analysis, medical diagnoses, and intervention\,\cite{Toennies-2017-Book-GuideToMedical}. They show attributes from such body structures in a noninvasive manner.\footnote{\emph{Noninvasive} denotes a medical procedure that does not involve the introduction of instruments into the patient’s body.}
+
+The first medical image dates the late 19$^{th}$ century from the discovery of X-rays by the German Wilhelm Röntgen.
+For the first time in history, an image --- created by marked X-ray absorption --- allowed noninvasive insights in the human body\,\cite{Bercovich-2018-Rambam-Medical}. This imaging technique was called \emph{radiography}. The more X-rays a tissue absorbs, the whiter it is in the X-ray image (\hyperref[subfig:xray]{\fig~\ref{subfig:xray}}). Thus, dense tissues (\eg bones) appear white, whereas fat and other soft tissues look gray or even black (\eg the air inside the lungs). Soon after its introduction, radiography quickly became essential for medical diagnosis. Currently, digital X-ray images are widely used to examine bone fractures and detect certain diseases, \eg pneumonia and pulmonary edema, in soft tissues\,\cite{Toennies-2017-Book-GuideToMedical}.
+
+New medical imaging techniques and technologies have emerged in the last 60 years, in particular, Computed Tomography (CT) and Magnetic Resonance Imaging (MRI). A \emph{CT scanner} takes a series of X-rays emitted at different angles to generate a detailed volumetric image (3D image) of a particular section of the body. Elements of a 3D image are called \emph{voxels}, by analogy to the \emph{pixel} elements of a 2D image. Voxels are defined by their 3D coordinates and their corresponding values. CT images are more expensive to acquire than conventional X-ray images but yield a better way to separate between various types of tissues, atop the ability to reason about spatial structures in the body.
+Some common uses of CT images consist of diagnosing injuries from trauma, determining the location of a tumor, and detecting the location of blood clots.
+
+% \clearpage
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[X-ray image]{\includegraphics[height=3.20cm]{chapters/1-introduction/figs/image_modalities/x-ray_brain.jpg}
+    \label{subfig:xray}}
+    
+    \subfloat[Computer Tomography (CT) image]{\includegraphics[height=3.20cm]{chapters/1-introduction/figs/image_modalities/ct_brain_slices.pdf}
+    \label{subfig:ct}}
+    
+    \subfloat[Magnetic Resonance Imaging (MRI)]{\includegraphics[height=6.2cm]{chapters/1-introduction/figs/image_modalities/mr-t1-t2_brain_slices.pdf}
+    \label{subfig:mri}}
+    
+    \caption[Brain images from different modalities]{Brain images from different modalities. \subref{subfig:xray} X-ray image. \subref{subfig:ct} Axial, sagittal, and coronal slices of a CT brain volumetric image. \subref{subfig:mri} Axial, sagittal, and coronal slices of MR T1 and T2 brain volumetric images of the same subject. CT and MR images provide superior soft-tissue contrast and anatomic detail compared to X-ray images. Water-rich structures are dark in T1 and very bright in T2, whereas structures containing fat are considerably brighter in T1 than T2.}
+    \clearpage
+    \label{fig:image_modalities}
+\end{figure}
+
+
+\emph{MRI scanners} do not use radiation during imaging. Instead, they produce a powerful fixed magnetic field around the patient so that radiofrequency waves excite protons within the body. As the excited protons relax back to their normal position, they emit signals that are captured and mapped into a 3D image\,\cite{Runge-2018-Book-ClinicalMR,Bercovich-2018-Rambam-Medical}. MRIs provide more detailed information about inner organs with superior soft-tissue contrast and anatomic detail compared to X-ray and CT images (\hyperref[fig:image_modalities]{\fig~\ref{fig:image_modalities}}). However, they are more expensive and take considerably more time to generate.\footnote{A CT image takes 10 minutes on average depending on the body part being examined whereas an MR image takes between 45 minutes to 1 hour.} MRI is usually the commonly chosen image modality for structural brain analysis\,\cite{Akkus-2017-DLForBrainSegmentation}.
+% good health insurance website for reference: https://www.docpanel.com/blog/post/ct-scan-vs-mri-uses-cost-risks-more
+% https://blog.healthcare.oxinst.com/t1-vs-t2-mri-imaging-guide-to-understanding-the-primary-difference/
+
+Different types of MR images can be obtained during the examination. The most common types are T1 and T2. Both types accentuate different characteristics of tissues resulting in images with distinct appearances. Water-rich structures --- \eg the cerebrospinal fluid (CSF) found in the brain and spinal cord --- are dark in T1 and very bright in T2. Conversely, structures containing fat are considerably brighter in T1 than T2. For brain images, gray matter is darker than white matter in T1. The opposite is true for T2 --- compare the pair of brain slices in \hyperref[subfig:mri]{\fig~\ref{subfig:mri}}. Therefore, T1 images are more effective for analyzing anatomical structures, whereas T2 images are typically used when looking for areas of inflammation\,\cite{Liu-2014-SurveyBrainTumorSegmentation,Guo-2015-AutomatedLesionDetectionOnMRI}. This thesis focuses on the analysis of MR-T1 images of the brain for anomaly detection.
+
+
+
+\section{Brain Asymmetries}
+\label{sec:brain_asymmetries}
+The brain hemispheres can be distinguished visually by the longitudinal fissure (\hyperref[fig:anatomical_planes]{\fig~\ref{fig:anatomical_planes}}) --- a membrane between both hemispheres filled with cerebrospinal fluid (CSF). Although they are, at a coarse scale, almost symmetrical in structure, subtle (finer-scale) anatomical differences between them exist\,\cite{Tortora-2018-Book-Principles,Baars-2013-Book-FundamentalsNeuroscience,Palmer-2004-Science-Symmetry}. These differences are called \emph{hemispheric asymmetries} or simply \emph{brain asymmetries} and can be defined at functional and structural levels\,\cite{Ocklenburg-2012-HemisphericAsymmetries}.
+
+\textbf{Functional differences} between the hemispheres --- so-called \emph{hemispheric lateralization} --- have been observed for several cognitive functions\,\cite{Corballis-2009-AsymmetryEvolution}. Both hemispheres are indeed specialized for separate tasks. The left hemisphere is more dominant for handedness and language than the right one. For instance, most humans are right-handed\footnote{Approximately $90\%$ of the world population are right-handed\,\cite{Corballis-2009-AsymmetryEvolution,Toga-2009-BrainAsymmetry}.}, whose motor coordination is performed by the left hemisphere\,\cite{Corballis-2009-AsymmetryEvolution,Toga-2009-BrainAsymmetry}. Conversely, the right hemisphere is dominant, for example, for visuospatial processing, face recognition, music, and visual imagery\,\cite{Vogel-2003-CerebralLateralization,Kalavathi-2017-ReviewBrainSymmetries}.
+
+% structural asymmetries
+The realization of the functional differences between the brain hemispheres raises questions regarding the structural correlation of such lateralization\,\cite{Hugdahl-2010-Book-TheTwoHalves}. \textbf{Structural differences} include changes in volume, shape, and size of (sub)cortical structures (\eg sulci, cerebral lobes, and hippocampus) as well as a different amount of white and gray matter in the hemispheres\,\cite{Hugdahl-2010-Book-TheTwoHalves,Amunts-2010-StructuralAsymmetries}. This thesis only focus on the analysis of \emph{structural} differences.
+
+Deviations from the \emph{normal} pattern of brain asymmetries are useful insights about neurological pathologies\,\cite{Wolard-2012-anatomicalHippocampalAsymmetry}. Studies have shown that some neurological diseases --- such as Alzheimer's\,\cite{Convit-1997-Neuro}, schizophrenia\,\cite{Csernansky-2004-Psychiatry,Wang-2001-Neuro}, epilepsy\,\cite{Farid-2012-Radio,Bernasconi-2003-Brain,Yasuda-2010-Neuro-Epilepsy}, and autism\,\cite{Lotspeich-1993-Autism} --- are indeed associated to abnormal brain asymmetries. Morphological changes in (sub)cortical in one or both hemispheres characterize these structural abnormalities, as illustrated in \hyperref[fig:brain_asymmetry_examples]{\fig~\ref{fig:brain_asymmetry_examples}}. Therefore, it becomes crucial to define \emph{normal} brain asymmetries for the identification and detection of many abnormalities in the brain. We widely explore lesions associated with \emph{abnormal asymmetries} throughout this thesis. 
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[]{\includegraphics[width=0.48\textwidth]{chapters/1-introduction/figs/brain_asymmetry_examples/normal_brain_asymmetries.pdf}
+    \label{subfig:normal_brain_asymmetries}}
+    \subfloat[]{\includegraphics[width=0.48\textwidth]{chapters/1-introduction/figs/brain_asymmetry_examples/abnormal_brain_asymmetries.pdf}
+    \label{subfig:abnormal_brain_asymmetries}}
+    
+    \caption[Examples of normal and abnormal brain asymmetries.]{MR images and their corresponding asymmetry maps for \subref{subfig:normal_brain_asymmetries} a healthy subject and \subref{subfig:abnormal_brain_asymmetries} a stroke patient. Green borders indicate examples of pairs of regions with normal asymmetries, whereas red borders indicate abnormal asymmetries resulted from a stroke. The dashed yellow lines show mid-sagittal planes. Normal asymmetries are accentuated on the brain cortex (regions close to the borders). Both cases omit other regions with normal asymmetries. }
+    \label{fig:brain_asymmetry_examples}
+\end{figure}
+
+
+
+
+\section{Analysis of Brain Disorders}
+\label{sec:analysis_of_brain_diseases}
+Quantitative analysis of MR brain images has been used extensively for the characterization of brain disorders, such as stroke, tumors, and multiple sclerosis. Such methods rely on delineating objects of interest --- (sub)cortical structures or lesions --- trying to solve detection and segmentation simultaneously. Results are usually used for tasks such as quantitative lesion assessment (\eg volume), surgical planning, and overall anatomic understanding\,\cite{Kamnitsas-2017-MEDIA,Chen-2018-NEURO-VoxResNet,Soltaninejad-2017-AutomatedBrainSuperpixel}. Note that \emph{segmentation} corresponds to the exact delineation of the object of interest, whereas \emph{detection} consists of finding the rough location of such objects (\eg by a bounding box around the object), in case they are present in the image.
+
+% mention the common way to analyze several diseases
+The simplest strategy to detect brain anomalies consists of a visual slice-by-slice inspection by one or multiple specialists. This process is very time-consuming, error-prone, and even impracticable when a large amount of data needs to be processed. 
+
+The analysis of brain asymmetries commonly follows a similar strategy. First, the approach interactively segments structures of interest in the image, such as hippocampi, amygdala, and putamen. Then, it computes morphometric measures from the segmented structures (\eg volume), and performs statistical analysis of these measures\,\cite{Herbert-2004-BrainAsymmetries}. However, this strategy is also problematic since the interactive segmentation of brain structures may be very complicated, extremely susceptible to errors, and that demands much time from the expert. Thus, segmentation errors may severely impact the analysis.
+
+Continuous efforts have been made for automatic anomaly detection that delineates anomalies with accuracy close to that of human experts. However, this goal is very challenging and complex due to the large variability in shape, size, and location present in different anomalies, even when the same disease causes these (see, \eg \hyperref[fig:lesion_analysis_difficulties]{\fig~\ref{fig:lesion_analysis_difficulties}}). All these difficulties have motivated the research and development of automatic brain anomaly detection methods based on \emph{machine learning} algorithms, as discussed next.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{chapters/1-introduction/figs/motivation/lesion_stats.pdf}
+    
+    \caption[The different appearance of brain anomalies.]{
+        The different appearance of brain anomalies. \textbf{Top:} axial slices of three stroke patients with lesions (gold-standard borders in pink) that significantly differ in location, shape, and size. \textbf{Bottom:} slices of a 3D heatmap show the location frequency of stroke lesions across the brain. Although caused by the same disease, the lesions are sparsely distributed in the brain resulting in low-concentrated regions. The 3D heatmap was built from aligned manual lesion segmentation of stroke patients from the ATLAS dataset\,\cite{Liew-2018-Nature-ATLAS-304} after registration to a standard template. 
+        }
+    \label{fig:lesion_analysis_difficulties}
+\end{figure}
+
+
+\subsection{Machine Learning}
+\label{subsec:machine_learning}
+
+% overview and popularity in medical image community
+Machine learning (ML) can aid experts in detecting and classifying lesions from a brain image\,\cite{Havaei:2017:BrainTumourSegWithDL}. ML is based on algorithms that can learn from a dataset without being explicitly programmed to perform a task\,\cite{Jansen-2019-PhDThesis}. Each example from the dataset is called \emph{sample}, and it is described by a set of features, called \emph{feature vector}. For medical image analysis, a sample can be defined, for example, as a voxel, the image of a segmented object, or the shape attributes (descriptors) computed on this object. \emph{Feature extraction} algorithms, in turn, are chosen according to the targeted problem and sample type. Texture\,\cite{Soltaninejad-2017-AutomatedBrainSuperpixel,Goetz-2014-ExtremelyRandomized,Geremia-2011-NEURO-MSLesion,Pinto-2015-EMBC-BrainTumourSeg,Martins-2019-ISBI-SAAD}, shape features\,\cite{Martins-2019-MedPhysics-AdaPro,Lotjonen-2010-NEURO-MALF,Zacharaki-2009-Classification}, and, more recently, deep-learning-based features\,\cite{Havaei:2017:BrainTumourSegWithDL,Litjens-2017-MEDIA-SurveyDLInMIA,Vasilakos-2016-NNForCAD,Aslani-2018-DeepAE-MICCAI} are common feature examples adopted in medical image analysis problems.
+
+
+%=> Types of ML: overview
+%- Supervised
+%%- Fig
+Overall, machine learning can be either supervised or unsupervised. In \emph{supervised learning}, the dataset is labeled, \ie each of its samples has an assigned class.\footnote{Some classification problems might consider a sample with more than one label.} For example, a dataset of MR brain images (samples) that is used in a classification task that aims to discriminate between normal and abnormal tissue will use two classes: normal and abnormal. A classification algorithm learns a \emph{decision model} from labeled samples of a given training set by associating features to classes\,\cite{Mello-2018-Book:ML}. More generally, when the algorithm predicts a continuous value rather than a categorical class value, one says that it learns a \emph{regression model}. In our work, we will mainly focus on decision models. New unseen samples are then classified according to the learned decision model. \hyperref[subfig:supervised_learning_good_linear_clf]{\fig~\ref{subfig:supervised_learning_good_linear_clf}} shows a toy example of two easy separable classes with a linear classifier, \ie a classifier that assumes that the boundary between samples of the two existing classes is linear. Typically, linear classifiers are not sufficient to predict the correct classes of more complex sample distributions in real-world data, as shown by the example in \hyperref[subfig:supervised_learning_bad_linear_clf]{\fig~\ref{subfig:supervised_learning_bad_linear_clf}}. In such cases, \emph{nonlinear} classifiers are used to properly split the feature space into areas corresponding to the two classes (\hyperref[subfig:supervised_learning_nonlinear_clf]{\fig~\ref{subfig:supervised_learning_nonlinear_clf}}).
+
+\begin{figure}[!ht]
+    \centering
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/supervised_learning_good_linear_clf.pdf}
+    \label{subfig:supervised_learning_good_linear_clf}}
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/supervised_learning_bad_linear_clf.pdf}
+    \label{subfig:supervised_learning_bad_linear_clf}}
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/supervised_learning_nonlinear_clf.pdf}
+    \label{subfig:supervised_learning_nonlinear_clf}}
+    
+    \caption[Supervised machine learning.]{Toy example displaying the relation between feature 1 and feature 2 and two classes.\protect\footnotemark\xspace \subref{subfig:supervised_learning_good_linear_clf} A linear classifier that can separate the given samples. \subref{subfig:supervised_learning_bad_linear_clf} A linear classifier unable to separate other given samples. \subref{subfig:supervised_learning_nonlinear_clf} A nonlinear classifier that separates the samples of \subref{subfig:supervised_learning_bad_linear_clf}.}
+    \label{fig:supervised_learning}
+\end{figure}
+
+
+
+%- Unsupervised
+%%- Fig
+\emph{Unsupervised} machine learning algorithms aim at finding intrinsic structures in an \emph{unlabeled/uncategorized} dataset\,\cite{Celebi-2016-Book-UnsupML}. The key added value of unsupervised methods as compared to supervised ones is that one does not need an expert to have created an annotated (labeled) training set. This is particularly essential in situations where labeling is expensive and requires specialist expertise, such as in the case of medical imaging datasets to be manually labeled by delineation by trained medical professionals. A potential drawback of unsupervised learning is that the structures extracted from an (image) dataset may not always be relevant to the expert\,\cite{Celebi-2016-Book-UnsupML}. \emph{Clustering} is arguably the best known unsupervised strategy. It finds patterns in the feature space and uses these to divide the dataset into groups that exhibit high internal coherence and low similarity with other groups. \hyperref[subfig:unsupervised_learning_unlabeled_dataset]{\figs}~\ref{subfig:unsupervised_learning_unlabeled_dataset}--\subref*{subfig:unsupervised_learning_clustering} illustrate results produced by clustering for hypothetical data.
+
+\begin{figure}[!t]
+    \centering
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/unsupervised_learning_unlabeled_dataset.pdf}
+    \label{subfig:unsupervised_learning_unlabeled_dataset}}
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/unsupervised_learning_clustering.pdf}
+    \label{subfig:unsupervised_learning_clustering}}
+    \subfloat[]{\includegraphics[scale=0.56]{chapters/1-introduction/figs/machine_learning/unsupervised_learning_one_class_classifier.pdf}
+    \label{subfig:unsupervised_learning_one_class_classifier}}
+    
+    \caption[Unsupervised machine learning and outlier detection.]{\subref{subfig:unsupervised_learning_unlabeled_dataset} A hypothetical unlabeled dataset. \subref{subfig:unsupervised_learning_clustering} Resulting groups after performing a given clustering algorithm. Each color represents a different group. \subref{subfig:unsupervised_learning_one_class_classifier} Example of outlier detection. If an unseen test sample is far from the training set of normal samples (the yellow region with dashed borders), it is classified as an outlier.}
+    \label{fig:unsupervised_learning}
+\end{figure}
+
+
+%%- Anomaly/Novelty detection: One-Class Classifiers
+\emph{Outlier detection} --- also called anomaly detection --- 
+\addtocounter{footnote}{-1} % trick to make the footnote from fig. 1.3 caption available on its page, but before the next footnote from the first paragraph of the page. 
+\stepcounter{footnote}\footnotetext{Figure inspired by the Ph.D. thesis of Jansen (2019)\,\cite{Jansen-2019-PhDThesis}.}
+is another common problem in unsupervised machine learning.\footnote{Some authors consider the term \emph{supervised anomaly detection} when the training set has only two classes: normal and outlier\,\cite{Hodge-2004-SurveyOutlier}. A binary classifier is then trained for outlier detection.} Techniques aim to detect \emph{outliers} in an unlabeled dataset under the assumption that the majority of its samples are \emph{normal}\,\cite{Hodge-2004-SurveyOutlier}. An \emph{outlier} is a sample that differs significantly from the remainder of the dataset. Some authors also refer to outliers as anomalies, exceptions, noise, and novelties. Several applications use outlier detection, such as bank fraud detection, loan application processing, and medical condition monitoring\,\cite{Hodge-2004-SurveyOutlier}. \hyperref[subfig:unsupervised_learning_one_class_classifier]{\fig~\ref{subfig:unsupervised_learning_one_class_classifier}} shows an example of outlier detection.
+
+
+Medical image analysis commonly uses outlier detection mainly for detecting anomalies (lesions). \emph{One-class classification} (OCC) --- also called unary classification --- is a class of techniques commonly used for this purpose\,\cite{Mourao-2011-NEURO-PatientOutlierDetection,Martins-2019-ISBI-SAAD,Martins-2020-BIOIMAGING-BADRESC,Tang-2019-ISBI-AbnormalChestOneClass,Baur-2018-MICCAI-DeepAutoencoding}. Consider a training dataset with \emph{only} medical images of \emph{healthy} subjects --- also known as \emph{control} images. All training samples have the same single class: \emph{healthy}. The OCC learns a classification boundary for the healthy class to classify new unseen images as \emph{healthy} or \emph{outlier}. Detected outliers are considered as anomalies, \eg tumors, stroke, and cancer. OCC is different from and more challenging than the traditional classification problem, which tries to differentiate two or more classes from a labeled training set. In this thesis, we focus on unsupervised algorithms in particular one-class classification.
+
+
+\subsection{Automatic Brain Anomaly Detection}
+% Supervised methods: pros x cons
+Most automatic methods in the literature rely on supervised machine learning to detect or segment brain anomalies. They train a classifier from training images --- which must be previously labeled (\eg lesion segmentation masks) by experts --- to delineate anomalies by classifying voxels or regions of the target image. Traditional image features (\eg edge detectors and texture features) and deep feature representations (\eg convolutional features) are commonly used\,\cite{Soltaninejad-2017-AutomatedBrainSuperpixel,Goetz-2014-ExtremelyRandomized,Geremia-2011-NEURO-MSLesion,Pinto-2015-EMBC-BrainTumourSeg,Kooi-2017-MEDIA-DLForMamographicLesions,Aslani-2018-DeepAE-MICCAI,Gao-2014-HBM-ShapeAnalysis,Shakeri-2016-CMIG-StatisticalShapeAnalysis}.
+
+However, these supervised methods commonly have three main limitations. First, they require a large number of high-quality annotated training images, which is absent for most medical image analysis problems\,\cite{Akkus-2017-DLForBrainSegmentation,Thyreau-2018-MEDIA-SegmentationHippocampus,Havaei:2017:BrainTumourSegWithDL}. Second, they are only designed for the lesions found in the training set. Third, some methods still require weight fine-tuning (retraining) when used for a new set of images due to image variability across scanners and acquisition protocols, limiting its application into clinical routine. 
+
+% Unsupervised methods: pros x cons
+All the above limitations of supervised methods motivate research on \emph{unsupervised} anomaly detection approaches\,\cite{Martins-2019-ISBI-SAAD,Sato-2018-SPIE-AnomalyDetection,Baur-2018-MICCAI-DeepAutoencoding,Guo-2015-AutomatedLesionDetectionOnMRI,Chen-2018-DeepGenerative}. From a training set with images of \emph{healthy} subjects \emph{only}, these methods perform an outlier detection technique to identify anomalies in new images. Some of these methods can detect enormous lesions\,\cite{Sato-2018-SPIE-AnomalyDetection,Chen-2018-DeepGenerative}, but show poor results with small lesions, which are the most challenging cases.
+
+
+\section{Thesis Problems and Approach}
+\label{sec:thesis_problem}
+As unsupervised brain anomaly detection methods do not use labeled samples, they are less effective in detecting lesions from a specific disease when compared to supervised approaches trained from labeled samples for the same disease. For the same reason, however, unsupervised methods are generic in detecting any lesions, \eg coming from multiple diseases, as long as these notably differ from healthy training samples. 
+
+Combining the pros and cons of unsupervised methods listed above, as well as the importance of identifying abnormal brain asymmetries associated to brain anomalies, we can now state the key research questions of this thesis:
+
+% \begin{itemize}[leftmargin=*]
+%   \item[]\textbf{Research question:} \emph{How can we leverage unsupervised machine learning for the detection/analysis of brain lesions?}
+% \end{itemize}
+
+\begin{itemize}[leftmargin=*]
+    \item[]\textbf{RQ1:} \emph{Can we model normal brain asymmetries?}
+    \item[]\textbf{RQ2:} \emph{Can we use the normal brain asymmetry model to detect brain anomalies?}
+\end{itemize}
+
+
+% Pipeline
+To illustrate how we approach answering these questions, let us consider the typical pipeline for brain image processing and analysis (\hyperref[fig:general_pipeline]{\fig~\ref{fig:general_pipeline}}). Given a 3D MR-T1 image, we first perform several preprocessing tasks (\eg noise filtering and intensity normalization) to overcome inherent acquisition issues, such as noise and inhomogeneity field. Next, we define the \emph{volumes of interest} (VOI) to be analyzed: either the entire brain or some specific region. Features related to brain asymmetries are extracted from these VOIs and subsequently classified as \emph{normal} or \emph{abnormal} from the knowledge about normal asymmetries present in a training set of control images. We evaluate our approaches on MR-T1 images, mainly due to the greater availability of public datasets of healthy and abnormal brain volumetric images for this imaging modality. Public datasets of different imaging modalities exist. However, some only provide a subset of 2D slices for each image or interpolate slices to build a volume.
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{chapters/1-introduction/figs/general_pipeline/general_pipeline.pdf}
+    \caption[General pipeline for unsupervised brain anomaly detection.]{General pipeline considered in this thesis to explore novel unsupervised brain anomaly detection approaches.
+    % The closest pipeline step to each dashed box indicates the main contribution(s) of the next chapters.
+    }
+    \label{fig:general_pipeline}
+\end{figure}
+
+
+The structure of this thesis follows the considered steps of the pipeline in \hyperref[fig:general_pipeline]{\fig~\ref{fig:general_pipeline}} in a bottom-up approach --- starting with simpler, more specific problems, towards the more complex and general ones, as follows.
+
+\textbf{\hyperref[chap:background]{Chapter~\ref{chap:background}}} presents background information on concepts explored in this work, such as brain anatomy concepts, imaging physics, and typical MRI preprocessing operations. Finally, the chapter also introduces the Image Forest Transform framework\,\cite{Falcao-2004-PAMI-IFT}, as well as two algorithms derived from it, which serves as a basis for the design of some image operators used by the proposed solutions of this thesis.
+
+\textbf{\hyperref[chap:brain-segmentation]{Chapter~\ref{chap:brain-segmentation}}} presents our solution for brain image segmentation. Its goal is to define our target macro-regions of interest --- \ie right and left hemispheres, cerebellum, and brainstem --- to improve the preprocessing, restrict the analysis, and compute hemispheric asymmetries in some cases. We start by exploring lesions associated with \emph{abnormal hemispheric asymmetries} as detailed next in \hyperref[chap:abnormal_hippo]{Chapters~\ref{chap:abnormal_hippo}}~and~\ref{chap:abnormal_asymmetries}, as follows.
+
+\textbf{\hyperref[chap:abnormal_hippo]{Chapter~\ref{chap:abnormal_hippo}}} proposes an automatic method for the detection of abnormal hippocampi from abnormal asymmetries. Our solution uses deep generative networks and a one-class classifier to model normal hippocampal asymmetries from healthy subjects and detect abnormal hippocampi. This is the first example of the usage of one-class classifiers for addressing the research questions of the thesis. % samuel's notes: Note as the last sentence links to the research question. Always do that!
+
+\textbf{\hyperref[chap:abnormal_asymmetries]{Chapter~\ref{chap:abnormal_asymmetries}}} presents a more generic solution that refines the proposal in \hyperref[chap:abnormal_hippo]{Chapter~\ref{chap:abnormal_hippo}} to detect abnormal asymmetries in the entire brain hemispheres. Our approach extracts pairs of symmetric regions --- called \emph{supervoxels} --- in both hemispheres of a test image under study.  One-class classifiers then analyze the asymmetries present in each pair. This method is limited to detect asymmetric lesions only in the hemispheres.
+
+% In \textbf{\hyperref[chap:general_brain_anomalies]{Chapter~\ref{chap:general_brain_anomalies}}}, we extend the previous solution from \hyperref[chap:abnormal_asymmetries]{Chapter~\ref{chap:abnormal_asymmetries}} for the detection of lesions (symmetric or asymmetric) in the hemispheres, cerebellum, and brainstem. This new approach replaces asymmetries with image registration errors to detect lesions.
+In \textbf{\hyperref[chap:general_brain_anomalies]{Chapter~\ref{chap:general_brain_anomalies}}}, we extend the previous solution from \hyperref[chap:abnormal_asymmetries]{Chapter~\ref{chap:abnormal_asymmetries}} to detect lesions (symmetric or asymmetric) in the hemispheres, cerebellum, and brainstem. This new approach replaces asymmetries with any other \emph{saliency map} that emphasizes brain anomalies. As proof of concept, we instantiated this solution with image registration errors to detect anomalies.
+
+Finally, \textbf{\hyperref[chap:conclusions]{Chapter~\ref{chap:conclusions}}} presents a compilation of our contributions and experimental findings, along with future research perspectives.
