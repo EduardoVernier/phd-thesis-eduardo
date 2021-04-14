@@ -15,13 +15,13 @@ Dynamic, or time-dependent, treemaps are one of the most effective techniques fo
 In this paper, we address the above limitations with two main contributions. Firstly, we propose a new dynamic treemap algorithm, called Greedy Insertion Treemap (GIT). GIT aims to preserve treemap-cell neighborhoods over time by constructing an initial so-called Layout Tree (LT), which is next incrementally updated as the tree data changes, so as to minimize undesired treemap-layout changes.
 Secondly, we evaluate the quality of GIT both in the spatial domain and the temporal domain against a large set of well-known treemap algorithms using several established quality metrics, and on a large set of dynamic hierarchies extracted from real-world software repositories. Our evaluation results show that GIT strikes a better balance between spatial and temporal quality than the existing competing methods we evaluated against. As GIT has a simple and computationally scalable implementation, we argue that it represents a valuable contribution to the toolset of techniques needed by program evolution comprehension.
 
-The structure of this paper is as follows. Section~\ref{sec:related_work} outlines existing work on (dynamic) treemapping and related quality metrics, and their use in program evolution comprehension, and also introduces the treemap methods we compare against. Section~\ref{sec:git} details our new GIT algorithm. Section~\ref{sec:evaluation} presents our evaluation methodology for GIT and the obtained results are revealed in Section~\ref{sec:results} . Section~\ref{sec:conclusion} discusses our proposal and outlines directions for future improvement.
+The structure of this paper is as follows. Section~\ref{sec:related_work} outlines existing work on (dynamic) treemapping and related quality metrics, and their use in program evolution comprehension, and also introduces the treemap methods we compare against. Section~\ref{sec:git} details our new GIT algorithm. Section~\ref{sec:evaluation} presents our evaluation methodology for GIT and the obtained results are revealed in Section~\ref{sec:results-3} . Section~\ref{sec:conclusion-3} discusses our proposal and outlines directions for future improvement.
 
 
 \section{Related Work}
 \label{sec:related_work}
 
-In this section, we will discuss the Algorithms (Section~\ref{sec:algorithms}) and Quality Metrics (Section~\ref{sec:metrics}) present in the dynamic treemap literature.
+In this section, we will discuss the Algorithms (Section~\ref{sec:algorithms}) and Quality Metrics (Section~\ref{sec:metrics-3}) present in the dynamic treemap literature.
 Let $T= \{n_i\}$ be a hierarchy (tree) with nodes $n_i$, each having a weight value $a_i \geq 0$. Weights are given for leaf nodes and computed for non-leaf nodes as the sum of their children weights, respectively. Let ${\cal T}(T)$ be the treemap layout of $T$, with a rectangle cell $r_i$ assigned to each $n_i$, so that the area of $r_i$ equals $a_i$.
 
 \subsection{Algorithms}
@@ -38,7 +38,7 @@ achieve, in general, good AR values, and have been adapted to also handle dynami
 
 
 \subsection{Metrics}
-\label{sec:metrics}
+\label{sec:metrics-3}
 %
 As outlined in Sec.~\ref{sec:algorithms}, treemap quality consists of two main components:
 
@@ -66,7 +66,7 @@ During this, for each $l \in LT$, we compute the total weight of its subtrees $R
 
 GIT proceeds in two phases: initialization and update, as follows.\\
 
-\noindent\textbf{Initialization:} To start with, we need to construct $LT$ from the first tree $T(t=0)$ in our sequence. For this, we can use basically any method ${\cal T}_{init}$ that constructs a (static) treemap for $T(0)$ from which we can next generate $LT$ with the properties (a) and (b) mentioned above. We have experimented with two such initialization methods. First, we constructed $LT$ from a squarified treemap (\emph{i.e.} ${\cal T}_{init}$ is the SQR algorithm), since SQR is well known to yield very good AR values. Alternatively, we propose a simple heuristic ${\cal T}_{init}^{direct}$ that directly builds $LT$ from the initial tree $T(0)$. Both initialization methods are compared next in Sec.~\ref{sec:results}.
+\noindent\textbf{Initialization:} To start with, we need to construct $LT$ from the first tree $T(t=0)$ in our sequence. For this, we can use basically any method ${\cal T}_{init}$ that constructs a (static) treemap for $T(0)$ from which we can next generate $LT$ with the properties (a) and (b) mentioned above. We have experimented with two such initialization methods. First, we constructed $LT$ from a squarified treemap (\emph{i.e.} ${\cal T}_{init}$ is the SQR algorithm), since SQR is well known to yield very good AR values. Alternatively, we propose a simple heuristic ${\cal T}_{init}^{direct}$ that directly builds $LT$ from the initial tree $T(0)$. Both initialization methods are compared next in Sec.~\ref{sec:results-3}.
 
 To explain our heuristic ${\cal T}_{init}^{direct}$, consider a single-level tree $T = [(n_i,a_i)]  =  [ (A, 10), (B, 2), (C, 8), (D, 4), (E, 1), (F, 3) ]$, to be laid our, for simplicity, in a square drawing area $S$ of size 1; handling general trees is trivial by top-down recursion. We build $LT$ by sequentially adding each $n_i \in T$ to it (Fig.~\ref{fig:git_example}). After each addition, we rebuild ${\cal T}$ from the current $LT$ as explained above, so it covers the entire $S$. Thus, existing nodes are `squeezed' to make space for the new nodes. In our example, we first add node $A$, which will cover the entire $S$. To add $B$, we find the node $n \in LT$ having the worst aspect-ratio cell $c \in {\cal T}$. If $w_c \geq h_c$, we add $B$ directly right of $n$ (as in our example), else we add $B$ directly below $n$, and update ${\cal T}$ from the new $LT$ again. For the third node $C$, as the worst-aspect-ratio cell is $B$, and since $h_B > w_B$, we add $C$ below $B$ and update ${\cal T}$ from $LT$ again. Fig.~\ref{fig:git_example}(d-f) shows the addition of the remaining nodes of $T$.\\
 
@@ -87,7 +87,7 @@ For didactic purposes, nodes were added in alphabetical order, but in reality, w
 \item else $n$ has no subtrees, so we just remove it from $LT$.
 \end{enumerate}
 
-After handling all changes in a new revision of $T$, we rebuild ${\cal T}$ from $LT$, as already explained. As we show next in Sec.~\ref{sec:results}, GIT scores a very good balance of spatial quality \emph{vs} stability.
+After handling all changes in a new revision of $T$, we rebuild ${\cal T}$ from $LT$, as already explained. As we show next in Sec.~\ref{sec:results-3}, GIT scores a very good balance of spatial quality \emph{vs} stability.
 
 \begin{figure}[htbp!]
 \centering
@@ -121,11 +121,11 @@ We define the stability $Q$ of an entire treemap as the average of its cells' st
 
 \subsection{Techniques}
 %
-We tested GIT against 14 other treemapping algorithms: Approximate (APP), Hilbert (HIL), Stable treemaps (LM0, LM4), Moore (MOO), NMap-Alternate-Cuts (NAC), NMap-Equal-Weights (NEW), Pivot-by-Middle (PBM), Pivot-by-Size (PBZ), Pivot-by-Split-Size (PBS), Slice- and-Dice (SND), Spiral (SPI), Squarified (SQR), and Strip (STR). For NMap, we use as seed layout the one computed by SQR~\cite{nmap}. We did not consider non-rectangular treemap methods in the evaluation, since not all the metrics in Sec.~\ref{sec:metrics} directly generalize to non-rectangular cells.
+We tested GIT against 14 other treemapping algorithms: Approximate (APP), Hilbert (HIL), Stable treemaps (LM0, LM4), Moore (MOO), NMap-Alternate-Cuts (NAC), NMap-Equal-Weights (NEW), Pivot-by-Middle (PBM), Pivot-by-Size (PBZ), Pivot-by-Split-Size (PBS), Slice- and-Dice (SND), Spiral (SPI), Squarified (SQR), and Strip (STR). For NMap, we use as seed layout the one computed by SQR~\cite{nmap}. We did not consider non-rectangular treemap methods in the evaluation, since not all the metrics in Sec.~\ref{sec:metrics-3} directly generalize to non-rectangular cells.
 
 \subsection{Datasets}
 %
-We extracted 28 dynamic hierarchies by mining the structure of software projects (folders, files, classes) from 28 corresponding public GitHub repositories, using a custom automated pipeline that scans all available revisions and extracts the code structure using Understand~\cite{understand}. As weights $w_i$, we use the number of lines of code of the respective items. Other software quality metrics delivered by Understand can be used instead, if desired. For more details on this process, we refer to~\cite{vmv}. The considered repositories have quite different sizes, number of revisions, hierarchy depths and shapes, number of developers, and code type (programming languages and application types). Statistics about the datasets are available in Table~\ref{tab:datasets}.
+We extracted 28 dynamic hierarchies by mining the structure of software projects (folders, files, classes) from 28 corresponding public GitHub repositories, using a custom automated pipeline that scans all available revisions and extracts the code structure using Understand~\cite{understand}. As weights $w_i$, we use the number of lines of code of the respective items. Other software quality metrics delivered by Understand can be used instead, if desired. For more details on this process, we refer to~\cite{vmv}. The considered repositories have quite different sizes, number of revisions, hierarchy depths and shapes, number of developers, and code type (programming languages and application types). Statistics about the datasets are available in Table~\ref{tab:datasets-3}.
 
 \begin{table}[htbp!]
 \small
@@ -170,14 +170,14 @@ uws & 122 & 4093 & 2.76\\
 \end{tabular}
 }
 \caption{Software evolution tree datasets used in the evaluation.}
-\label{tab:datasets}
+\label{tab:datasets-3}
 \end{table}
 
 
 \section{Results}
-\label{sec:results}
+\label{sec:results-3}
 %
-We evaluate GIT on the aforementioned datasets, algorithms, and metrics collection from several perspectives, by answering a series of questions. Below, average stability $S$ refers to the average of the $LDC$ and $Q$ metrics introduced in Sec.~\ref{sec:metrics}. All results that we were not able to fit in the paper can be found at our online repository\cite{benchmark}.
+We evaluate GIT on the aforementioned datasets, algorithms, and metrics collection from several perspectives, by answering a series of questions. Below, average stability $S$ refers to the average of the $LDC$ and $Q$ metrics introduced in Sec.~\ref{sec:metrics-3}. All results that we were not able to fit in the paper can be found at our online repository\cite{benchmark}.
 
 \subsection{How does GIT's initialization affect its quality?}
 %
@@ -223,18 +223,18 @@ The experiments so far do not show the individual stability metrics (including $
 
 \subsection{How to summarize GIT's quality?}
 %
-As noted, GIT seems to strike a good balance between spatial quality and stability. We summarize both these metrics for GIT and all other algorithms using a star plot (Fig.~\ref{fig:star}). The figure shows a scatterplot with $x$ mapping average stability $S$ and $y$ aspect ratio $AR$, respectively. Categorically colored points, one color per method, indicate the tested methods, attributed by their $S$ and $AR$ values over all datasets, all time steps. From each point (method), we draw lines connecting it with the $S$ and $AR$ values obtained for all the 28 tested datasets. A good algorithm has thus its `star' center placed top-right and relatively short star arms, indicating consistent quality over the entire dataset collection. We see several patterns, as follows.
+As noted, GIT seems to strike a good balance between spatial quality and stability. We summarize both these metrics for GIT and all other algorithms using a star plot (Fig.~\ref{fig:star-3}). The figure shows a scatterplot with $x$ mapping average stability $S$ and $y$ aspect ratio $AR$, respectively. Categorically colored points, one color per method, indicate the tested methods, attributed by their $S$ and $AR$ values over all datasets, all time steps. From each point (method), we draw lines connecting it with the $S$ and $AR$ values obtained for all the 28 tested datasets. A good algorithm has thus its `star' center placed top-right and relatively short star arms, indicating consistent quality over the entire dataset collection. We see several patterns, as follows.
 
 At a high level, stability is roughly inversely correlated with spatial quality -- methods that score very well on one tend to score worse on the other. We see three groups of methods: APP, PBS, SQR, PBM, STR, PBZ and NEW score well on spatial quality, but poorly (except NEW) on stability. SND is the opposite outlier, scoring best on stability but clearly poorest on spatial quality. A middle group of methods (GIT, LM0, LM4, MOO, NAC, SPI, and HIL) trades well stability \emph{vs} spatial quality. Within these, GIT scores the best stability, and LM0 the best spatial quality. As such, GIT and LM0 can be considered complementary methods with respect to the stability \emph{vs} spatial quality trade-off. However, LM0 has a considerably more complex and slower implementation than GIT -- for details, we refer to~\cite{sondag17}. Separately, we see that GIT's star size (convex hull containing the lines emerging from the GIT point) is one of the smallest of all tested methods. Hence, GIT offers one of the most consistent behaviors over the entire dataset collection from all tested algorithms.
 
 \begin{figure}[htbp!]
   \includegraphics[width=1.0\linewidth]{figures/treemap-algorithm/star.png}
 \caption{Star plot summarizing both visual quality and stability, all algorithms, all datasets.}
-\label{fig:star}
+\label{fig:star-3}
 \end{figure}
 
 \section{Conclusion}
-\label{sec:conclusion}
+\label{sec:conclusion-3}
 We have presented a new method for computing treemap layouts for time-dependent hierarchies. As discussed earlier, there are only a few methods in the literature that consider quality aspects pertaining to \emph{both} spatial quality and stability of such treemaps. Our contribution, in brief, is proposing a new method that takes both these quality aspects into account; and evaluating our method comprehensively on a broad dataset of 28 time-dependent hierarchies extracted from real-world dynamic dataset (software repositories), against 14 well-known treemapping methods, and using 4 quality metrics. Our results show that our new method strikes a good balance between spatial quality and stability as compared to state-of-the-art methods. Additionally, our method is simple to implement, fast, generic (with respect to the considered dynamic hierarchies), and has no hidden free parameters. More importantly, our method is an addition of a very small set of so-called \emph{stateful} methods that consider the evolution of a dynamic tree sequence when computing suitable treemaps thereof. Most existing treemapping methods are not designed to consider tree state, which arguably makes them suboptimal for handling inherently stateful datasets like dynamic trees.
 
 Several future work directions are possible, as follows. Firstly, it is interesting to extend our evaluation to dynamic hierarchies from other domains than software evolution. This may show how much our proposal can effectively handle such more diverse datasets. Secondly, we argue that more refined quality metrics are needed (in general, for our new method but also any other treemapping methods) to capture the quality of such methods, as perceived by end users and in sync with their tasks. Finally, understanding the trade-off between the (algorithmic) reasons behind spatial quality and stability, \emph{i.e.} what to do to optimally satisfy both these requirements, is an open problem, to which we believe to have contributed to with our current work.

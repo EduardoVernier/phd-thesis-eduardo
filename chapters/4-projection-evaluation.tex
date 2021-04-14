@@ -21,7 +21,7 @@ We work towards filling this gap in assessing projection techniques for dynamic 
 
 Our work can help researchers in targeting the identified challenges of current dynamic projection techniques, therefore potentially leading to improved ones. Separately, practitioners can use our findings into the process of determining which dynamic projection technique is best suited to their given user context. Finally, our creation of an open benchmark for assessing dynamic projections (containing datasets, techniques, metrics, visualizations, and associated workflows) should benefit both user types by providing a basis via which such techniques can be transparently compared.
 
-The structure of this paper is as follows. Section~\ref{sec:related} outlines related work and evaluation techniques for projections for static and dynamic data. Section~\ref{sec:experiment} details the proposed experiment we conducted to quantitatively assess the behavior of projection techniques for dynamic data, including techniques, datasets, and evaluated metrics. Section~\ref{sec:results} presents the obtained results. Section~\ref{sec:discussion} discusses the causes of the observed dynamic projection behavior. Finally, Section~\ref{sec:conclusion} concludes the paper. For replication purposes, all our datasets, code, workflow, and results are openly available\,\cite{repo}.
+The structure of this paper is as follows. Section~\ref{sec:related} outlines related work and evaluation techniques for projections for static and dynamic data. Section~\ref{sec:experiment} details the proposed experiment we conducted to quantitatively assess the behavior of projection techniques for dynamic data, including techniques, datasets, and evaluated metrics. Section~\ref{sec:results-4} presents the obtained results. Section~\ref{sec:discussion} discusses the causes of the observed dynamic projection behavior. Finally, Section~\ref{sec:conclusion} concludes the paper. For replication purposes, all our datasets, code, workflow, and results are openly available\,\cite{repo}.
 
 
 %-------------------------------------------------------------------------
@@ -75,7 +75,7 @@ Stability is related to the capacity of a DR technique to deal with so-called ou
 \label{sec:experiment}
 %
 To evaluate how dynamic DR techniques perform, we follow a methodology similar to the one proposed in\,\cite{EspadotoSurvey} for evaluating static DR techniques, as follows.
-We first select a set of dynamic DR \emph{techniques} to evaluate. Next, we select a collection of \emph{datasets} that cover various aspects, or \emph{traits}, that characterize high-dimensional dynamic data. Thirdly, we evaluate both spatial quality and stability \emph{metrics} on all combinations of techniques and datasets; in this step, we also propose novel metrics to gauge stability. We describe all these steps next. The analysis of the discovered correlations between techniques, dataset traits, and quality metrics obtained from our experiments is discussed afterwards in Sec.~\ref{sec:results}.
+We first select a set of dynamic DR \emph{techniques} to evaluate. Next, we select a collection of \emph{datasets} that cover various aspects, or \emph{traits}, that characterize high-dimensional dynamic data. Thirdly, we evaluate both spatial quality and stability \emph{metrics} on all combinations of techniques and datasets; in this step, we also propose novel metrics to gauge stability. We describe all these steps next. The analysis of the discovered correlations between techniques, dataset traits, and quality metrics obtained from our experiments is discussed afterwards in Sec.~\ref{sec:results-4}.
 
 \subsection{Techniques}
 \label{subsec:techniques}
@@ -145,7 +145,7 @@ walk       & VAE  & 2                & 100, 10                     & 20        \
 \subsection{Datasets}
 \label{subsec:datasets}
 %
-There is, to our knowledge, no standardized benchmark for evaluating DR techniques. Espadoto \emph{et al.}\,\cite{EspadotoSurvey} took a first step towards providing such a benchmark containing 19 datasets. However, all these are time-independent, thus not suitable for us. We followed here a similar approach, \emph{i.e.} collecting a set of 10 high-dimensional and dynamic datasets that exhibit significant variations in terms of provenance, number of samples $N$, number of timesteps $T$, dimensionality $n$, intrinsic dimensionality $\rho_n$ (percentage of $n$ dimensions that explain 95\% of the data variance), and sparsity ratio $\sigma_n$ (percentage of zeros in the data). All datasets are labeled into 3 to 10 classes. We only use labels for visualization and quality assessment and not the projection itself. Table \ref{tab:datasets} shows the characteristics, or traits, for these datasets. Further details on them are listed below.
+There is, to our knowledge, no standardized benchmark for evaluating DR techniques. Espadoto \emph{et al.}\,\cite{EspadotoSurvey} took a first step towards providing such a benchmark containing 19 datasets. However, all these are time-independent, thus not suitable for us. We followed here a similar approach, \emph{i.e.} collecting a set of 10 high-dimensional and dynamic datasets that exhibit significant variations in terms of provenance, number of samples $N$, number of timesteps $T$, dimensionality $n$, intrinsic dimensionality $\rho_n$ (percentage of $n$ dimensions that explain 95\% of the data variance), and sparsity ratio $\sigma_n$ (percentage of zeros in the data). All datasets are labeled into 3 to 10 classes. We only use labels for visualization and quality assessment and not the projection itself. Table \ref{tab:datasets-4} shows the characteristics, or traits, for these datasets. Further details on them are listed below.
 
 \begin{itemize}
   \item \textbf{cartolastd:} Player statistics for the second turn of the 2017 Brazilian football championship. Data was extracted from an open-source project\,\cite{cartola} that scrapes the Cartola FC football platform. Each timestep corresponds to a tournament round. Variables relate to per-match performance of a given player (number of goals, assistances, fouls, defenses, etc.). Players are labeled by their playing position (goalkeeper, right or left-back, defender, midfielder, forward).
@@ -164,12 +164,12 @@ There is, to our knowledge, no standardized benchmark for evaluating DR techniqu
 
 % \red{ALEX: Very important: If these datasets come from somewhere and/or were used in other papers, SAY THIS (so we don't have to explain all about them, readers can look there). Also, within space limits, try to explain what are the attributes (or give some examples at least, if these are too many) and classes. You did this for some of the datasets but not all, so this affects next e.g. the fine-grained discussion later on, since we don't know at what kind of data we look.}
 
-Covering all variations of high-dimensional datasets with a benchmark is already daunting for static data\,\cite{EspadotoSurvey}, thus even more for dynamic data, as there are many types of dynamic patterns possible. Hence, we cannot claim that our benchmark is \emph{exhaustive} in terms of the space it samples. However, we believe that the included datasets exhibit a rich variety of different traits (Tab.~\ref{tab:datasets}). Also, no two datasets are redundant, \emph{i.e.}, have all traits similar. Given that, to date, no other benchmark exists for this task, we believe ours is a good start in supporting the intended evaluation.
+Covering all variations of high-dimensional datasets with a benchmark is already daunting for static data\,\cite{EspadotoSurvey}, thus even more for dynamic data, as there are many types of dynamic patterns possible. Hence, we cannot claim that our benchmark is \emph{exhaustive} in terms of the space it samples. However, we believe that the included datasets exhibit a rich variety of different traits (Tab.~\ref{tab:datasets-4}). Also, no two datasets are redundant, \emph{i.e.}, have all traits similar. Given that, to date, no other benchmark exists for this task, we believe ours is a good start in supporting the intended evaluation.
 
 \begin{table}
 \centering
 \caption{Datasets and their traits used in the evaluation.}
-\label{tab:datasets}
+\label{tab:datasets-4}
 \vspace{-0.15cm}
 \includegraphics[width=.99\linewidth]{figures/projection-evaluation/datasets.eps}
 \vspace{-0.15cm}
@@ -183,7 +183,7 @@ We measure the quality of all projection techniques (Sec.~\ref{subsec:techniques
 
 
 \subsubsection{Spatial metrics}
-\label{sec:spatial}
+\label{sec:spatial-4}
 %
 \noindent
 \textbf{Neighborhood preservation ($S_{NP}$):} With values in $[0,1]$, with 1 being the best, this is the percentage of the k-nearest neighbors of $\mathbf{x} \in \mathbf{D}$ that project in the k-nearest neighborhood of $P(\mathbf{x})$.
@@ -224,7 +224,7 @@ $ \delta^t = \|\mathbf{x}^t - \mathbf{x}^{t+1}\|$, and \emph{movement of the pro
 $ \overline{\delta^t} = \|P(\mathbf{x}^t) - P(\mathbf{x}^{t+1})\|$. Ideally, for a temporally stable $P$, we want $\overline{\delta^t}$ to be proportional to $\delta^t$. However, this may be a too hard constraint for $P$ to satisfy, just as perfect $n$D to 2D distance preservation is hard to achieve for static projections. A more relaxed requirement for a temporally stable $P$ is to have
  $\overline{\delta^t}$ a monotonic increasing function of $\delta^t$. Indeed, if this constraint were not obeyed by $P$, then if an observation $\mathbf{x}^t$ changes only slightly over time, its projection  $P(\mathbf{x}^t)$ could move a lot. That is, if  $\delta^t \ll \overline{\delta^t}$, the projection $P$ is unstable, and would convey the user the wrong impression that data is changing a lot. Conversely, if $\mathbf{x}^t$ strongly changes over time, but $P(\mathbf{x}^t)$ remains roughly static, \emph{i.e.} if $\delta_i^t \gg \overline{\delta_i^t}$, then the user gets the wrong impression that the data is not changing. Hence, for a temporally stable $P$, the two changes $\overline{\delta^t}$ and ${\delta^t}$ should be positively correlated.
 
-To measure the relationship of ${\delta^t}$ and $\overline{\delta^t}$, we adapt the static spatial quality metrics introduced in Sec.~\ref{sec:spatial} as follows:
+To measure the relationship of ${\delta^t}$ and $\overline{\delta^t}$, we adapt the static spatial quality metrics introduced in Sec.~\ref{sec:spatial-4} as follows:
 
 \noindent
 \textbf{Normalized temporal stress ($T_{Stress}$):} We define temporal stress as $\sum_{i\, t}{(\delta_{i}^{t}-\overline{\delta}_{i}^{t})^{2}} / { (\delta_{i}^t)^{2}}$, where the subscript $i$ indicates sample point $\mathbf{x}_i$. As for the spatial normalized stress, we normalize distances using standardization. Low stress values indicate that the 2D changes $\overline{\delta^t}$ reflect closely their $n$D counterparts ${\delta^t}$, which is desirable.
@@ -235,7 +235,7 @@ between $\delta$ and $\overline{\delta}$ for every observation and consecutive t
 
 %-------------------------------------------------------------------------
 \section{Evaluation and Results}
-\label{sec:results}
+\label{sec:results-4}
 %
 We evaluate the 12 quality metrics introduced in Sec.~\ref{subsec:metrics} on all (dataset, method) pairs formed by the selected 9 DR methods and 10 datasets, and analyze next the results. We do this by proposing several metric visualizations, from highly aggregated (to help forming first insights) to detailed (to examine more subtle points). For a direct impression, see also the videos showing the actual dynamic projections in action, available online at\,\cite{repo}.
 
@@ -294,7 +294,7 @@ Here we see dataset-specific behavior: For \emph{gaussians}, $S_{NP}$, $S_{Trust
 
 
 
-\noindent\textbf{Dataset difficulty:} Some datasets are considerably harder to project with good quality than others, no matter which technique we use. For example, \emph{walk} has poor stability for all techniques. In contrast, \emph{gaussians} has good stability for all techniques (except the t-SNE and UMAP variants) and good neighborhood preservation for all techniques. To study how dataset characteristics influence quality, we compute the correlation of the distance-preservation, neighborhood, and temporal stability metrics (measured over all techniques) with the six traits that we used to characterize our datasets (Tab.~\ref{tab:datasets}). Table~\ref{tab:corr_table} shows the results. A few things stand out: As the number of samples $N$ increases, the difficulty to preserve distances also increases, but neighborhoods are preserved better. Conversely, as sparsity $\sigma_n$ increases, it becomes harder to preserve neighborhoods. Separately, we do not find any strong (positive or negative) correlation of temporal stability with any of the traits. Overall, this suggests that the traits are useful in predicting \emph{spatial} quality of projections. However, we need additional traits that capture the data dynamics to reason about the projections' temporal stability.
+\noindent\textbf{Dataset difficulty:} Some datasets are considerably harder to project with good quality than others, no matter which technique we use. For example, \emph{walk} has poor stability for all techniques. In contrast, \emph{gaussians} has good stability for all techniques (except the t-SNE and UMAP variants) and good neighborhood preservation for all techniques. To study how dataset characteristics influence quality, we compute the correlation of the distance-preservation, neighborhood, and temporal stability metrics (measured over all techniques) with the six traits that we used to characterize our datasets (Tab.~\ref{tab:datasets-4}). Table~\ref{tab:corr_table} shows the results. A few things stand out: As the number of samples $N$ increases, the difficulty to preserve distances also increases, but neighborhoods are preserved better. Conversely, as sparsity $\sigma_n$ increases, it becomes harder to preserve neighborhoods. Separately, we do not find any strong (positive or negative) correlation of temporal stability with any of the traits. Overall, this suggests that the traits are useful in predicting \emph{spatial} quality of projections. However, we need additional traits that capture the data dynamics to reason about the projections' temporal stability.
 
 \begin{table}[tb]
 \centering

@@ -39,7 +39,7 @@ Motivated by these challenges of understanding and quantifying the quality of dy
 We aim to cover the above-identified gap by proposing ways to add stability to the neighborhood preservation ability of static projections, in particular t-SNE. We propose two approaches that use global influences to steer projected points:
 Our first method, LD-tSNE, offers similar flexibility in steering dynamic projections via landmarks as known for static projections, and also reaches good quality values. Our second method, PCD-tSNE, increases neighborhood influences atop an already stable Global PCA dynamic projection, scoring better than all compared counterparts in terms of spatial quality combined with stability. The global influence of both methods can be controlled via simple user parameters to find the best balance between stability and spatial quality. We compare our methods with 11 existing dynamic projections on a benchmark of 10 high-dimensional datasets using 12 metrics for both spatial quality and stability. 
 
-Section~\ref{sec:background} overviews related work on dynamic projections of high-dimensional data. Section~\ref{sec:methods} introduces our two new methods. Section~\ref{sec:experimental-setup} presents the experimental setup we used in comparing our new methods with existing ones. Section~\ref{sec:results} presents and discusses the evaluation results. Finally, Section~\ref{sec:conclusion} concludes the paper.
+Section~\ref{sec:background} overviews related work on dynamic projections of high-dimensional data. Section~\ref{sec:methods} introduces our two new methods. Section~\ref{sec:experimental-setup} presents the experimental setup we used in comparing our new methods with existing ones. Section~\ref{sec:results} presents and discusses the evaluation results. Finally, Section~\ref{sec:conclusion-5} concludes the paper.
 
   
 %-------------------------------------------------------------------------
@@ -447,7 +447,7 @@ Figure~\ref{fig:landmark-placement} shows how landmark placement can steer a dyn
 %-------------------------------------------------------------------------
 
 \section{Conclusion}
-\label{sec:conclusion}
+\label{sec:conclusion-5}
 %
 We have presented two projection methods that leverage the good neighborhood-preservation ability of t-SNE for dynamic (time-dependent) data. For this, we use guidance in the form of landmarks (for our first method, LD-tSNE), respectively attractors to principal vectors (for our second method, PCD-tSNE). We compared our methods against 11 dynamic projection techniques on 10 datasets using 8 spatial quality and 4 stability metrics. The comparison showed that PCD-tSNE scores better than all compared methods on the combined spatial quality and stability criteria. LD-tSNE obtained second-best scores on neighborhood preservation, allowing flexible placement of landmarks to drive the shape of the resulting dynamic projection. While our work -- for sure -- does not solve the problem of dynamic projection of high-dimensional data, we argue that our methods bring added value to users interested in this goal.
 
