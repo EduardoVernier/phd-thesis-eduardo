@@ -27,7 +27,7 @@ Besides faithfully capturing the data structure -- a desiderate shared with stat
 % https://docs.google.com/drawings/d/1XENnHkpmsl6AqJfx5l2b-H4bSuKonbjgjYY_E599Q5c/edit
 \begin{figure*}[h]
  \centering
- \includegraphics[width=0.7\linewidth]{figures/projection-algorithm/demo-instability-trails-rebuttal-with-color-3.eps}
+ \includegraphics[width=\linewidth]{figures/projection-algorithm/demo-instability-trails-rebuttal-with-color-3.eps}
 %  \includegraphics[width=0.48\linewidth]{figures/projection-algorithm/demo-instability-trails-rebuttal-with-color.pdf}
  \caption{A time-dependent collapsing 100-dimensional 10-Gaussian-distributions dataset (2000 points) is visualized by three projection methods. Point trails are colored by time (top) and class (bottom). The images show increasing amounts of instability artefacts.}
  \label{fig:demo-instability}
@@ -69,7 +69,7 @@ Visualization of static high dimensional data\,\cite{Liu2017} is a well studied 
 \subsection{Strategies for dynamic projections} 
 \label{sec:taxonomy}
 %
-All current dynamic projection techniques that we are aware of are based on methods that were initially designed for static data. These base methods are adapted to achieve two goals: (a) obtaining good \emph{spatial quality}, measured by the various static projection metrics outlined earlier in Sec.~\ref{sec:rw_vis_dynamic}; and (b) obtaining good \emph{stability}, defined as the ratio between changes, over time, of the projection $P(\mathbf{D})$ \emph{vs} changes of the data $\mathbf{D}$\,\cite{Vernier2020}. Besides projections, similar definitions of stability have been used to quantify dynamic treemapping algorithms\,\cite{vernier_treemap,vernier_treemap2}.  We next propose to classify these techniques as a function of how they `adapt' the underlying base (static) projection algorithm, denoted further $P_B$, to handle spatial quality and stability for dynamic data.
+All current dynamic projection techniques that we are aware of are based on methods that were initially designed for static data. These base methods are adapted to achieve two goals: (a) obtaining good \emph{spatial quality}, measured by the various static projection metrics outlined earlier in Sec.~\ref{sec:rw_vis_dynamic}; and (b) obtaining good \emph{stability}, defined as the ratio between changes, over time, of the projection $P(\mathbf{D})$ \emph{vs} changes of the data $\mathbf{D}$\,\cite{Vernier2020}. Besides projections, similar definitions of stability have been used to quantify dynamic treemapping algorithms\,\cite{vernier_treemap,vernier18software}.  We next propose to classify these techniques as a function of how they `adapt' the underlying base (static) projection algorithm, denoted further $P_B$, to handle spatial quality and stability for dynamic data.
 
 %A number of these strategies were proposed by Rauber \emph{et al.} \cite{Rauber2016} using t-SNE as testbed, but were not implemented or quantitatively tested. 
 %Later, Vernier \emph{et al.} \cite{Vernier2020} explored the idea further, benchmarking the proposed methods and applying these strategies to other base algorithms. These strategies, according to our taxonomy, are:
@@ -333,7 +333,7 @@ For a direct impression, the animations of each (dataset, method) pair can be fo
 % https://docs.google.com/drawings/d/1dUEZz5K3WcL8MpqT95sdXr2dMzeSUX-Vbu6Yg2-1Uv4/edit
 \begin{figure*}[htb!]
   \centering
-  \includegraphics[width=0.92\linewidth]{figures/projection-algorithm/cifar10grid-with-circles2.pdf}
+  \includegraphics[width=\linewidth]{figures/projection-algorithm/cifar10grid-with-circles2.pdf}
   \caption{Trails showing the ``hidden activity''\,\cite{Rauber2017} of a convolutional neural network trained on the \emph{CIFAR10}\,\cite{dataset:cifar10} dataset, computed by all 13 tested dynamic projections. Red circles show clusters of trail endpoints which indicate training convergence. Images without red circles show (suboptimal) projection methods where it is not possible to see this training convergence.}  
   \label{fig:cifar}
   \vspace{-0.5cm}
@@ -404,7 +404,7 @@ Finally, Figure~\ref{fig:lambda} shows that G-PCA and C-tSNE are not always opti
 
 % https://docs.google.com/drawings/d/18Y6EjHYnk1McBokhSRCSHwiHzoDtwdT-Ddccpk9r-og/edit
 \begin{figure}[htb!]\centering
- \includegraphics[width=.78\linewidth]{figures/projection-algorithm/lambda-influence-on-metrics.pdf}
+ \includegraphics[width=.7\linewidth]{figures/projection-algorithm/lambda-influence-on-metrics.pdf}
  \caption{
 Mean distance preservation (MDP), mean neighborhood preservation (MNP), and mean temporal stability (MTS) per dataset, as in Figs.~\ref{fig:swarm} and~\ref{fig:star}, but normalized over the 8 runs in each subplot.
   The leftmost column is for G-PCA. The next 6 columns are for PCD-tSNE with $\lambda \in \{10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}\}$. The rightmost column is for C-tSNE.

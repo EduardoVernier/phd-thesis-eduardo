@@ -184,7 +184,7 @@ We evaluate GIT on the aforementioned datasets, algorithms, and metrics collecti
 As outlined in Sec.~\ref{sec:git}, we can initialize GIT with various treemap layouts, such as squarified (SQR) or using the direct initialization illustrated in Fig.~\ref{fig:git_example}. Intuitively, one would think that SQR initialization is to be preferred, since SQR is well known for its high $AR$ values. To test this, we ran GIT using both initializations for all datasets. After initialization, the same regular GIT update mechanism is used in both cases. Figure~\ref{fig:git_vs_sqr} shows the per-dataset average stability and $AR$ values. Interestingly, we see that the higher-$AR$ SQR initialization actually yields slightly worse $AR$ values for the entire sequence. For stability, the two initializations behave basically identically. We can explain this result by the fact that the GIT direct initialization follows the same heuristics as the update steps, while SQR forces GIT to start with a layout which needs more substantial updates next as the tree data changes. At a higher level, this experiment suggests that GIT performs very well using direct initialization. As such, we use this initialization in all subsequent experiments.
 
 \begin{figure}[htbp!]
-\includegraphics[width=.48\textwidth]{figures/treemap-algorithm/git-vs-sqrgit-both.png}
+\includegraphics[width=\textwidth]{figures/treemap-algorithm/git-vs-sqrgit-both.png}
 \caption{GIT performance using ${\cal T}_{init}^{direct}$ (GIT) \emph{vs} squarified initialization (SGI). }
 \label{fig:git_vs_sqr}
 \end{figure}
@@ -193,14 +193,17 @@ As outlined in Sec.~\ref{sec:git}, we can initialize GIT with various treemap la
 %
 As we have already noted, spatial quality and stability are roughly inversely correlated desiderates -- a treemap that scores well for one of these metrics tends to score less well for the other one. Hence, comparing how these metrics change in time is interesting. To answer this, we display, for one dataset and all tested algorithms, two charts showing the median (black), 25-75\% range (green), and 5-95\% range (gray) of the $AR$ and $S$ metrics (Fig.~\ref{fig:boxplots}). We see that APP and SQR have the best $AR$ values, and SND the worst $AR$ values. The other algorithms, including GIT, score in-between. In contrast, GIT, LM0, and SND score the best for stability, while all other algorithms exhibit a non-negligible number of unstable time moments. This suggests that GIT strikes a good compromise between stability and aspect ratio.
 
-\begin{figure*}[htbp!]
+
+\begin{sidewaysfigure}
+% \begin{figure*}[htbp!]
 \centering
 \includegraphics[width=\textwidth]{figures/treemap-algorithm/boxplots-gimp.png}
 %\includegraphics[width=0.69\linewidth]{figures/boxplots-gimp-ar.png}
 %\includegraphics[width=0.69\linewidth]{figures/boxplots-gimp-st.png}
 \caption{Distribution of aspect ratio ($AR, left$) and average stability ($S$, right) values over time for the GIMP dataset.}
 \label{fig:boxplots}
-\end{figure*}
+% \end{figure*}
+\end{sidewaysfigure}
 
 While Fig.~\ref{fig:boxplots}(right) shows how the per-timestep stability changes over time, it does not show us which actual instability patterns each method is prone to deliver. Knowing this is useful, as we can better understand what to expect in terms of (undesired) cell moves from a certain algorithm, including GIT. To show this, we plot the trails connecting all centers $k_i(t)$ of all rectangles $r_i(t)$ for consecutive $t$ values over a given tree sequence (Fig.~\ref{fig:centroids}). We set the opacity of each line segment $(r_i(t), r_i(t+1))$ to the Euclidean distance $\| k_i(t) - k_i(t+1)\|$ normalized by the square root of the number of time steps. Hence, dark long lines show big moves (instability) while small moves (close to stability) are hardly visible. The image confirms the high stability of GIT --  in contrast to most other methods, except SND, GIT creates smaller cell moves (shorter dark lines), and most of these are close to horizontal or vertical. Interestingly, we see that other methods create quite different move patterns: SQR, PBS, PBZ, and PBM have mostly (large) diagonal moves. SPI shows a coil-like movement and in STR we see no vertical travel. Overall, we see that GIT is more stable not only because it yields smaller moves, but also because it constrains these to fewer motion directions, thus causes less complex dynamics (that the user must follow) in the resulting visualization. This can be also checked by watching the actual videos showing the algorithms in action~\cite{benchmark}.
 
@@ -216,7 +219,7 @@ The experiments so far do not show the individual stability metrics (including $
 
 \begin{figure}[htbp!]
 %\includegraphics[width=.5\textwidth]{figures/tables.png}
-\includegraphics[width=1.0\linewidth]{figures/treemap-algorithm/tables.png}
+\includegraphics[width=.8\linewidth]{figures/treemap-algorithm/tables.png}
 \caption{Average metric values for all techniques and all datasets.}
 \label{fig:tables}
 \end{figure}

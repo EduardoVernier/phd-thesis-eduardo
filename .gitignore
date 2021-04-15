@@ -13,3 +13,6 @@ thesis.fls
 **/*.aux
 **/*.fls
 **/*.log
+frontback/Colophon.aux
+frontback/Contents.aux
+frontback/Acknowledgments.aux
