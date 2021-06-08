@@ -3,6 +3,8 @@
 Information Visualization is the field of study concerned with providing visual tools to improve our reasoning about abstract data. Abstract data has no physical representation or direct spatial association, such as data tables, relational databases, and graphs.
 In this thesis, we will focus on testing and improving visualization techniques designed to portray two specific kinds of abstract datasets: \emph{temporal hierarchical} and \emph{temporal multidimensional}.
 
+\eduardo{add necessary refs later}
+
 \section{Temporal hierarchical data and treemaps}
 
 Hierarchical datasets are trees with weighted nodes. Weights are given for leaf nodes and computed for non-leaf nodes as the sum of their children's weights. One example of a hierarchical dataset is a computer's file system -- the "shape of the tree" is given by the organization of the directories, and the weight of the leaf nodes can be defined as a file attribute such as size.
@@ -48,7 +50,7 @@ Most such techniques are designed for static data, and when used for time-depend
 \section{Temporal coherence}
 
 Treemaps and projections are incredibly useful techniques that, due to their compact and easy to interpret design, give unique insights into large and complicated datasets.
-They were initially designed for static datasets, but, naturally, if given a temporal hierarchical or multidimensional dataset, we would like to use their concise power of expression to visualize the data. However, when creating these animation-like encodings, since these methods are not designed to maintain temporal coherence, are deceitful visual changes and algorithm-driven artifacts.
+They were initially designed for static datasets, but, naturally, if given a temporal hierarchical or multidimensional dataset, we would like to use their concise power of expression to visualize the data. However, when creating these animation-like encodings, since these methods are not designed to maintain temporal coherence, they may create deceitful visual changes and algorithm-driven artifacts.
 
 To illustrate dynamic projection instability, Fig.~\ref{fig:intro-pj-demo-instability} shows three different methods (G-PCA, TF-PCA, and TF-tSNE) projecting the same dataset, using a trail-like visual encoding. The \emph{gaussians} dataset is a 100-dimensional dataset of 2000 samples covering 10 distinct isotropic Gaussian distributions that collapse into 10 single points over 10 timesteps. Knowing the dataset, we can tell that G-PCA renders quite faithfully the data dynamics and structure; TF-PCA creates an artificial amount of spiraling; and TF-tSNE creates a very large amount of apparently random and unstable motion that is not present in the data.  
 
@@ -64,7 +66,7 @@ To illustrate dynamic projection instability, Fig.~\ref{fig:intro-pj-demo-instab
 
 The same effect occurs when we create time-dependent treemaps. The top row of Fig.~\ref{fig:intro-tm-demo-instability} shows three snapshots/timesteps of the evolution of a simple weighted tree, and the next two rows show two different treemapping algorithms creating rectangular treemap representations for the data.
 Notice that Nmap creates a stable layout; that is, there are no significant changes in the positions of the cells driven by the small changes in the data, and the adjacencies in the layout remain the same over the evolution.
-While in the Squarified treemap layout, cell \emph{d} keeps changing its relative position. When dealing with more complicated datasets, this movement can happen for multiple cells simultaneously, making it impossible to reason about the data and the change in the data.
+While in the Squarified treemap layout, cell \emph{d} (red) keeps changing its relative position. When dealing with more complicated datasets, this movement can happen for multiple cells simultaneously, making it impossible to reason about the data and the change in the data.
 
 \begin{figure*}[h]
     \centering
