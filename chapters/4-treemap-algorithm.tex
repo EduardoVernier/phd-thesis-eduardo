@@ -1,7 +1,17 @@
-\chapter{Treemap Algorithm}
+\chapter{Improved Treemapping for Dynamic Data}
 
 % https://github.com/EduardoVernier/git-latex
 % A Stable Greedy Insertion Treemap Algorithm for Software Evolution Visualization
+
+\textit{
+This chapter finalizes the treemap track of this thesis. In it, we introduce \emph{Greedy Insertion Treemaps}, a simple and scalable method which scores a great balance between temporal stability and visual quality, making it one of the most suitable techniques for dynamic treemapping, as supported by the benchmark in the previous chapter.
+}
+
+\vspace{5mm} %5mm vertical space
+
+\noindent \textbf{Abstract:}
+Computing treemap layouts for time-dependent (dynamic) trees is an open problem in information visualization. In particular, the constraints of spatial quality (cell aspect ratio) and stability (small treemap changes mandated by given tree-data changes) are hard to satisfy simultaneously. Most existing treemap methods focus on spatial quality, but are not inherently designed to address stability. We propose here a new treemapping method that aims to jointly optimize both these constraints. Our method is simple to implement, generic (handles any types of dynamic hierarchies), and fast. We compare our method with 14 state of the art treemaping algorithms using four quality metrics, over 28 dynamic hierarchies extracted from evolving software codebases. The comparison shows that our proposal jointly optimizes spatial quality and stability better than existing methods.
+
 
 \section{Introduction} \label{sec:intro}
 %

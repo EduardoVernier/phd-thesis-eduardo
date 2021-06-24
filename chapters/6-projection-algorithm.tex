@@ -1,6 +1,6 @@
-\chapter{Projection Algorithm}
+\chapter{Guided Stable Dynamic Projections}
 
-\section{Abstract}
+\noindent \textbf{Abstract:}
 Projections aim to convey the relationships and similarity of high-dimensional data in a low-dimensional representation.
 Most such techniques are designed for static data. When used for time-dependent data, they usually fail to create a stable and suitable low dimensional representation.
 We propose two dynamic projection methods (PCD-tSNE and LD-tSNE) that use global guides to steer projection points. This avoids unstable movement that does not encode data dynamics while keeping t-SNE's neighborhood preservation ability. PCD-tSNE scores a good balance between stability, neighborhood preservation, and distance preservation, while LD-tSNE allows creating stable and customizable projections. We compare our methods to 11 other techniques using quality metrics and datasets provided by a recent benchmark for dynamic projections.
