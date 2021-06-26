@@ -406,37 +406,37 @@ Yet, the polylines for the stateless algorithms now show a `kink' at the midpoin
 %\end{itemize}
 
 
-% \subsection{Comparison of data classes}
-% \label{sec:comparison}
+\subsection{Comparison of data classes}
+\label{sec:comparison}
 
-% We next compare the relative performance of all algorithms separately on all data classes. 
-% % This information refines the insights obtained in Section~\ref{sec:acrossfeatures} in helping users to choose a suitable algorithm for a given data class. 
-% Figure~\ref{fig:rankingtable} supports this comparison as follows: it is structured as a matrix of tables, one per data class.
-% Each table shows the average visual quality (left column) and average stability (right column) of all algorithms for all datasets in the respective data class. The two columns are sorted separately to show the best-ranking algorithms at the top. Cells show the algorithm names and scores, and are categorically color-coded on the algorithm name, following the same color scheme as in Section~\ref{sec:acrossfeatures}. Empty cells indicate data classes for which we did not find datasets.
-% Figure~\ref{fig:rankingtable} can answer the following practical questions:
-% %
-% \begin{description}
-% \item[Which method is best for my data?] Given a family of datasets with known characteristics (feature values), we search for the corresponding cell and pick the top algorithm(s) in visual quality, stability, or a combination of both, depending on the application requirements. When doing this, we should examine the actual values, since several algorithms score quite close to each other.
-% \item[How is a given algorithm performing in general?] We scan the table following the color of the respective algorithm, and detect its rank (with respect to visual quality and/or stability) over all data classes. In this way we can find patterns and outliers in the data for this algorithm: for example, LM0 and LM4 are always near the top in stability, and GIT's performance on visual quality fluctuates widely depending on the data class.
-% \item[Which algorithms perform similarly?] We locate groups of neigh\-boring rows with the same color pattern in all tables. These indicate algorithms which score similarly regardless of data class.
-% \end{description}
-% %
-% %We can read Figure~\ref{fig:rankingtable} in several ways. 
-% In general there are a number of insights we can obtain from Figure~\ref{fig:rankingtable}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
-% %
-% If only the stability is important, SND almost always scores best regardless of the data class, but likewise it consistently scores the poorest on visual quality. 
-% The state-aware algorithms all perform very well on stability. While LM0 is better in terms of stability than LM4, their exact order as well as their relative order to GIT varies depending on the data class.
-% %
-% When considering which algorithm is best for both stability and visual quality, there are no easy answers. There is no algorithm that performs best on both in any of the data classes and hence the answer depends on the desired trade-off and the data class in question.
+We next compare the relative performance of all algorithms separately on all data classes. 
+% This information refines the insights obtained in Section~\ref{sec:acrossfeatures} in helping users to choose a suitable algorithm for a given data class. 
+Figure~\ref{fig:rankingtable} supports this comparison as follows: it is structured as a matrix of tables, one per data class.
+Each table shows the average visual quality (left column) and average stability (right column) of all algorithms for all datasets in the respective data class. The two columns are sorted separately to show the best-ranking algorithms at the top. Cells show the algorithm names and scores, and are categorically color-coded on the algorithm name, following the same color scheme as in Section~\ref{sec:acrossfeatures}. Empty cells indicate data classes for which we did not find datasets.
+Figure~\ref{fig:rankingtable} can answer the following practical questions:
+%
+\begin{description}
+\item[Which method is best for my data?] Given a family of datasets with known characteristics (feature values), we search for the corresponding cell and pick the top algorithm(s) in visual quality, stability, or a combination of both, depending on the application requirements. When doing this, we should examine the actual values, since several algorithms score quite close to each other.
+\item[How is a given algorithm performing in general?] We scan the table following the color of the respective algorithm, and detect its rank (with respect to visual quality and/or stability) over all data classes. In this way we can find patterns and outliers in the data for this algorithm: for example, LM0 and LM4 are always near the top in stability, and GIT's performance on visual quality fluctuates widely depending on the data class.
+\item[Which algorithms perform similarly?] We locate groups of neigh\-boring rows with the same color pattern in all tables. These indicate algorithms which score similarly regardless of data class.
+\end{description}
+%
+%We can read Figure~\ref{fig:rankingtable} in several ways. 
+In general there are a number of insights we can obtain from Figure~\ref{fig:rankingtable}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
+%
+If only the stability is important, SND almost always scores best regardless of the data class, but likewise it consistently scores the poorest on visual quality. 
+The state-aware algorithms all perform very well on stability. While LM0 is better in terms of stability than LM4, their exact order as well as their relative order to GIT varies depending on the data class.
+%
+When considering which algorithm is best for both stability and visual quality, there are no easy answers. There is no algorithm that performs best on both in any of the data classes and hence the answer depends on the desired trade-off and the data class in question.
 
 
 
-%\begin{figure*}[htbp!]
-%\centering
-%\includegraphics[height=0.95\textheight]{figures/treemap-evaluation/ranktable.pdf}
-%\caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of %average visual quality (left column) and average stability (right column).}
-%\label{fig:rankingtable}
-%\end{figure*}
+\begin{figure*}[htbp!]
+\centering
+\includegraphics[width=\linewidth]{figures/treemap-evaluation/rankingtable.png}
+\caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of average visual quality (left column) and average stability (right column).}
+\label{fig:rankingtable}
+\end{figure*}
 
 
 \section{Discussion and Conclusion}
