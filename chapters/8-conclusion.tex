@@ -16,3 +16,21 @@
 % [I can of course suggest a lot here, but I don’t want to monopolize the writing]
 
 % Anyways, the conclusion should be like 3-4 pages, not more.
+
+In this thesis, we considered two instances of abstract temporal data (dynamic hierarchies and dynamic high-dimensional datasets), and for both cases we found out that to generate useful and insightful visualizations, it is important judge quality along two main axes: \emph{visual quality and stability}. 
+
+For both abstract data instances, there were well stablished visual quality metrics in the literature, i.e., when time is not take into consideration and only the quality of individual layouts are measured. For treemaps, the quality of the layout tends to be quantified by the aspect ratio of the contained cells, considering that cells closer to squares form a more readable visualization; for projections, visual quality is measured by how well the distances and neighborhoods from the high-dimensional space are preserved into the low-dimensional embedding.
+
+Regarding stability, there were no effective methods of quantifying the relationship between \emph{data change} and \emph{visual change}, so we proposed our own stability metrics. Concerning dynamic treemaps, an algorithm is stable if small changes in the input data result in small changes in the layout, that is, data change and layout change correlate positively. Previously proposed stability metrics measure only the layout change and conclude that small layout changes are a sign of a stable algorithm. However, to properly measure stability, we also need to capture the data change and then correlate data and layout change (see Chapters \ref{ch:soft-eval} and \ref{ch:tree-eval}).
+This exact same principle applies to dynamic projection, but now we correlate high-dimensional data change to low-dimensional scatterplot layout change (Chapter \ref{ch:proj-eval}).  
+
+In both cases, we found out that these two main axes are conflicting. In order to improve stability, both treemapping and dimensionality reduction methods have to sacrifice visual quality, and vice versa.
+Our goal was then to create methods that strike a good balance between these two criteria, which we achieved with Greedy Insertion Treemaps (Chapter \ref{ch:git}) and with LD-tSNE and PCD-tSNE (Chapter \ref{ch:proj-algo}).
+
+Greedy Insertion Treemap (or GIT) aims to preserve treemap-cell neighborhoods over time by constructing an initial so-called Layout Tree (LT), a data structure which is incrementally updated as the input tree data changes, so as to minimize undesired treemap-layout changes. Our state-aware approach is simple to implement, generic (handles any types of dynamic hierarchies), and fast (compared to the other state-of-the-art methods).
+
+In the dynamic projections front, we introduced two new methods that leverage the neighborhood-preservation ability of t-SNE for dynamic time-dependent data. LD-tSNE uses guidance in the form of landmarks, and PCD-tSNE uses information given by the Principal Components of the full temporal dataset. Our results show that PCD-tSNE scores a good balance between stability, neighborhood preservation, and distance preservation, making it one of the best suited general methods for dynamic projections, while LD-tSNE allows creating stable and customizable projections via landmarks selection and steering. 
+
+\eduardo{possible application text goes here}
+
+\section{Limitations and future work}
