@@ -11,7 +11,12 @@
 % What’s the big diff in Ch 3 vs Ch 2? That we now use a far wider set of dataset types, and we think on how to sample the ‘space’ of timedep hierarchies. We’re not looking only at hierarchies from software, but many more. So, this chapter extends the approach, evaluation, etc from Ch 2 to simply a larger space of datasets. Again, make sure you make this clear in the abstract.
 
 \textit{
-In this chapter we expand on the previous evaluation. We use a far wider collection of datasets and we consider how to fairly sample the `space' of time-dependent hierarchical datasets. We also include more techniques and more metrics, making this the most comprehensive study of dynamic treemaps so far.
+In the previous chapter, we have presented an evaluation of 12 algorithms designed for construction of static treemaps for the visualization of dynamic hierarchies. 
+The evaluation has outlined that there is no ideal treemapping algorithm that optimally balances stability against visual quality. While these results 
+indicate that better treemapping algorithms could be designed for the visualization of dynamic hierarchies obtained from evolving software systems, an important question is whether we can extrapolate
+these findings to dynamic hierarchies that emerge from datasets coming from different domains. Additionally, there are more treemapping algorithms, and more ways to gauge their quality, than those 
+which have been considered in the previous chapter. In this chapter, we extend the evaluation from the previous chapter to cover the above directions. First and foremost, we consider dynamic hierarchies produced by a wide range of application domains, and, to
+address this aspect, we propose a strategy to comprehensively sample the space of time-dependent hierarchical datasets. Secondly, we consider additional quality metrics and ways to compare the performance of the studied algorithms. Finally, we consider a few recent treemapping algorithms that were not used in the evaluation in the previous chapter. Taking all these aspects together, the work presented in this chapter represents the most comprehensive quantitative evaluation of dynamic treemaps presented in the literature.
 }
 
 \vspace{5mm} %5mm vertical space
@@ -160,7 +165,7 @@ The baseline treemap $T^*$ as proposed here is not a perfect baseline, as it doe
 
 \begin{figure}[]
     \centering
-    \includegraphics[width=.7\textwidth]{figures/treemap-evaluation/BaselineVerificationv5}
+    \includegraphics[width=.6\textwidth]{figures/treemap-evaluation/BaselineVerificationv5}
     \caption{Scatter plot of the average layout change between $T$ and $T'$ or $T^*$ for a random 25\% sample of all algorithms and datasets.}
     \label{fig:CTDvsBase}
 \end{figure}
@@ -407,7 +412,7 @@ Yet, the polylines for the stateless algorithms now show a `kink' at the midpoin
 
 \subsection{Comparison of data classes}
 \label{sec:comparison}
-
+%
 We next compare the relative performance of all algorithms separately on all data classes. 
 % This information refines the insights obtained in Section~\ref{sec:acrossfeatures} in helping users to choose a suitable algorithm for a given data class. 
 Figure~\ref{fig:rankingtable} supports this comparison as follows: it is structured as a matrix of tables, one per data class.
@@ -421,7 +426,8 @@ Figure~\ref{fig:rankingtable} can answer the following practical questions:
 \end{description}
 %
 %We can read Figure~\ref{fig:rankingtable} in several ways. 
-In general there are a number of insights we can obtain from Figure~\ref{fig:rankingtable}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
+
+There are a number of additional insights we can obtain from Figure~\ref{fig:rankingtable}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
 %
 If only the stability is important, SND almost always scores best regardless of the data class, but likewise it consistently scores the poorest on visual quality. 
 The state-aware algorithms all perform very well on stability. While LM0 is better in terms of stability than LM4, their exact order as well as their relative order to GIT varies depending on the data class.
@@ -452,6 +458,6 @@ To overcome possible data bias, we would also like to construct, and evaluate on
 
 To complement our quantitative evaluation it would naturally be of interest to evaluate the performance of treemapping algorithms in various usage scenarios through user studies. The two metrics we use for visual quality and stability are both perceptually salient according to studies performed in previous work. However, a study that evaluates the combination of and the trade-offs between visual quality and stability could deliver important insights as to where on the Pareto-front an optimal treemapping algorithm should lie.
 
-Finally, our evaluation currently does not measure the run-time and correspondingly the scalability of the algorithms used in our experiments. Our implementations are not (equally) optimized and hence a fair comparison is currently impossible. Scalability is clearly an important factor in online usage scenarios, and we hope to be able to complement our current set of implementations with optimized versions in the near future.
+Finally, our evaluation currently does not measure the run-time and correspondingly the computational scalability of the algorithms used in our experiments. Our implementations are not (equally) optimized and hence a fair comparison is currently risky if not impossible. Scalability is clearly an important factor in online usage scenarios, and we hope to be able to complement our current set of implementations with optimized versions in the near future.
 
 \newpage
