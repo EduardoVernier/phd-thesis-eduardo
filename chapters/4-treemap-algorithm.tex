@@ -6,8 +6,11 @@
 % A Stable Greedy Insertion Treemap Algorithm for Software Evolution Visualization
 
 \textit{
-This chapter finalizes the treemap track of this thesis. In it, we introduce \emph{Greedy Insertion Treemaps}, a simple and scalable method which scores a great balance between temporal stability and visual quality, making it one of the most suitable techniques for dynamic treemapping, as supported by the benchmark in the previous chapter.
+The previous two chapters have shown two evaluations of treemapping algorithms that are used for visualizing time-dependent hierarchies. Both evaluations -- the first being done only for datasets obtained from evolving software systems (Chapter~2) and the second being done for a much wider spectrum, and number, of datasets obtained from many application domains (Chapter~3) point out that there is no ideal algorithm that can optimize both spatial quality and stability. As such, there is room to create better treemapping algorithms. In this chapter, we finalize the treemap trach of this thesis by proposing such an algorithm, with a focus on the visualization of time-dependent software hierarchies. Our method, called \emph{Greedy Insertion Treemaps}, is a simple and scalable technique which achieves a good balance between temporal stability and visual quality, scoring better values than
+existing techniques, as supported by the software-datasets benchmark introduced in Chapter~2. 
 }
+
+\alex{I modified the above since, in this chapter, we benchmarked GIT only against the \emph{software} hierarchies, not the entire benchmark from Chapter~3. I know that GIT was also used in the evaluation in Chapter~3, but, in this chapter, we only refer to software datasets. So I think it is better to position GIT as we did initially, meaning, as a good algo for software evolution data.}
 
 \vspace{5mm} %5mm vertical space
 
@@ -24,10 +27,10 @@ Several types of data attributes are collected (and explored) in this way, inclu
 
 Dynamic, or time-dependent, treemaps are one of the most effective techniques for displaying time-dependent hierarchies. Compared to other techniques, such as node-link tree layouts, they use basically every pixel of the available screen space to display information, and as such scale to tens of thousands of items (tree nodes) per time step. Many treemap methods exist for handling static (time-independent) hierarchies~\citep{shneiderman92,sqr}, which also have been shown to optimize various quality measures that help readability, such as aspect ratio~\citep{sqr, nagamochi07} and relative positions of nodes~\citep{sot,ordered,Ghoniem2015, Buchin2011,nmap}. However, far fewer methods are available for dynamic trees~\citep{hahn10,sondag17,htm}. One key problem for dynamic treemapping is \emph{instability}, \emph{i.e.}, the fact that relatively small changes in a tree can induce disproportionately large changes in the resulting treemaps. Finding a good way to quantify and reduce instability is an open problem for dynamic treemap algorithms.
 
-In this paper, we address the above limitations with two main contributions. Firstly, we propose a new dynamic treemap algorithm, called Greedy Insertion Treemap (GIT). GIT aims to preserve treemap-cell neighborhoods over time by constructing an initial so-called Layout Tree (LT), which is next incrementally updated as the tree data changes, so as to minimize undesired treemap-layout changes.
+In this chapter, we address the above limitations with two main contributions. Firstly, we propose a new dynamic treemap algorithm, called Greedy Insertion Treemap (GIT). GIT aims to preserve treemap-cell neighborhoods over time by constructing an initial so-called Layout Tree (LT), which is next incrementally updated as the tree data changes, so as to minimize undesired treemap-layout changes.
 Secondly, we evaluate the quality of GIT both in the spatial domain and the temporal domain against a large set of well-known treemap algorithms using several established quality metrics, and on a large set of dynamic hierarchies extracted from real-world software repositories. Our evaluation results show that GIT strikes a better balance between spatial and temporal quality than the existing competing methods we evaluated against. As GIT has a simple and computationally scalable implementation, we argue that it represents a valuable contribution to the toolset of techniques needed by program evolution comprehension.
 
-The structure of this paper is as follows. Section~\ref{sec:related_work} outlines existing work on (dynamic) treemapping and related quality metrics, and their use in program evolution comprehension, and also introduces the treemap methods we compare against. Section~\ref{sec:git} details our new GIT algorithm. Section~\ref{sec:evaluation} presents our evaluation methodology for GIT and the obtained results are revealed in Section~\ref{sec:results-3} . Section~\ref{sec:conclusion-3} discusses our proposal and outlines directions for future improvement.
+The structure of this chapter is as follows. Section~\ref{sec:related_work} outlines existing work on (dynamic) treemapping and related quality metrics, and their use in program evolution comprehension, and also introduces the treemap methods we compare against. Section~\ref{sec:git} details our new GIT algorithm. Section~\ref{sec:evaluation} presents our evaluation methodology for GIT and the obtained results are revealed in Section~\ref{sec:results-3} . Section~\ref{sec:conclusion-3} discusses our proposal and outlines directions for future improvement.
 
 
 \section{Related Work}
@@ -71,7 +74,7 @@ During this, for each $l \in LT$, we compute the total weight of its subtrees $R
 
 \begin{figure}
 \centering
-\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/space-partition.png}
+\includegraphics[width=.63\textwidth]{figures/treemap-algorithm/space-partition.png}
 \caption{Space partitioning from $LT$.}
 \label{fig:space-partition}
 \end{figure}
@@ -89,7 +92,7 @@ To explain our heuristic ${\cal T}_{init}^{direct}$, consider a single-level tre
 \label{fig:git_example}
 \end{figure}
 
-For didactic purposes, nodes were added in alphabetical order, but in reality, we want nodes to be added in random order, hence when dealing with truly hierarchical data, one sub-tree is not completely laid out before its siblings, which could cause it to be `squeezed'.
+For didactic purposes, nodes were added in alphabetical order, but in reality, we want nodes to be added in random order, hence when dealing with truly hierarchical data, one sub-tree is not completely laid out before its siblings, which could cause it to be `squeezed'.\\
 
 \noindent\textbf{Update:} We now have an initial treemap ${\cal T}$ and its $LT$. We next edit $LT$ to handle weight changes, node additions, and node deletions as $T$ changes. \emph{Weight} changes do not change $LT$. \emph{Additions} are handled just as adding regular nodes when building the initial $LT$ using ${\cal T}_{init}^{direct}$. Additions tend to increase the cells' aspect ratios, so we do them after node removals and weight changes. \emph{Removals} are done by editing $LT$ as follows (see also Fig.~\ref{fig:git_removal}):
 
@@ -189,7 +192,7 @@ uws & 122 & 4093 & 2.76\\
 \section{Results}
 \label{sec:results-3}
 %
-We evaluate GIT on the aforementioned datasets, algorithms, and metrics collection from several perspectives, by answering a series of questions. Below, average stability $S$ refers to the average of the $LDC$ and $Q$ metrics introduced in Sec.~\ref{sec:metrics-3}. All results that we were not able to fit in the paper can be found at our online repository\citep{git-benchmark}.
+We evaluate GIT on the aforementioned datasets, algorithms, and metrics collection from several perspectives, by answering a series of questions. Below, average stability $S$ refers to the average of the $LDC$ and $Q$ metrics introduced in Sec.~\ref{sec:metrics-3}. All results that we were not able to fit in this chapter can be found at our online repository\citep{git-benchmark}.
 
 \subsection{How does GIT's initialization affect its quality?}
 %
@@ -231,6 +234,7 @@ The experiments so far do not show the individual stability metrics (including $
 
 \begin{figure}[htbp!]
 %\includegraphics[width=.5\textwidth]{figures/tables.png}
+\centering
 \includegraphics[width=.8\linewidth]{figures/treemap-algorithm/tables.png}
 \caption{Average metric values for all techniques and all datasets.}
 \label{fig:tables}
@@ -243,15 +247,18 @@ As noted, GIT seems to strike a good balance between spatial quality and stabili
 At a high level, stability is roughly inversely correlated with spatial quality -- methods that score very well on one tend to score worse on the other. We see three groups of methods: APP, PBS, SQR, PBM, STR, PBZ and NEW score well on spatial quality, but poorly (except NEW) on stability. SND is the opposite outlier, scoring best on stability but clearly poorest on spatial quality. A middle group of methods (GIT, LM0, LM4, MOO, NAC, SPI, and HIL) trades well stability \emph{vs} spatial quality. Within these, GIT scores the best stability, and LM0 the best spatial quality. As such, GIT and LM0 can be considered complementary methods with respect to the stability \emph{vs} spatial quality trade-off. However, LM0 has a considerably more complex and slower implementation than GIT -- for details, we refer to~\citep{sondag17}. Separately, we see that GIT's star size (convex hull containing the lines emerging from the GIT point) is one of the smallest of all tested methods. Hence, GIT offers one of the most consistent behaviors over the entire dataset collection from all tested algorithms.
 
 \begin{figure}[htbp!]
-  \includegraphics[width=1.0\linewidth]{figures/treemap-algorithm/star.png}
-\caption{Star plot summarizing both visual quality and stability, all algorithms, all datasets.}
+\centering
+  \includegraphics[width=0.8\linewidth]{figures/treemap-algorithm/star.png}
+\caption{Star plot summarizing both visual quality and stability, all evaluated algorithms, all datasets.}
 \label{fig:star-3}
 \end{figure}
 
 \section{Conclusion}
 \label{sec:conclusion-3}
-We have presented a new method for computing treemap layouts for time-dependent hierarchies. As discussed earlier, there are only a few methods in the literature that consider quality aspects pertaining to \emph{both} spatial quality and stability of such treemaps. Our contribution, in brief, is proposing a new method that takes both these quality aspects into account; and evaluating our method comprehensively on a broad dataset of 28 time-dependent hierarchies extracted from real-world dynamic dataset (software repositories), against 14 well-known treemapping methods, and using 4 quality metrics. Our results show that our new method strikes a good balance between spatial quality and stability as compared to state-of-the-art methods. Additionally, our method is simple to implement, fast, generic (with respect to the considered dynamic hierarchies), and has no hidden free parameters. More importantly, our method is an addition of a very small set of so-called \emph{stateful} methods that consider the evolution of a dynamic tree sequence when computing suitable treemaps thereof. Most existing treemapping methods are not designed to consider tree state, which arguably makes them suboptimal for handling inherently stateful datasets like dynamic trees.
+We have presented Greedy Insertion Treemaps (GIT), a new method for computing treemap layouts for time-dependent hierarchies. As discussed earlier, there are only a few methods in the literature that consider quality aspects pertaining to \emph{both} spatial quality and stability of such treemaps. Our contribution, in brief, is proposing a new method that takes both these quality aspects into account; and evaluating our method comprehensively on a broad dataset of 28 time-dependent hierarchies extracted from real-world dynamic datasets (software repositories), against 14 well-known treemapping methods, and using 4 quality metrics. Our results show that our new GIT method strikes a good balance between spatial quality and stability as compared to state-of-the-art methods. Additionally, our method is simple to implement, fast, generic (with respect to the considered dynamic hierarchies), and has no hidden free parameters. More importantly, our method is an addition of a very small set of so-called \emph{stateful} methods that consider the evolution of a dynamic tree sequence when computing suitable treemaps thereof. Most existing treemapping methods are not designed to consider tree state, which arguably makes them suboptimal for handling inherently stateful datasets like dynamic trees.
 
-Several future work directions are possible, as follows. Firstly, it is interesting to extend our evaluation to dynamic hierarchies from other domains than software evolution. This may show how much our proposal can effectively handle such more diverse datasets. Secondly, we argue that more refined quality metrics are needed (in general, for our new method but also any other treemapping methods) to capture the quality of such methods, as perceived by end users and in sync with their tasks. Finally, understanding the trade-off between the (algorithmic) reasons behind spatial quality and stability, \emph{i.e.} what to do to optimally satisfy both these requirements, is an open problem, to which we believe to have contributed to with our current work.
+\alex{I am modifying the conclusion here, since the old one was from the paper and that didn't account for the `big' comparison from Chapter 3.}
+
+Chapter~\ref{ch:tree-eval} has included GIT in the comparison with other treemapping algorithms and, more importantly, on a far more diverse collection of dynamic hierarchical datasets extracted from more application domains than evolving software systems. The respective evaluation shows that GIT performs well also for such more diverse datasets. In contrast to that broader (but shallower) evaluation, we focus in this chapter on a narrower evaluation that considers only datasets from software systems, but analyze GIT's performance in more depth. This provides, we believe, additional insights that show that, for the domain of evolving software hierarchies, GIT is the best solution in terms of trade-off of stability and spatial quality. Drawing this conclusion for the wider collection of datasets evaluated in Chapter~\ref{ch:tree-eval} is, however, not yet possible. To do this, we would need to explore GIT (and the other tested algorithms there) in more detail, \emph{e.g.}, by visually examining the dynamic patterns they produce, as shown here in Fig.~\ref{fig:centroids}. This also underlines the fact that using only a few quantitative metrics such as stability and visual (spatial) quality is necessary, but not sufficient, to fully capture the behavior of dynamic treemapping algorithms. Future work is needed to capture more complex motion patterns, such as those shown in Fig.~\ref{fig:centroids}, by suitable metrics, and next to gauge how desirable (or, on the other hand, confusing for the end user) are such patterns when present in a dynamic hierarchy visualization. Finally, understanding the trade-off between the (algorithmic) reasons behind spatial quality and stability, \emph{i.e.} what to do to optimally satisfy both these requirements, is an open problem, to which we believe to have contributed to with our current work.
 
 \newpage
