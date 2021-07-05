@@ -138,13 +138,31 @@ Lastly, it is important to mention that all aspects of our research are open. Al
 
 \section{Organization of the thesis}
 
+This thesis is structured in two main tracks. The first track covers dynamic treemaps, the challenges related to evaluating such techniques, and the proposal of a new stable algorithm. The second track follows the same organization, with an evaluation of dynamic projection techniques, the introduction of new stable methods, and, finally, \eduardo{an application chapter}.
+
+Chapter~\ref{ch:soft-eval} is an evaluation of treemap methods in the context of dynamic trees extracted from Open Source software repository. In this initial contribution, we propose new ways of effectively quantifying the relationship between data change and visual change. The metrics and concepts presented in this chapter are the base that the whole treemap track is built upon. For this evaluation, instead of using general tree datasets and having to handle the challenges of data from different sources with a wide range of attributes and traits, for the sake of simplicity, we chose the smaller scope of software evolution datasets.
+
+In Chapter~\ref{ch:tree-eval}, we build upon the foundations of Chapter~\ref{ch:soft-eval}, and present a large scale evaluation of generalized dynamic treemaps. We expand the study in terms of techniques, metrics, and, most importantly, datasets. We use more than 2000 datasets from a wide range of domains, which are next classified according to our novel classification scheme for time-dependent data. This allows us to have a finer understanding of method behavior and how performance relates to the data traits and dynamics. 
+
+In Chapter~\ref{ch:git}, we conclude the treemap track of this thesis introducing Greedy Insertion Treemaps, a novel (stateful) method that jointly optimizes spatial quality and stability. Note that GIT was proposed before the publication of Chapter~\ref{ch:tree-eval}, so, even though in this chapter we only benchmark GIT on software repository datasets, its results for generalized temporal tree data are also available in Chapter~\ref{ch:tree-eval}, which supports its status as a state-of-the-art dynamic treemapping method. 
+
+Chapter~\ref{ch:proj-eval} starts the projection track of the thesis. Following the approach of Chapters \ref{ch:soft-eval} and \ref{ch:tree-eval}, we present an extensive evaluation of dynamic projection algorithms. For such an evaluation, we collect/implement/modify a set of projection methods, we gather time-dependent multidimensional datasets, and we introduce new suitable ways to define and quantify the stability of dynamic projection methods.
+
+Given that the results of Chapter~\ref{ch:proj-eval} reveal no ``best'' method for both visual quality and stability, in Chapter~\ref{ch:proj-algo} we propose two new algorithms that strive to strike a better balance between the aforementioned metrics, making them better suited methods for dynamic projections. 
+We propose PCD-tSNE and LD-tSNE, which use global guides to steer projection points in an attempt to avoid unstable movement while keeping t-SNE’s neighborhood preservation ability. 
+
+\eduardo{In Chapter~\ref{ch:nemo},}
+
+Finally, Chapter~\ref{ch:conclusion} summarizes the work conducted in this thesis, discusses the strengths and weaknesses of our proposed approaches, and suggests directions for \eduardo{future work}.
+
+
+
 \alex{Here and later: I added cite{xxx} reference placeholders for the obvious things - like the 1st time you refer to a term or method. Please fill these in. It's trivial to do so. Will add more as I read/correct more Please pedantically fill these in!}
 
 \eduardo{will add refs later}
 
 \alex{Yes please do. Also, in sec 1.5, be short: simply list the chapters and say what you do in which and how that relates to what PREVIOUS sections in this chapter mention. Easy. Just, like, 1..2 paragraphs per chapter, not more.}
 
-\eduardo{(explanation for unavoidable change metric is not in the text yet -- software visualization paper)}
 
 \eduardo{quotes come from here http://www.cs.umd.edu/hcil/treemap-history/index.shtml}
 
