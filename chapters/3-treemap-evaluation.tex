@@ -367,37 +367,32 @@ Increasing the weight variance decreases the visual quality for all algorithms, 
 The plot shows a similar variation of visual quality and stability as seen for the weight change feature (Fig.~\ref{fig:weightChange}). 
 Yet, the polylines for the stateless algorithms now show a `kink' at the midpoint (RID, regular insertions/deletions). Hence these algorithms are most unstable for regular insertions/deletions, and stabler for linear and spiky insertions/deletions. Interestingly, the state-aware methods (LM0, LM4, GIT) show a similar kink but oriented differently. These methods thus achieve poorest visual quality for regular insertions/deletions and highest quality on the other two values of this feature.
 
-\begin{figure*}[t]
-\begin{minipage}{0.475\textwidth}
+\begin{figure*}[h!]
  \centering
-    \includegraphics[width=\linewidth]{figures/treemap-evaluation/DepthPlot}
+    \includegraphics[width=.7\linewidth]{figures/treemap-evaluation/DepthPlot}
     \caption{Visual quality \emph{vs} stability as function of the levels of hierarchy feature.}
     \label{fig:depth}
-\end{minipage}
-\hfill
-\begin{minipage}{0.475\textwidth}
-\centering
-    \includegraphics[width=\linewidth]{figures/treemap-evaluation/weightVariancePlot}
-    \caption{Visual quality \emph{vs} stability as function of the variance of node weights feature.}
-    \label{fig:weightVariance}
-\end{minipage}
 \end{figure*}
 
-\begin{figure*}[t]
-\begin{minipage}{0.475\textwidth}
+\begin{figure*}[h!]
+\centering
+    \includegraphics[width=.7\linewidth]{figures/treemap-evaluation/weightVariancePlot}
+    \caption{Visual quality \emph{vs} stability as function of the variance of node weights feature.}
+    \label{fig:weightVariance}
+\end{figure*}
+
+\begin{figure*}[h!]
   \centering
-    \includegraphics[width=\linewidth]{figures/treemap-evaluation/WeightChangePlot}
+    \includegraphics[width=.7\linewidth]{figures/treemap-evaluation/WeightChangePlot}
     \caption{Visual quality \emph{vs} stability as function of the weight change feature.}
     \label{fig:weightChange}
-\end{minipage}
-\hfill
-\begin{minipage}{0.475\textwidth}
-\centering
+\end{figure*}
+
+\begin{figure*}[h!]
     \centering
-    \includegraphics[width=\linewidth]{figures/treemap-evaluation/insertionsDeletionsPlot}
+    \includegraphics[width=.7\linewidth]{figures/treemap-evaluation/insertionsDeletionsPlot}
     \caption{Visual quality \emph{vs} stability as function of the insertions and deletions feature.}
     \label{fig:insertionsDeletions}
-\end{minipage}
 \end{figure*}
 
 %Summarize makes sense? Might want to include, but I don't think it makes sense. Not that much text to read.
@@ -416,9 +411,9 @@ Yet, the polylines for the stateless algorithms now show a `kink' at the midpoin
 %
 We next compare the relative performance of all algorithms separately on all data classes. 
 % This information refines the insights obtained in Section~\ref{sec:acrossfeatures} in helping users to choose a suitable algorithm for a given data class. 
-Figure~\ref{fig:rankingtable} supports this comparison as follows: it is structured as a matrix of tables, one per data class.
+\cref{fig:rankingtable-a,fig:rankingtable-b,fig:rankingtable-c} support this comparison as follows: it is structured as a matrix of tables, one per data class.
 Each table shows the average visual quality (left column) and average stability (right column) of all algorithms for all datasets in the respective data class. The two columns are sorted separately to show the best-ranking algorithms at the top. Cells show the algorithm names and scores, and are categorically color-coded on the algorithm name, following the same color scheme as in Section~\ref{sec:acrossfeatures}. Empty cells indicate data classes for which we did not find datasets.
-Figure~\ref{fig:rankingtable} can answer the following practical questions:
+\cref{fig:rankingtable-a,fig:rankingtable-b,fig:rankingtable-c} can answer the following practical questions:
 %
 \begin{description}
 \item[Which method is best for my data?] Given a family of datasets with known characteristics (feature values), we search for the corresponding cell and pick the top algorithm(s) in visual quality, stability, or a combination of both, depending on the application requirements. When doing this, we should examine the actual values, since several algorithms score quite close to each other.
@@ -426,9 +421,9 @@ Figure~\ref{fig:rankingtable} can answer the following practical questions:
 \item[Which algorithms perform similarly?] We locate groups of neigh\-boring rows with the same color pattern in all tables. These indicate algorithms which score similarly regardless of data class.
 \end{description}
 %
-%We can read Figure~\ref{fig:rankingtable} in several ways. 
+%We can read Figure~\cref{fig:rankingtable-a,fig:rankingtable-b,fig:rankingtable-c} in several ways. 
 
-There are a number of additional insights we can obtain from Figure~\ref{fig:rankingtable}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
+There are a number of additional insights we can obtain from \cref{fig:rankingtable-a,fig:rankingtable-b,fig:rankingtable-c}. When we consider only the visual quality, we see that SQR is usually the best for low-weight variance data, but for high weight variance APP is just as often the best algorithm. If the dataset contains only 1 level, SQR performs better, but for the other depth subclasses it depends on the exact data class.
 %
 If only the stability is important, SND almost always scores best regardless of the data class, but likewise it consistently scores the poorest on visual quality. 
 The state-aware algorithms all perform very well on stability. While LM0 is better in terms of stability than LM4, their exact order as well as their relative order to GIT varies depending on the data class.
@@ -437,12 +432,39 @@ When considering which algorithm is best for both stability and visual quality, 
 
 
 
-\begin{figure*}[htbp!]
+%\begin{figure*}[htbp!]
+%\centering
+%\includegraphics[width=\linewidth]{figures/treemap-evaluation/rankingtable.png}
+%\caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of average visual quality (left column) and average stability (right column).}
+%\label{fig:rankingtable-a,fig:rankingtable-b,fig:rankingtable-c}
+%\end{figure*}
+
+\begin{sidewaysfigure}
+% \begin{figure*}[]
 \centering
-\includegraphics[width=\linewidth]{figures/treemap-evaluation/rankingtable.png}
+\includegraphics[width=\linewidth]{figures/treemap-evaluation/table-a.png}
 \caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of average visual quality (left column) and average stability (right column).}
-\label{fig:rankingtable}
-\end{figure*}
+\label{fig:rankingtable-a}
+% \end{figure*}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}
+% \begin{figure*}[]
+\centering
+\includegraphics[width=\linewidth]{figures/treemap-evaluation/table-b.png}
+\caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of average visual quality (left column) and average stability (right column).}
+\label{fig:rankingtable-b}
+% \end{figure*}
+\end{sidewaysfigure}
+
+\begin{sidewaysfigure}
+% \begin{figure*}[]
+\centering
+\includegraphics[width=\linewidth]{figures/treemap-evaluation/table-c.png}
+\caption{Relative ranking of treemapping algorithms for all data classes. Each table cell shows algorithms in top-down decreasing order of average visual quality (left column) and average stability (right column).}
+\label{fig:rankingtable-c}
+% \end{figure*}
+\end{sidewaysfigure}
 
 
 \section{Discussion and Conclusion}
@@ -461,4 +483,3 @@ To complement our quantitative evaluation it would naturally be of interest to e
 
 Finally, our evaluation currently does not measure the run-time and correspondingly the computational scalability of the algorithms used in our experiments. Our implementations are not (equally) optimized and hence a fair comparison is currently risky if not impossible. Scalability is clearly an important factor in online usage scenarios, and we hope to be able to complement our current set of implementations with optimized versions in the near future.
 
-\newpage

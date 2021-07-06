@@ -88,7 +88,7 @@ To explain our heuristic ${\cal T}_{init}^{direct}$, consider a single-level tre
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/git_example.eps}
+\includegraphics[width=.9\textwidth]{figures/treemap-algorithm/git_example.eps}
 \caption{Building the initial layout tree $LT$ (green: inserted cells).}
 \label{fig:git_example}
 \end{figure}
@@ -107,7 +107,7 @@ After handling all changes in a new revision of $T$, we rebuild ${\cal T}$ from 
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=.8\textwidth]{figures/treemap-algorithm/git_removal.eps}
+\includegraphics[width=.9\textwidth]{figures/treemap-algorithm/git_removal.eps}
 \caption{Removal of nodes (red) from layout tree and its treemap.}
 \label{fig:git_removal}
 \end{figure}
@@ -224,9 +224,15 @@ As we have already noted, spatial quality and stability are roughly inversely co
 While Fig.~\ref{fig:boxplots}(right) shows how the per-timestep stability changes over time, it does not show us which actual instability patterns each method is prone to deliver. Knowing this is useful, as we can better understand what to expect in terms of (undesired) cell moves from a certain algorithm, including GIT. To show this, we plot the trails connecting all centers $k_i(t)$ of all rectangles $r_i(t)$ for consecutive $t$ values over a given tree sequence (Fig.~\ref{fig:centroids}). We set the opacity of each line segment $(r_i(t), r_i(t+1))$ to the Euclidean distance $\| k_i(t) - k_i(t+1)\|$ normalized by the square root of the number of time steps. Hence, dark long lines show big moves (instability) while small moves (close to stability) are hardly visible. The image confirms the high stability of GIT --  in contrast to most other methods, except SND, GIT creates smaller cell moves (shorter dark lines), and most of these are close to horizontal or vertical. Interestingly, we see that other methods create quite different move patterns: SQR, PBS, PBZ, and PBM have mostly (large) diagonal moves. SPI shows a coil-like movement and in STR we see no vertical travel. Overall, we see that GIT is more stable not only because it yields smaller moves, but also because it constrains these to fewer motion directions, thus causes less complex dynamics (that the user must follow) in the resulting visualization. This can be also checked by watching the actual videos showing the algorithms in action~\citep{git-benchmark}.
 
 \begin{figure*}[htbp!]
-\includegraphics[width=\textwidth]{figures/treemap-algorithm/centroid-4.png}
-\caption{Instability (cell center motion) patterns, all methods, \emph{AudioKit}, \emph{brackets}, \emph{exo} and \emph{fsharp} datasets.}
+\includegraphics[width=\textwidth]{figures/treemap-algorithm/centroid-4a.png}
+\caption{Instability (cell center motion) patterns, all methods, \emph{AudioKit}, \emph{exo} datasets.}
 \label{fig:centroids}
+\end{figure*}
+
+\begin{figure*}[htbp!]
+  \includegraphics[width=\textwidth]{figures/treemap-algorithm/centroid-4b.png}
+  \caption{Instability (cell center motion) patterns, all methods, \emph{brackets}, and \emph{fsharp} datasets.}
+  \label{fig:centroids-b}
 \end{figure*}
 
 \subsection{How do all quality metrics vary over all datasets?}
@@ -262,4 +268,3 @@ We have presented Greedy Insertion Treemaps (GIT), a new method for computing tr
 
 Chapter~\ref{ch:tree-eval} has included GIT in the comparison with other treemapping algorithms and, more importantly, on a far more diverse collection of dynamic hierarchical datasets extracted from more application domains than evolving software systems. The respective evaluation shows that GIT performs well also for such more diverse datasets. In contrast to that broader (but shallower) evaluation, we focus in this chapter on a narrower evaluation that considers only datasets from software systems, but analyze GIT's performance in more depth. This provides, we believe, additional insights that show that, for the domain of evolving software hierarchies, GIT is the best solution in terms of trade-off of stability and spatial quality. Drawing this conclusion for the wider collection of datasets evaluated in Chapter~\ref{ch:tree-eval} is, however, not yet possible. To do this, we would need to explore GIT (and the other tested algorithms there) in more detail, \emph{e.g.}, by visually examining the dynamic patterns they produce, as shown here in Fig.~\ref{fig:centroids}. This also underlines the fact that using only a few quantitative metrics such as stability and visual (spatial) quality is necessary, but not sufficient, to fully capture the behavior of dynamic treemapping algorithms. Future work is needed to capture more complex motion patterns, such as those shown in Fig.~\ref{fig:centroids}, by suitable metrics, and next to gauge how desirable (or, on the other hand, confusing for the end user) are such patterns when present in a dynamic hierarchy visualization. Finally, understanding the trade-off between the (algorithmic) reasons behind spatial quality and stability, \emph{i.e.} what to do to optimally satisfy both these requirements, is an open problem, to which we believe to have contributed to with our current work.
 
-\newpage

@@ -181,7 +181,7 @@ For proportional visual \emph{vs} data changes, $Q^{MOD}_k=1$.
 
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=.7\textwidth]{figures/initial-treemap-evaluation/unavoidable.eps}
+\includegraphics[width=.6\textwidth]{figures/initial-treemap-evaluation/unavoidable.eps}
 %\includegraphics[width=1.0\linewidth]{figures/unavoidable.eps}
 \vspace{-0.1cm}
 \caption{Computation of unavoidable change metric $Q^{UNAV}_k$.}
@@ -253,16 +253,25 @@ cannot show this chart for all our 28 datasets (nor can we aggregate them in a s
 
 \begin{figure*}[htbp!]
 \centering
-\includegraphics[width=1.\textwidth]{figures/initial-treemap-evaluation/boxplots.eps}
+\includegraphics[width=.8\textwidth]{figures/initial-treemap-evaluation/boxplot-a.png}
 %\includegraphics[width=1.0\linewidth]{figures/boxplots.eps}
 \vspace{-0.25cm}
-\caption{Evolution in time of spatial quality (a) and averaged four stability metrics (b) for the \emph{cpython} dataset.}
-\label{fig:boxplots_1}
+\caption{Evolution in time of spatial quality (a) for the \emph{cpython} dataset.}
+\label{fig:boxplots_1a}
 \end{figure*}
 
-Figure~\ref{fig:boxplots_1}a shows the evolution of the $Q^{AR}$ metric (Eqn.~\ref{eqn:spatial_ratio}) for all tested methods for \emph{cpython}. We see that APP and PBS deliver overall quite high and constant-over-time aspect ratios (0.7), so they are the best methods for spatial quality, with APP being better as it has a narrower $Q^{AR}$ spread around a slightly higher median value. SQR scores higher median values, but has a larger spread -- for every revision, it can score as bad as 0.05 aspect-ratio, while APP does not drop below 0.4 (compare the bottoms of the gray bands in Fig.~\ref{fig:boxplots_1} for APP and SQR). SND shows the worst spatial quality, with a tight spread around a median $Q^{AR}$ below 0.1. The chart also tells us that most methods deliver \emph{consistent} spatial quality regardless of the data changes in the 321 revisions (which we found to be large by manually examining the sequence). The quality decrease shown by SND and (less) by HIL and STR is somehow surprising, as none of the studied methods uses a `history' of the tree-sequence in its layout heuristics.
+\begin{figure*}[htbp!]
+\centering
+\includegraphics[width=.8\textwidth]{figures/initial-treemap-evaluation/boxplot-b.png}
+%\includegraphics[width=1.0\linewidth]{figures/boxplots.eps}
+\vspace{-0.25cm}
+\caption{Evolution in time of the averaged four stability metrics (b) for the \emph{cpython} dataset.}
+\label{fig:boxplots_1b}
+\end{figure*}
 
-Figure~\ref{fig:boxplots_1}b shows the evolution of four stability metrics $Q^{RATIO}$, $Q^{MOD}$, and $Q^{UNAV}$, averaged per time-step. Compared to spatial quality, we see now much more variation between methods and also much more variation (of the stability) over time. We see that SND is by far the most stable method, whereas SQR, SPI, and PBM score worst. Long `icicle' like boxplots indicate revisions where much more visual change was present than `warranted' by the data change. Interestingly, these appear at the same moments for different algorithms (Fig.~\ref{fig:boxplots_1}b, red markers shows one example). For such moments we see large variations across methods: For SPI, this is the most unstable part of the sequence, both in median and 5-95\% range sense, whereas APP finds earlier sequences (marked in blue in Fig.~\ref{fig:boxplots_1}) which are harder to lay out stably.
+Figure~\ref{fig:boxplots_1a}a shows the evolution of the $Q^{AR}$ metric (Eqn.~\ref{eqn:spatial_ratio}) for all tested methods for \emph{cpython}. We see that APP and PBS deliver overall quite high and constant-over-time aspect ratios (0.7), so they are the best methods for spatial quality, with APP being better as it has a narrower $Q^{AR}$ spread around a slightly higher median value. SQR scores higher median values, but has a larger spread -- for every revision, it can score as bad as 0.05 aspect-ratio, while APP does not drop below 0.4 (compare the bottoms of the gray bands in Fig.~\ref{fig:boxplots_1a} for APP and SQR). SND shows the worst spatial quality, with a tight spread around a median $Q^{AR}$ below 0.1. The chart also tells us that most methods deliver \emph{consistent} spatial quality regardless of the data changes in the 321 revisions (which we found to be large by manually examining the sequence). The quality decrease shown by SND and (less) by HIL and STR is somehow surprising, as none of the studied methods uses a `history' of the tree-sequence in its layout heuristics.
+
+Figure~\ref{fig:boxplots_1b}b shows the evolution of four stability metrics $Q^{RATIO}$, $Q^{MOD}$, and $Q^{UNAV}$, averaged per time-step. Compared to spatial quality, we see now much more variation between methods and also much more variation (of the stability) over time. We see that SND is by far the most stable method, whereas SQR, SPI, and PBM score worst. Long `icicle' like boxplots indicate revisions where much more visual change was present than `warranted' by the data change. Interestingly, these appear at the same moments for different algorithms (Fig.~\ref{fig:boxplots_1b}b, red markers shows one example). For such moments we see large variations across methods: For SPI, this is the most unstable part of the sequence, both in median and 5-95\% range sense, whereas APP finds earlier sequences (marked in blue in Fig.~\ref{fig:boxplots_1b}) which are harder to lay out stably.
 
 %
 % Refinements:\\
@@ -292,7 +301,7 @@ Figure~\ref{fig:table} tells several interesting things. Scanning the first tabl
 \begin{figure*}[htbp!]
 \centering
 %\includegraphics[width=.8\textwidth]{figures/rankcharts.eps}
-\includegraphics[width=0.75\textwidth]{figures/initial-treemap-evaluation/rank-vertical.png}
+\includegraphics[width=0.9\textwidth]{figures/initial-treemap-evaluation/rank-vertical.png}
 \vspace{-0.1cm}
 \caption{Ranking of the 12 methods showing the percentage of times they scored a certain rank with respect to spatial quality (a) and averaged stability (b).}
 \vspace{-0.2cm}
@@ -350,4 +359,3 @@ We have presented an evaluation of treemap algorithms for the visualizaton of dy
 
 Several directions exist for extending this work. First and foremost, a finer-grained analysis of the space of evolving software trees can be made to elicit correlations between characteristics of the datasets and measured quality of the tested treemap methods. Secondly, and at a higher level, it would be useful to extend this type of benchmarking to other application domains that generate dynamic trees and use treemap methods to visualize their evolution in time. This second direction of work will be further explored in the next chapter.
 
-\newpage

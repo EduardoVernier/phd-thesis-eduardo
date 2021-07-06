@@ -321,16 +321,19 @@ Here we see dataset-specific behavior: For \emph{gaussians}, $S_{NP}$, $S_{Trust
 \includegraphics[width=1.01\linewidth]{figures/projection-evaluation/corr_table.eps}
 \end{table}
 
-\begin{figure*}[tb]\centering
+\begin{sidewaysfigure}
+% \begin{figure*}[tb]\centering
 \hspace*{-0.02\linewidth}
   \includegraphics[width=1.0\linewidth]{figures/projection-evaluation/detailed_cartolastd.pdf}
-  \caption{Detailed analysis of distances and movements produced by all DR techniques on the \emph{cartolastd} dataset. \alex{Maybe rotate this fig so it becomes bigger.}}
+  \caption{Detailed analysis of distances and movements produced by all DR techniques on the \emph{cartolastd} dataset.}
   \vspace{-0.15cm}
   \label{fig:trails_cartolastd}
-\end{figure*}
+%\end{figure*}
+\end{sidewaysfigure}
+
 
 \begin{figure*}[tb]\centering
-  \includegraphics[width=\linewidth]{figures/projection-evaluation/instability.eps}
+  \includegraphics[width=\linewidth]{figures/projection-evaluation/instability-a.png}
   \caption{Examples of instability in TF-t-SNE (a,b) and TF-PCA (c,d,e).}
   \vspace{-0.15cm}
   \label{fig:instability}
@@ -433,5 +436,4 @@ We can also integrate streaming data techniques, datasets, and tests. In this se
 
 \alex{I adapted a bit the conclusion to make again parallels with the treemap evaluation.}
 
-\newpage
     
