@@ -184,7 +184,7 @@ To accelerate convergence, improve initialization, and create tighter clusters, 
  \end{aligned}
 \end{equation*}
 %
-%\alex{Wait, below you introduce alpha and beta, but these do NOT appear AT ALL earlier. You cannot introduce them just like that in the formulation of the gradient.}
+
 %
 % drawing at https://docs.google.com/drawings/d/1eweekZraQIyAtnmhA89MoFp0af11ic91d_qjd08Je5M/edit
 \begin{figure}[h]\centering
@@ -272,7 +272,6 @@ All the above metrics range in $[0,1]$, with 1 indicating optimal value.
 We compute $S_{NP}$, $S_{Trust}$, and $S_{Cont}$ for multiple (20) neighborhood sizes equally spread between $k=1\%$ and $k=20\%$ of the point count $N$. For $S_{NH}$, we use 20 values for $k$, ranging from 0.25\% to 5\% of $N$. 
 We next average the results for different neighborhood sizes $k$, following\,\citep{Vernier2020,Martins2015}.\\
 
-%This allows us next to study the spatial quality of projections at different scales\,\citep{Martins2015}. \alex{Wait, this was for the earlier paper. Which $k$ do you use for the \emph{current} paper, since you don't do this multiscale analysis?}
 
 \noindent\textbf{Normalized stress ($S_{Stress}$)} measures the pairwise difference of distances of points in $\mathbf{D}$ and $P(\mathbf{D})$. We define $S_{Stress}$ as $\sum_t \sum_{ij}(d_{ij}^t - {\delta_{ij}^t})^{2} / T\sum_{ij} (\delta_{ij}^t)^{2}$, where $d_{ij}^t$ and ${\delta_{ij}^t}$ are the Euclidean distances between data points $\mathbf{x}_i^t$ and $\mathbf{x}_j^t$, and between their projections $P(\mathbf{x}_i^t)$ and $P(\mathbf{x}_j^t)$, respectively for every point pair $(i,j)$ and timeframe $1 \leq t \leq T$. To ease analysis, we scale distances using standardization.\\
 % $\mathbf{x}^{norm} = \frac{\mathbf{x} - X_{min}}{X_{max}-X_{min}} $
