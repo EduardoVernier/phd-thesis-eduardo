@@ -340,14 +340,28 @@ For a direct impression, the animations of each (dataset, method) pair can be fo
 %-------------------------------------------------------------------------
 
 % https://docs.google.com/drawings/d/1dUEZz5K3WcL8MpqT95sdXr2dMzeSUX-Vbu6Yg2-1Uv4/edit
+%\begin{figure*}[htb!]
+%  \centering
+%  \includegraphics[width=\linewidth]{figures/projection-algorithm/cifar10grid-with-circles2.pdf}
+%  \caption{Trails showing the ``hidden activity''\,\citep{Rauber2017} of a convolutional neural network trained on the \emph{CIFAR10}\,\citep{dataset:cifar10} dataset, computed by all 13 tested dynamic projections. Red circles show clusters of trail endpoints which indicate training convergence. Images without red circles show (suboptimal) projection methods where it is not possible to see this training convergence.}  
+%  \label{fig:cifar}
+%  \vspace{-0.5cm}
+%\end{figure*}
+
+
 \begin{figure*}[htb!]
   \centering
-  \includegraphics[width=\linewidth]{figures/projection-algorithm/cifar10grid-with-circles2.pdf}
+  \includegraphics[width=\linewidth]{figures/projection-algorithm/cifar-a.png}
   \caption{Trails showing the ``hidden activity''\,\citep{Rauber2017} of a convolutional neural network trained on the \emph{CIFAR10}\,\citep{dataset:cifar10} dataset, computed by all 13 tested dynamic projections. Red circles show clusters of trail endpoints which indicate training convergence. Images without red circles show (suboptimal) projection methods where it is not possible to see this training convergence.}  
   \label{fig:cifar}
-  \vspace{-0.5cm}
 \end{figure*}
 
+\begin{figure*}[htb!]
+  \centering
+  \includegraphics[width=\linewidth]{figures/projection-algorithm/cifar-b.png}
+  \caption{Identical trails to \cref{fig:cifar} but colored by data class.}  
+  \label{fig:cifar-b}
+\end{figure*}
 
 
 \subsection{Visual comparison of dynamic projections}

@@ -271,14 +271,29 @@ Light colors represent high metric values (preferred). The colormap in Fig.~\ref
   \label{fig:aggregated}
 \end{figure}
 
-\begin{figure*}[tb]\centering
+% \begin{figure*}[tb]\centering
+%  \vspace{-0.2cm}
+%  \includegraphics[width=\linewidth]{figures/projection-evaluation/f2.eps}
+%  \caption{Twelve spatial quality and temporal stability metrics evaluated for 9 DR  methods run on ten datasets.}
+%  \vspace{-0.2cm}
+%  \label{fig:all_datasets}
+% \end{figure*}
+
+\begin{figure*}[h]\centering
   \vspace{-0.2cm}
-  \includegraphics[width=\linewidth]{figures/projection-evaluation/f2.eps}
+  \includegraphics[width=\linewidth]{figures/projection-evaluation/f2-a.png}
   \caption{Twelve spatial quality and temporal stability metrics evaluated for 9 DR  methods run on ten datasets.}
   \vspace{-0.2cm}
   \label{fig:all_datasets}
 \end{figure*}
 
+\begin{figure*}[h]\centering
+  \vspace{-0.2cm}
+  \includegraphics[width=\linewidth]{figures/projection-evaluation/f2-b.png}
+  \caption{Twelve spatial quality and temporal stability metrics evaluated for 9 DR  methods run on ten datasets.}
+  \vspace{-0.2cm}
+  \label{fig:all_datasets_b}
+\end{figure*}
 
 Figure~\ref{fig:aggregated} helps us to find methods that strike a balance between spatial quality and stability. In this sense, (variational) autoencoders and G-PCA score, overall, the best. The other methods are good in one aspect but not the other: Timeframe t-SNE has high neighborhood metric values but poor distance preservation and the poorest stability from all assessed methods. Timeframe PCA has high distance preservation but relatively low stability. dt-SNE appears to be as good spatially as G-t-SNE, but slightly less stable. This is an interesting finding since dt-SNE was explicitly designed (but not quantitatively assessed) to aid stability.
 
@@ -314,7 +329,7 @@ Here we see dataset-specific behavior: For \emph{gaussians}, $S_{NP}$, $S_{Trust
 
 \noindent\textbf{Dataset difficulty:} Some datasets are considerably harder to project with good quality than others, no matter which technique we use. For example, \emph{walk} has poor stability for all techniques. In contrast, \emph{gaussians} has good stability for all techniques (except the t-SNE and UMAP variants) and good neighborhood preservation for all techniques. To study how dataset characteristics influence quality, we compute the correlation of the distance-preservation, neighborhood, and temporal stability metrics (measured over all techniques) with the six traits that we used to characterize our datasets (Tab.~\ref{tab:datasets-4}). Table~\ref{tab:corr_table} shows the results. A few things stand out: As the number of samples $N$ increases, the difficulty to preserve distances also increases, but neighborhoods are preserved better. Conversely, as sparsity $\sigma_n$ increases, it becomes harder to preserve neighborhoods. Separately, we do not find any strong (positive or negative) correlation of temporal stability with any of the traits. Overall, this suggests that the traits are useful in predicting \emph{spatial} quality of projections. However, we need additional traits that capture the data dynamics to reason about the projections' temporal stability.
 
-\begin{table}[tb]
+\begin{table}[h]
 \centering
 \caption{Correlation between metric types and dataset traits.}
 \label{tab:corr_table}
@@ -332,7 +347,7 @@ Here we see dataset-specific behavior: For \emph{gaussians}, $S_{NP}$, $S_{Trust
 \end{sidewaysfigure}
 
 
-\begin{figure*}[tb]\centering
+\begin{figure*}[h]\centering
   \includegraphics[width=\linewidth]{figures/projection-evaluation/instability-a.png}
   \caption{Examples of instability in TF-t-SNE (a,b) and TF-PCA (c,d,e).}
   \vspace{-0.15cm}
