@@ -156,7 +156,7 @@ The baseline treemap $T^*$ as proposed here is not a perfect baseline, as it doe
 % Also, note that $T^*$ is not an actual treemap that represents the input data. Instead, $T^*$ it is an artificially created treemap (thus, the name `baseline'), which has many additional (gray) rectangles that represent the data change between time steps.
 
 %
-\begin{figure}[]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=.8\textwidth]{figures/treemap-evaluation/baselineRow}
     \caption{Treemaps $T'$ (with gray rectangle inserted), $T$, and $T^*$ (with gray area spread over maximal segments).}
@@ -164,7 +164,7 @@ The baseline treemap $T^*$ as proposed here is not a perfect baseline, as it doe
 \end{figure}
 %
 
-\begin{figure}[]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.6\textwidth]{figures/treemap-evaluation/BaselineVerificationv5}
     \caption{Scatter plot of the average layout change between $T$ and $T'$ or $T^*$ for a random 25\% sample of all algorithms and datasets.}
@@ -277,7 +277,7 @@ We ran all 14 algorithms on all time steps of all 2405 datasets, generated the b
 We focus on two specific questions: We first explore the \emph{validity} of our data classification (Section~\ref{sec:validity}) and then we study the \emph{performance} of all algorithms with respect to visual quality and stability across varying data features (Section~\ref{sec:acrossfeatures}).
 In the supplementary material we additionally compare the performance of all algorithms on each data \emph{class} separately. We believe that the resulting visual summary will help researchers and practitioners choose a suitable treemapping algorithm for their data.
 
-\begin{figure}[]
+\begin{figure}[ht]
     \centering
     \includegraphics{figures/treemap-evaluation/VarianceTable}
     \caption{For each data class with at least 50 datasets, the ratio of the consistency score (visual quality on the left, stability on the right) between the data class and the baseline. }
