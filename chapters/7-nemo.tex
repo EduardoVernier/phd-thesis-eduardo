@@ -92,7 +92,7 @@ Each subplot corresponds to the accelerometer data collected during the experime
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/sliding.png}
-\caption{}
+\caption{Before we project our data, we subdivide each spectrogram using the Sliding Window method. In this example, we use a window width of 5 seconds and a stride of 1 second to partition the data from Fig. \ref{fig:freq}c.}
 \label{fig:sliding}
 \end{figure*}
 
@@ -100,31 +100,32 @@ Each subplot corresponds to the accelerometer data collected during the experime
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/nemo1-projections.pdf}
-\caption{}
+\caption{The last step of the pipeline is to project (using dynamic methods) the data that has been subdivided by the Sliding Window method. Our tool supports 3 dynamic projection methods: G-PCA, G-tSNE, and PCD-tSNE. We visualize the dynamic projections as trails, where we connect the consecutive ``windows''. The data corresponds to the patients presented in \cref{fig:acc,fig:freq}.}
 \label{fig:nemo1-projections}
 \end{figure*}
 
 
 \section{Data exploration}
 
+\eduardo{We will limit the analysis to a very small subset of the data (for now). \\
+Only one task -- the same as described above --, only one sensor/sensor axis (right hand Z), and only healthy vs tremor patients.} 
 
 \begin{figure}
 \centering
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.47\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1.png}
-    \captionof{figure}{A figure}
+    % \captionof{figure}{A figure}
     \label{fig:exp1-gpca-1s-1s}
 \end{minipage}%
-\begin{minipage}{.5\textwidth}
+\begin{minipage}{.47\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1-5s-window.png}
-    \captionof{figure}{Another figure}
+    % \captionof{figure}{Another figure}
     \label{fig:exp1-gpca-5s-1s}
 \end{minipage}
-\caption{test test}
+\caption{G-PCA projection of 24 healthy (black) and 11 tremor (red) patients with window width and stride of [1s, 1s] on the left and [5s, 1s] on the right.}
 \end{figure}
-
 
 \begin{figure*}[ht]
 \centering
@@ -136,26 +137,26 @@ Each subplot corresponds to the accelerometer data collected during the experime
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/exp1-3942.png}
-\caption{}
+\caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural aspect to it that isn't captured in this task or perhaps it only appears in certain circunstances?}
 \label{fig:exp1-3942}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/exp1-337.png}
-\caption{}
+\caption{Temporary tremors on the left, and premature end of experiment on the right.}
 \label{fig:exp1-337}
 \end{figure*}
 
 
 \begin{figure}
 \begin{tabular}{cc}
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-5s-window.png}} &
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,1.png}} \\
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,001.png}} &
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,0001.png}}\\
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,000001.png}} &
-\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-gtsne.png}}
+\subfloat[G-PCA]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-5s-window.png}} &
+\subfloat[PCD-tSNE $\lambda=.1$]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,1.png}} \\
+\subfloat[PCD-tSNE $\lambda=.001$]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,001.png}} &
+\subfloat[PCD-tSNE $\lambda=.0001$]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,0001.png}}\\
+\subfloat[PCD-tSNE $\lambda=.000001$]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,000001.png}} &
+\subfloat[G-tSNE]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-gtsne.png}}
 \end{tabular}
 \caption{}
 \end{figure}
