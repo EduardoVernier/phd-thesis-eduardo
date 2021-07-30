@@ -57,6 +57,13 @@ Next we need to move into data exploration, where we want to find examples of wh
 
 \section{Our approach (not sure what to call this section)}
 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=.5\linewidth]{figures/nemo/simple-pipeline.pdf}
+\caption{Data transformation.}
+\label{fig:nemo-pipe}
+\end{figure*}
+
 
 \begin{figure*}[ht]
 \centering
@@ -66,6 +73,7 @@ Each subplot corresponds to the accelerometer data collected during the experime
 \label{fig:acc}
 \end{figure*}
 
+
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=.5\linewidth]{figures/nemo/hands.png}
@@ -73,9 +81,89 @@ Each subplot corresponds to the accelerometer data collected during the experime
 \label{fig:hands}
 \end{figure*}
 
+
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/freq2.png}
 \caption{Time-frequency representation of the acceleration of the Z axis (blue) in Fig. \ref{fig:acc}. Light colors represent high energy in the spectral distribution, i.e., there is a large amplitude component in the subject's movement associated to a particular frequency or frequency distribution.}
 \label{fig:freq}
 \end{figure*}
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=\linewidth]{figures/nemo/sliding.png}
+\caption{}
+\label{fig:sliding}
+\end{figure*}
+
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=\linewidth]{figures/nemo/nemo1-projections.pdf}
+\caption{}
+\label{fig:nemo1-projections}
+\end{figure*}
+
+
+\section{Data exploration}
+
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/nemo/exp1.png}
+    \captionof{figure}{A figure}
+    \label{fig:exp1-gpca-1s-1s}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/nemo/exp1-5s-window.png}
+    \captionof{figure}{Another figure}
+    \label{fig:exp1-gpca-5s-1s}
+\end{minipage}
+\caption{test test}
+\end{figure}
+
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=\linewidth]{figures/nemo/exp1-9196.png}
+\caption{}
+\label{fig:exp1-9196}
+\end{figure*}
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=\linewidth]{figures/nemo/exp1-3942.png}
+\caption{}
+\label{fig:exp1-3942}
+\end{figure*}
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=\linewidth]{figures/nemo/exp1-337.png}
+\caption{}
+\label{fig:exp1-337}
+\end{figure*}
+
+
+\begin{figure}
+\begin{tabular}{cc}
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-5s-window.png}} &
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,1.png}} \\
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,001.png}} &
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,0001.png}}\\
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,000001.png}} &
+\subfloat[caption]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-gtsne.png}}
+\end{tabular}
+\caption{}
+\end{figure}
+
+
+\section{Discussion}
+
+\section{Conclusions}
+
+
+    
