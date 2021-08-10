@@ -101,22 +101,24 @@ These simple line graphs are very useful for reasoning about the disorders and u
 
 The technique we use for time-frequency analysis is called Synchrosqueezing Wavelet Transform \eduardo{cite}. It is an improvement over the original Wavelet transform \eduardo{cite} which provides a sparser, sharper, noise-robust, and partly denoised representation of the time-frequency information. \eduardo{how deep do we want to go here?}
 
-This time-frequency representation can be of great relevance for the diagnosis of motion disorders. For example, studies suggest that 95\% of Essential Tremor cases exhibited frequencies in the 5--8Hz range. If we examine \cref{fig:freq}(b), we can see that throught the whole experient, there is a defined presence of frequences in this exact range, showing a regular and insuppressible tendency to the involuntary movement. We don't see the same ``horizontal line'' in that frequency range for patients (a) and (c). Patient (a) is able to hold his/her hand in a much more stable position, which translates into a darker spectrogram (less energy), while patient (c) performs high amplitude random non-rythmic movements characteristic of chorea. The high amplitude can be seen represented by the light colors in the spectrogram, and the ``random non-rythmic'' aspect can be read as having no constant lines in the time-frequecy representation, as seen on patient (b). Having both representations (\cref{fig:acc,fig:freq})side-by-side helps us understand the phenomena as whole. 
-
-The time-frequency representation is especially important because it eases the comparisson of signals. Even though there are methods to compute the similarity between two signals in the time-domain (raw signals) such as RMSE, cross-correlation, and Dynamic Time Warping \eduardo{cite all}, these can be greatly affected by phase shift and small differences in frequency. By doing comparissons in the time-frequency domain, we get a better representation for the next steps of the pipeline.
-
+This time-frequency representation can be of great relevance for the diagnosis of motion disorders. For example, studies suggest that 95\% of Essential Tremor cases exhibited frequencies in the 5--8Hz range. If we examine \cref{fig:freq}(b), we can see that throught the whole experient, there is a defined presence of frequences in this exact range, showing a regular and insuppressible tendency to the involuntary movement. We don't see the same ``horizontal line'' in that frequency range for patients (a) and (c). Patient (a) is able to hold his/her hand in a much more stable position, which translates into a darker spectrogram (less energy), while patient (c) performs high amplitude random non-rythmic movements characteristic of chorea. The high amplitude can be seen represented by the light colors in the spectrogram, and the ``random non-rythmic'' aspect can be read as having no constant lines in the time-frequency representation, as seen on patient (b). Having both representations (\cref{fig:acc,fig:freq}) side-by-side helps us understand the phenomena as whole. 
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3475963/
 
+For our purposes, the time-frequency representation is especially important as it facilitates comparisson between signals. Methods for computing similarity of signals in the time-domain (raw signals) exist (such as RMSE, cross-correlation, and Dynamic Time Warping \eduardo{cite all}), but these can be greatly affected by phase shift and small differences in frequency. By doing comparissons in the time-frequency domain, we get a better, more reliable, representation that is better suited for the next steps of the pipeline.
 
 %The sensor reads acceleration in three orthogonal axes (X, Y, Z). For the next figures, we will focus on the Z axis, which points up/down for the hands shown in \cref{fig:hands}.
-
 
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/freq2.png}
-\caption{Time-frequency representation of the acceleration of the Z axis (blue) in Fig. \ref{fig:acc}. Light colors represent high energy in the spectral distribution, i.e., there is a large amplitude component in the subject's movement associated to a particular frequency or frequency distribution. \eduardo{add colormap}}
+\caption{Time-frequency representation of the acceleration of the Z axis (blue) in Fig. \ref{fig:acc}. This is the vertical axis which points up/down for the hands shown in \cref{fig:hands}. Light colors represent high energy in the spectral distribution, i.e., there is a large amplitude component in the subject's movement associated to a particular frequency or frequency distribution. \eduardo{add colormap}}
 \label{fig:freq}
 \end{figure*}
+
+Before we project our data, we need to get it in a uniform and easily comparable format. As seen in \cref{fig:freq}, time-frequency information can vary slightly from recording to recording: they have different lenghts and different frequency precision. Both of these are due to the difference in experiment duration. Longer experiments have longer spectrograms and higher frequency definition since we are able to detect more frequencies in the lower range. The upper range of the frequency spectrum is set by the sampling rate of the sensor. The accelerometers we used are capable of collecting 148 readings per second, so the maximum frequency we are able to detect is 74 Hz. We also limit our frequency range to 100 logarithmic bins in the range of $0-74$ Hz. 
+
+To get our data in this uniform and easily comparable format we use the Sliding Window method as illustrated in \cref{fig:sliding}. In this example, we set a stride of 1 second and a window width of 5 seconds. One additional advantage of using this method is that we can change the parameters on the fly to generate projections of different ``resolutions'', as seen on \cref{fig:nemo1-projections}. What is meant by resolution is the number of points (which connected create a polyline) that represent a recording in the projection.
+
 
 \begin{figure*}[ht]
 \centering
@@ -125,6 +127,12 @@ The time-frequency representation is especially important because it eases the c
 \label{fig:sliding}
 \end{figure*}
 
+Since our data is multidimensional and temporal, naturally we will use dynamic projections to obtain further insights into our dataset.
+For this prototype, we implemented three of the dynamic projection methods introduced in the previous two chapters. These are G-PCA, G-tSNE \cref{ch:proj-eval}, and PCD-tSNE \cref{ch:proj-algo}. 
+G-PCA and PCD-tSNE are methods that achieve a great balance between visual quality and temporal stability, but they each have their own pros and cons. PCD-tSNE has better neighborhood presevation than G-PCA, its drawback however is that is has a few parameter that need to be adjusted, which adds an undesired level of uncertainty when interactively exploring the data.
+G-tSNE is a relatively unstable technique, as seen on \cref{ch:proj-eval}, however, it still provides interesting (non-temporal) insights into the high dimensional structure of the data.
+
+\cref{fig:nemo1-projections} shows the data from patients a, b, and c projected using the three methods. Because the spectrum signatures of the different patients are so different from each other, we see that the trails don't overlap. 
 
 \begin{figure*}[ht]
 \centering
