@@ -17,8 +17,6 @@ In the introduction and initial sections we will need to: \\
 2 - talk about how their manisfestation in different people can differ wildly and how that makes them challenging to classify/diagnose even for medical especialists. \\
 3 - talk about our goals creating this visual exploration tool and how this differs from a more traditional supervised learning approach. \\
 \\
-What are these goals exactly? And what are the pros/cons over what ziuz is doing (list them here...) 
-\\
 \\
 After that we'll probably need a section introducing the different disorders and possibly explaining how they manifest in some of the tasks for illustration. \\
 One thing that I'm not sure about is how familiar we expect the reader to be about these disorders.
@@ -49,7 +47,7 @@ Next we need to move into data exploration, where we want to find examples of wh
 
 \section{Hyperkinectic movement disorders and experiment design}
 
-\section{Our approach (not sure what to call this section)}
+\section{Our approach}
 
 Our goal was to design a visual analytics tool that supports the exploration of the motion data generated in the NEMO project. This is important given that the data is vast and has many axes that can be explored: there are over 100 patients, over 30 tasks, and 16 motion units which record accelerometer (3 axes), gyroscope (3 axes), and EMG (1 dimension) at up to 4370 samples per second, plus 3D video, and, for some experiments, page scans. 
 
@@ -128,11 +126,11 @@ To get our data in this uniform and easily comparable format we use the Sliding 
 \end{figure*}
 
 Since our data is multidimensional and temporal, naturally we will use dynamic projections to obtain further insights into our dataset.
-For this prototype, we implemented three of the dynamic projection methods introduced in the previous two chapters. These are G-PCA, G-tSNE \cref{ch:proj-eval}, and PCD-tSNE \cref{ch:proj-algo}. 
-G-PCA and PCD-tSNE are methods that achieve a great balance between visual quality and temporal stability, but they each have their own pros and cons. PCD-tSNE has better neighborhood presevation than G-PCA, its drawback however is that is has a few parameter that need to be adjusted, which adds an undesired level of uncertainty when interactively exploring the data.
-G-tSNE is a relatively unstable technique, as seen on \cref{ch:proj-eval}, however, it still provides interesting (non-temporal) insights into the high dimensional structure of the data.
+For this prototype, we implemented three of the dynamic projection methods introduced in the previous two chapters. These are G-PCA, G-tSNE (\cref{ch:proj-eval}), and PCD-tSNE (\cref{ch:proj-algo}). 
+G-PCA and PCD-tSNE are methods that achieve a great balance between visual quality and temporal stability, but they each have their own pros and cons. PCD-tSNE has better neighborhood and distance presevation than G-PCA and comparable stability, its main drawback for this particular application is the fact that there are a few parameters that need to be adjusted, which adds an undesired level of uncertainty when interactively exploring the data. This same trait outside of an interactive setting can be advantageous, as it allows us to create projections that borrow characteristics from both PCA and tSNE-based methods, as previously discussed in \cref{sec:results}. % chapter 6
+G-tSNE is a relatively unstable technique, as benchmarked in \cref{ch:proj-eval}, however, it still provides interesting (non-temporal) insights into the high dimensional structure of the data.
 
-\cref{fig:nemo1-projections} shows the data from patients a, b, and c projected using the three methods. Because the spectrum signatures of the different patients are so different from each other, we see that the trails don't overlap. 
+\cref{fig:nemo1-projections} shows the data from patients a, b, and c projected using the three methods. Because the spectrum signatures of the different patients are so different from each other, we see that the trails don't overlap. We can also see how PCD-tSNE creates a projection that borrows traits from both G-PCA and G-tSNE: the general position of all clusters and shape of the (c) trail resemble that of G-PCA, while the focus on intercluster neighborhood preservation for trails a and b (materialized as expanded clusters) are traits derived from the tSNE influence.
 
 \begin{figure*}[ht]
 \centering
@@ -140,7 +138,6 @@ G-tSNE is a relatively unstable technique, as seen on \cref{ch:proj-eval}, howev
 \caption{The last step of the pipeline is to project (using dynamic methods) the data that has been subdivided by the Sliding Window method. Our tool supports 3 dynamic projection methods: G-PCA, G-tSNE, and PCD-tSNE. We visualize the dynamic projections as trails, where we connect the consecutive ``windows''. The data corresponds to the patients presented in \cref{fig:acc,fig:freq}.}
 \label{fig:nemo1-projections}
 \end{figure*}
-
 
 \section{Data exploration}
 
