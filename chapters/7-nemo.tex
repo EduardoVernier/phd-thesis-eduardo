@@ -81,7 +81,7 @@ The same sensor unit also records gyroscopic and EMG data. We decided to ignore 
 On the three subplots of \cref{fig:acc} we see acceleration the data corresponding to three subjects: 
 \begin{itemize}
     \item Patient \textit{a} is the healthy control, the lines aren't perfectly straight indicating very low magnitude movement since it's impossible to hold this position perfectly still.
-    \item Patient \textit{b}'s measurements show a very rhythmic and regular tremor of average magnitude for the disorder (\eduardo{can anyone check?}). This patient was diagnosed with Essential Tremor, the most common trembling disorder, often confused with Parkinson's disease.
+    \item Patient \textit{b}'s measurements show a very rhythmic and regular tremor of average magnitude for the disorder (\eduardo{can anyone check?}). This patient was diagnosed with essential tremor, the most common trembling disorder, often confused with Parkinson's disease.
     \item Patient \textit{c} was diagnosed with chorea and displays high amplitude random non-rythmic movements. \eduardo{Are we allowed to upload censored videos to a website?}
 \end{itemize}
  
@@ -99,7 +99,7 @@ These simple line graphs are very useful for reasoning about the disorders and u
 
 The technique we use for time-frequency analysis is called Synchrosqueezing Wavelet Transform \eduardo{cite}. It is an improvement over the original Wavelet transform \eduardo{cite} which provides a sparser, sharper, noise-robust, and partly denoised representation of the time-frequency information. \eduardo{how deep do we want to go here?}
 
-This time-frequency representation can be of great relevance for the diagnosis of motion disorders. For example, studies suggest that 95\% of Essential Tremor cases exhibited frequencies in the 5--8Hz range. If we examine \cref{fig:freq}(b), we can see that throught the whole experient, there is a defined presence of frequences in this exact range, showing a regular and insuppressible tendency to the involuntary movement. We don't see the same ``horizontal line'' in that frequency range for patients \textit{a} and \textit{c}. Patient \textit{a} is able to hold his/her hand in a much more stable position, which translates into a darker spectrogram (less energy), while patient \textit{c} performs high amplitude random non-rythmic movements characteristic of chorea. The high amplitude can be seen represented by the light colors in the spectrogram, and the ``random non-rythmic'' aspect can be read as having no constant lines in the time-frequency representation, as seen on patient \textit{b}. Having both representations (\cref{fig:acc,fig:freq}) side-by-side helps us understand the phenomena as a whole. 
+This time-frequency representation can be of great relevance for the diagnosis of motion disorders. For example, studies suggest that 95\% of essential tremor cases exhibited frequencies in the 5--8Hz range. If we examine \cref{fig:freq}(b), we can see that throught the whole experient, there is a defined presence of frequences in this exact range, showing a regular and insuppressible tendency to the involuntary movement. We don't see the same ``horizontal line'' in that frequency range for patients \textit{a} and \textit{c}. Patient \textit{a} is able to hold his/her hand in a much more stable position, which translates into a darker spectrogram (less energy), while patient \textit{c} performs high amplitude random non-rythmic movements characteristic of chorea. The high amplitude can be seen represented by the light colors in the spectrogram, and the ``random non-rythmic'' aspect can be read as having no constant lines in the time-frequency representation, as seen on patient \textit{b}. Having both representations (\cref{fig:acc,fig:freq}) side-by-side helps us understand the phenomena as a whole. 
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3475963/
 
 For our purposes, the time-frequency representation is especially important as it facilitates comparisson between signals. Methods for computing similarity of signals in the time-domain (raw signals) exist (such as RMSE, cross-correlation, and Dynamic Time Warping \eduardo{cite all}), but these can be greatly affected by phase shift and small differences in frequency. By doing comparissons in the time-frequency domain, we get a better, more reliable, representation that is better suited for the next steps of the pipeline.
@@ -135,14 +135,27 @@ G-tSNE is a relatively unstable technique, as benchmarked in \cref{ch:proj-eval}
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/nemo1-projections.pdf}
-\caption{The last step of the pipeline is to project (using dynamic methods) the data that has been subdivided by the Sliding Window method. Our tool supports 3 dynamic projection methods: G-PCA, G-tSNE, and PCD-tSNE. We visualize the dynamic projections as trails, where we connect the consecutive ``windows''. The data corresponds to the patients presented in \cref{fig:acc,fig:freq}.}
+\caption{The last step of the pipeline is to project (using dynamic methods) the data that has been subdivided by the Sliding Window method. Our tool supports 3 dynamic projection methods: G-PCA, PCD-tSNE, and  G-tSNE. We visualize the dynamic projections as trails, where we connect the consecutive spectrum ``windows'' via Akima spline \eduardo{cite}. The data corresponds to the patients presented in \cref{fig:acc,fig:freq}.}
 \label{fig:nemo1-projections}
 \end{figure*}
 
 \section{Data exploration}
 
-\eduardo{We will limit the analysis to a very small subset of the data (for now). \\
-Only one task -- the same as described above --, only one sensor/sensor axis (right hand Z), and only healthy vs tremor patients.} 
+In this section, we will present an example of the kind of data exploration that our tool supports. The NEMO project has over 100 participants diagnosed with 6 different disorders \eduardo{how many?}. Each participant performed over 30 tasks whiled being measured by tens of sensors.
+
+There are many ways to conduct data exploration depending on the goal of the analysis. Some relevant examples from a clinical standpoint are:
+\begin{itemize}
+    \item Understand the behaviour of different patients or patient groups for a given task; 
+    \item Given new patient measurements, find patients with similar movement characteristics to assist diagnosis;
+    \item Explore the movements that led to a specific diagnosis;
+    \item Study the erratic/circunstantial nature of the appearance of certain symptoms;
+    \item Understand how different task induce different behaviours on specific patients or patient groups. 
+\end{itemize}
+
+In the following analysis, we will perform an example analysis that will focus on the first goal. We want to understand the behaviour of essential tremor patients \textit{vs} healthy controls in a the context of the task described as ``arms stretched forward, wrists straight, palms down, and suppress involuntary movements'' (\cref{fig:hands}). In total, we have 24 healthy subjects and 11 tremor patients.
+For the next figures we will use the reading from the Z axis of the accelerometer sensor placed on the right hand of the subject. Our tool supports interactive real-time change of all the filters set above.
+
+Once we selected the data subset of interest, we need to choose how to project the data. \cref{fig:exp1-gpca} displays two G-PCA projections, the only difference is the size of the sliding window (\cref{fig:sliding}) which translates into the resolution and smoothness of the projection. The left projection has a sliding window size of 1 second and a stride of 1 second, meaning that there is no overlap between the consecutive windows, leading to more jaggedy trails. The right projection has a window size of 5 seconds instead, so consecutive windows share part of the same data, leading to smoother lines. Choice of windows size and stride also depend on the amount of data we are projecting, i.e., number of patients and length of experiments. For the following figures we will use a window size of 5 seconds and stride of 1 second. 
 
 \begin{figure}
 \centering
@@ -150,16 +163,27 @@ Only one task -- the same as described above --, only one sensor/sensor axis (ri
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1.png}
     % \captionof{figure}{A figure}
-    \label{fig:exp1-gpca-1s-1s}
+    % \label{fig:exp1-gpca-1s-1s}
 \end{minipage}%
 \begin{minipage}{.47\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1-5s-window.png}
     % \captionof{figure}{Another figure}
-    \label{fig:exp1-gpca-5s-1s}
+    % \label{fig:exp1-gpca-5s-1s}
 \end{minipage}
 \caption{G-PCA projection of 24 healthy (black) and 11 tremor (red) patients with window width and stride of [1s, 1s] on the left and [5s, 1s] on the right.}
+\label{fig:exp1-gpca}
 \end{figure}
+
+
+With the projected data in front of us, we can start making some assumptions about the data. For example, we see that most healthy patients (black trails) cluster together in a tight formation in the ``center'' of the projection, while the tremor patients' trails tend to be located to the right of this cluster and with a wider spread. The angle and distance from the central cluster must portray some trait in the data, but we can't confirm anything just yet.    
+
+To better understand the overall structure of the projection, we can start by looking at a couple of trails drawn in its perifery. We start selecting patient 91 (\cref{fig:exp1-9196}-left). Note that the tool also displays the video recording of the experiment, but this is omitted on this chapter due to privacy concerns. 
+
+Patient 91 presents a unique behaviour. Looking at the raw signal and spectrogram, we can tell that on the initial 2-3 seconds there is a presence of medium amplitude tremors, followed by high amplitude tremors until 13s, and then a big reduction in the intensity until the end of the experiment. We also see that the the movement is decomposed into a ``sharp'' spectrum, mostly focused on the reange around 5 Hz. Without talking to the patient we can only speculate, but one hypothesis is that the patient is able to suppress involunntary movements after a lot of effort and that is only possible after a few senconds into the experiment. This dynamic translates in a particular  projection trail (top-left): it starts a certain distance away from the certer of the projection, characteristic of ``unhealthy'' behaviour, and then ``shoots'' away to the top left as tremor intensity increases, only to finally move closer to the center of the projection, close to the healthy cluster as the amplitude is reduced. This hints that the distance from the ``center'' of the projection is related to the energy in the signal, that is, how large are the movements. 
+
+The three plots on the right portray the data collected from patient 96. This patient was also diagnosed with essential tremors, but its manisfestation shows important differences compared to patient 91. Patient 96 shows a more constant tremor, its amplitude is constantly high, showing that the patitient can't supress the movement. Another disssimilaty comes in the signature of the tremor: Patient 91 has a ``sharp'' histogram, meaning that his tremor has very sinusoidal tendencies, while the same is not true for patient 96, given the presence of high energy high frequencies on the spectrum. Upon detailed inspection of the video recording, we notice that patient 96's tremor has a more lateral tendency (side-to-side instead of up-and-down). \eduardo{check}
+
 
 \begin{figure*}[ht]
 \centering
@@ -171,7 +195,7 @@ Only one task -- the same as described above --, only one sensor/sensor axis (ri
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/exp1-3942.png}
-\caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural aspect to it that isn't captured in this task or perhaps it only appears in certain circunstances?}
+\caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural aspect to it that isn't captured in this task or perhaps it only appears in certain circunstances? \eduardo{these are very hard to see, not sure how I can make it better.}}
 \label{fig:exp1-3942}
 \end{figure*}
 
