@@ -155,17 +155,17 @@ There are many ways to conduct data exploration depending on the goal of the ana
 In the following analysis, we will perform an example analysis that will focus on the first goal. We want to understand the behaviour of essential tremor patients \textit{vs} healthy controls in a the context of the task described as ``arms stretched forward, wrists straight, palms down, and suppress involuntary movements'' (\cref{fig:hands}). In total, we have 24 healthy subjects and 11 tremor patients.
 For the next figures we will use the reading from the Z axis of the accelerometer sensor placed on the right hand of the subject. Our tool supports interactive real-time change of all the filters set above.
 
-Once we selected the data subset of interest, we need to choose how to project the data. \cref{fig:exp1-gpca} displays two G-PCA projections, the only difference is the size of the sliding window (\cref{fig:sliding}) which translates into the resolution and smoothness of the projection. The left projection has a sliding window size of 1 second and a stride of 1 second, meaning that there is no overlap between the consecutive windows, leading to more jaggedy trails. The right projection has a window size of 5 seconds instead, so consecutive windows share part of the same data, leading to smoother lines. Choice of windows size and stride also depend on the amount of data we are projecting, i.e., number of patients and length of experiments. For the following figures we will use a window size of 5 seconds and stride of 1 second. 
+Once we selected the data subset of interest, we need to choose how to project the data. \cref{fig:exp1-gpca} displays two G-PCA projections, the only difference is the size of the sliding window (\cref{fig:sliding}) which translates into the resolution and smoothness of the projection. The left projection has a sliding window size of 1 second and a stride of 1 second, meaning that there is no overlap between the consecutive windows, leading to more jaggedy trails. The right projection has a window size of 5 seconds instead, so consecutive windows share part of the same data, leading to a longer representation of temporal phenomena and smoother lines. Choice of windows size and stride also depend on the amount of data we are projecting, i.e., number of patients and length of experiments. For the following figures we will use a window size of 5 seconds and stride of 1 second. 
 
 \begin{figure}
 \centering
-\begin{minipage}{.47\textwidth}
+\begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1.png}
     % \captionof{figure}{A figure}
     % \label{fig:exp1-gpca-1s-1s}
 \end{minipage}%
-\begin{minipage}{.47\textwidth}
+\begin{minipage}{.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{figures/nemo/exp1-5s-window.png}
     % \captionof{figure}{Another figure}
@@ -176,14 +176,13 @@ Once we selected the data subset of interest, we need to choose how to project t
 \end{figure}
 
 
-With the projected data in front of us, we can start making some assumptions about the data. For example, we see that most healthy patients (black trails) cluster together in a tight formation in the ``center'' of the projection, while the tremor patients' trails tend to be located to the right of this cluster and with a wider spread. The angle and distance from the central cluster must portray some trait in the data, but we can't confirm anything just yet.    
+With the projected data in front of us, we can start making some assumptions. For example, we see that most healthy patients (black trails) cluster together in a tight formation in the ``center'' of the projection, while the tremor patients' trails tend to be located to the right of this cluster and with a wider spread. The angle and distance from the central cluster must portray some trait in the data, but we can't confirm anything just yet.    
 
 To better understand the overall structure of the projection, we can start by looking at a couple of trails drawn in its perifery. We start selecting patient 91 (\cref{fig:exp1-9196}-left). Note that the tool also displays the video recording of the experiment, but this is omitted on this chapter due to privacy concerns. 
 
-Patient 91 presents a unique behaviour. Looking at the raw signal and spectrogram, we can tell that on the initial 2-3 seconds there is a presence of medium amplitude tremors, followed by high amplitude tremors until 13s, and then a big reduction in the intensity until the end of the experiment. We also see that the the movement is decomposed into a ``sharp'' spectrum, mostly focused on the reange around 5 Hz. Without talking to the patient we can only speculate, but one hypothesis is that the patient is able to suppress involunntary movements after a lot of effort and that is only possible after a few senconds into the experiment. This dynamic translates in a particular  projection trail (top-left): it starts a certain distance away from the certer of the projection, characteristic of ``unhealthy'' behaviour, and then ``shoots'' away to the top left as tremor intensity increases, only to finally move closer to the center of the projection, close to the healthy cluster as the amplitude is reduced. This hints that the distance from the ``center'' of the projection is related to the energy in the signal, that is, how large are the movements. 
+Patient 91 presents a unique behaviour. Looking at the raw signal and spectrogram, we can tell that on the initial 2-3 seconds there is a presence of medium amplitude tremors, followed by high amplitude tremors until 13s, and then a big reduction in the intensity until the end of the experiment. We also see that the the movement is decomposed into a ``sharp'' spectrum, mostly focused on the range around 5 Hz. Without talking to the patient we can only speculate, but one hypothesis is that the patient is able to suppress involuntary movements after considerable effort and that is only possible after a few senconds into the experiment. This dynamic translates in a particular  projection trail (top-left): it starts a certain distance away from the certer of the projection, characteristic of ``unhealthy'' behaviour, and then ``shoots'' away to the top left as tremor intensity increases, only to finally move closer to the center of the projection, close to the healthy cluster as the amplitude is reduced. This hints that the distance from the ``center'' of the projection is related to the energy in the signal, that is, how large the movements are. 
 
-The three plots on the right portray the data collected from patient 96. This patient was also diagnosed with essential tremors, but its manisfestation shows important differences compared to patient 91. Patient 96 shows a more constant tremor, its amplitude is constantly high, showing that the patitient can't supress the movement. Another disssimilaty comes in the signature of the tremor: Patient 91 has a ``sharp'' histogram, meaning that his tremor has very sinusoidal tendencies, while the same is not true for patient 96, given the presence of high energy high frequencies on the spectrum. Upon detailed inspection of the video recording, we notice that patient 96's tremor has a more lateral tendency (side-to-side instead of up-and-down). \eduardo{check}
-
+The three plots on the right portray the data collected from patient 96 (\cref{fig:exp1-9196}-right). This patient was also diagnosed with essential tremors, but its manisfestation shows important differences compared to patient 91's. Patient 96 shows a more constant tremor, its amplitude is constantly high, showing that the patitient can't supress the movement. Another disssimilaty comes in the signature of the tremor: Patient 91 has a ``sharp'' histogram, meaning that his tremor has very sinusoidal tendencies, while the same is not true for patient 96, given the presence of high energy high frequencies on the spectrum. Upon detailed inspection of the video recording, this can be related to the fact that patient 96's tremor has a more lateral tendency (side-to-side instead of up-and-down). \eduardo{check} We also notice extra movement in the beginning of the recording as the patient gets into position, which can be identified in the projection as abnormal movements that make the trails start at the right-bottom at a considerable distance from where the rest of the trail is located.   
 
 \begin{figure*}[ht]
 \centering
@@ -192,12 +191,27 @@ The three plots on the right portray the data collected from patient 96. This pa
 \label{fig:exp1-9196}
 \end{figure*}
 
+The projection also allows us to investigate the border between the two classes, as these are potentially subjects of interest with difficult diagnoses.
+\cref{fig:exp1-3942} shows two subjects whose trails are in the border and overlap each other. However, patient 39 (left) is classified as healthy, while patient 42 (right) was diagnosed with essential tremor. Comparing their signals, we see that subject 39's signal has larger amplitude and a sharper spectrum, which to the untrained eye could meant that he/she suffers from tremors. The subject's tremors, however, have a very high frequency main component (over 10 Hz), which puts him/her outside the normal range for essential tremor (5--8 Hz) -- maybe the subject just drank too much coffee in the morning. His/her tremor also doesn't seem to be very significant inpact in other tasks. Patient 42, however, does not display obvious tremor symptoms in this particular static task, but given its classification we must explore the reasons for the diagnosis. Further exploration tells us that this particular patient has a one side of the body more affected than the other, and that the condition appears to be more obvious when performing active tasks (instead of holding static positions), as witnessed by the Archimedes Spiral tests (\cref{fig:spirals}). Patient 42 shows signals of tremor for both hands, but on the left the tremor is much more apparent.
+
+
+
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/exp1-3942.png}
 \caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural aspect to it that isn't captured in this task or perhaps it only appears in certain circunstances? \eduardo{these are very hard to see, not sure how I can make it better.}}
 \label{fig:exp1-3942}
 \end{figure*}
+
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=.7\linewidth]{figures/nemo/4-spirals.pdf}
+\caption{Archimedes spirals for both hands of patients 39 and 42.}
+\label{fig:spirals}
+\end{figure*}
+    
+
 
 \begin{figure*}[ht]
 \centering
