@@ -194,15 +194,12 @@ The three plots on the right portray the data collected from patient 96 (\cref{f
 The projection also allows us to investigate the border between the two classes, as these are potentially subjects of interest with difficult diagnoses.
 \cref{fig:exp1-3942} shows two subjects whose trails are in the border and overlap each other. However, patient 39 (left) is classified as healthy, while patient 42 (right) was diagnosed with essential tremor. Comparing their signals, we see that subject 39's signal has larger amplitude and a sharper spectrum, which to the untrained eye could meant that he/she suffers from tremors. The subject's tremors, however, have a very high frequency main component (over 10 Hz), which puts him/her outside the normal range for essential tremor (5--8 Hz) -- maybe the subject just drank too much coffee in the morning. His/her tremor also doesn't seem to be very significant inpact in other tasks. Patient 42, however, does not display obvious tremor symptoms in this particular static task, but given its classification we must explore the reasons for the diagnosis. Further exploration tells us that this particular patient has a one side of the body more affected than the other, and that the condition appears to be more obvious when performing active tasks (instead of holding static positions), as witnessed by the Archimedes Spiral tests (\cref{fig:spirals}). Patient 42 shows signals of tremor for both hands, but on the left the tremor is much more apparent.
 
-
-
 \begin{figure*}[ht]
 \centering
 \includegraphics[width=\linewidth]{figures/nemo/exp1-3942.png}
-\caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural aspect to it that isn't captured in this task or perhaps it only appears in certain circunstances? \eduardo{these are very hard to see, not sure how I can make it better.}}
+\caption{The trail representing the patient on the right is very close to the healthy group. If we look at only his right hand during the recording of this specific task, it is hard to tell that he/she suffers from tremors and it raises the question as to why was he/she diagnosed with tremors. Does it have a postural/unilateral aspect that isn't captured in this task? \eduardo{hard to see, not sure how I can make it better.}}
 \label{fig:exp1-3942}
 \end{figure*}
-
 
 \begin{figure*}[ht]
 \centering
@@ -211,7 +208,7 @@ The projection also allows us to investigate the border between the two classes,
 \label{fig:spirals}
 \end{figure*}
     
-
+Lastly, we can notice some healthy trails reaching out into ``tremor territory'' which might be interesting subjects for investigation. One trail that attracts attention in the projection is the one of patient 3 (\cref{fig:exp1-337}-left). Most of the trail is located near other healthy patients, but part of it reaches out to the right. Looking at the spectrogram and raw signal, we can see that indeed this patient trembles for short period. Looking at the video, however, we notice that this happens as he/she talks to the researchers and moves his/her legs slightly, so it doesn't indicate an incorrect diagnostic. But further investigation was needed, as such a trail could also mean that a true essential tremor patient lost control of the supression of the involuntary movement, and this moment (which is obviously pointed out in the projection) could have been easily not noticed in a clinical setting. We see a similar trend for patient 37 (\cref{fig:exp1-337}-right), but in this case the movement is due to a late stop of the recording -- the sensors and camera keep going as the subject is told to return to a rest position. Both these recording also help us confirm an earlier suspicion about the meaning of the north-east and south-east portions of the projection space. These are related to the ``sharpness'' of the spectrum: signals where the frequency band of 5--8 Hz tends to form the majority of the sprectrum energy tend to go north-east, these ``well-behaved/well-defined'' tremors; while the direction torwards south-east of the projection is representative of more uniform spectral distributions, related to more chaotic movements.
 
 \begin{figure*}[ht]
 \centering
@@ -220,6 +217,7 @@ The projection also allows us to investigate the border between the two classes,
 \label{fig:exp1-337}
 \end{figure*}
 
+All the previous analysis was done atop of a single G-PCA projection, but the other methods implemented into the tool might offer different perspectives into the data which in turn could be useful in other tasks. \cref{fig:diff-projs}
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -231,6 +229,7 @@ The projection also allows us to investigate the border between the two classes,
 \subfloat[G-tSNE]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-gtsne.png}}
 \end{tabular}
 \caption{}
+\label{fig:diff-projs}
 \end{figure}
 
 
