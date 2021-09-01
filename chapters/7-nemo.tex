@@ -2,7 +2,7 @@
 \label{ch:nemo}
 
 \textit{
-In this chapter, we present a real-world application for the dynamic projection methods introduced in \cref{ch:proj-eval,ch:proj-algo} in the context of hyperkinetic movement disorder analysis. These disorders manifest in abnormal involuntary movements that highly affect the quality of life of the people who suffer from them. These involuntary movements may present a wide range of tendencies: they may be regular and rhythmic, as in tremors; swift ``lightning-like'' jerks or twitches, as in myoclonus; sustained and repetitive movements resulting in abnormal postures, as seen in dystonia; they may present a random, brief, and non-rhythmic character, as in chorea; or can be temporarily suppressible jerks, as in tics.
+In this chapter, we present a real-world application for the dynamic projection methods introduced in \cref{ch:proj-eval,ch:proj-algo} in the context of hyperkinetic movement disorder analysis. These disorders manifest as abnormal involuntary movements that highly affect the quality of life of the people who suffer from them. These involuntary movements may present a wide range of tendencies: they may be regular and rhythmic, as in tremors; swift ``lightning-like'' jerks or twitches, as in myoclonus; sustained and repetitive movements resulting in abnormal postures, as seen in dystonia; they may present a random, brief, and non-rhythmic character, as in chorea; or can be temporarily suppressible jerks, as in tics.
 The diagnosis of these disorders is carried out via careful professional observation. It can be extra challenging due to the circumstantial emergence of certain behaviors (trigged by specific postures or tasks) and their manifestation via compound movements, including a combination of the various hyperkinesias. All these factors lead to professionals often disagreeing with diagnosis. 
 This chapter describes how we transform the data collected during clinical experiments, present our visual analytics tool, and show an example of data exploration that leads to valuable clinical insights using spectral analysis and temporal dimensionality reduction.
 }
@@ -219,7 +219,7 @@ Such a trail could also mean that a true essential tremor patient lost control o
 \label{fig:exp1-337}
 \end{figure*}
 
-All the previous analysis was done atop of a single G-PCA projection. However, the other methods implemented into the tool might offer different perspectives on the data, which could be useful in other tasks. \cref{fig:diff-projs}
+All the previous analysis was done atop of a single G-PCA projection. However, the other methods implemented into the tool might offer different perspectives on the data, which could be useful in other tasks. \cref{fig:diff-projs} shows 6 projections of the same data. These projections show a  PCD-tSNE characteristic previously discussed (\cref{sec:lambda}), in which it proves itself capable of evoking traits from PCA (focus on distance preservation) and tSNE (focus on neighborhood preservation) based on the setting of the $\lambda$ parameter.
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -230,7 +230,7 @@ All the previous analysis was done atop of a single G-PCA projection. However, t
 \subfloat[PCD-tSNE $\lambda=.000001$]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-pcd0,000001.png}} &
 \subfloat[G-tSNE]{\includegraphics[width=.5\linewidth]{figures/nemo/exp1-gtsne.png}}
 \end{tabular}
-\caption{}
+\caption{Different projection of the same data showing how PCD-tSNE is able to create a hybrid focus on distance preservation or neighborhood preservation depending on the $\lambda$ parameter setting.}
 \label{fig:diff-projs}
 \end{figure}
 
