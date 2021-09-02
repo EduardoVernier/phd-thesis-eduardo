@@ -21,9 +21,6 @@ In this thesis, we attack a part of the above problem by focusing on abstract da
 
 In isolation, information visualization provides many methods to depict data which is hierarchical, high-dimensional, or temporal. However, the combination of at least two of the above three data aspects immediately makes the visualization problem far harder to address. In particular, we are interested in exploring how to visualize abstract datasets which are \emph{hierarchical and time-dependent}, respectively \emph{high-dimensional and time-dependent}. We outline the two separate challenges -- visualizing abstract data which is hierarchical and temporal, respectively high-dimensional and temporal, in Secs.~\ref{sec:ch1_tempo} and~\ref{sec:ch1_highdim} next.
 
-\alex{You see I added quite a bit. Important: here and elsewhere: you NEED to go gently step-by-step and introduce/defend/explain the problem in SMALL increments.}
-
-\eduardo{add necessary refs later}
 
 \section{Visualizing temporal hierarchical data}
 \label{sec:ch1_tempo}
@@ -138,7 +135,7 @@ Lastly, it is important to mention that all aspects of our research are open. Al
 
 \section{Organization of the thesis}
 
-This thesis is structured in two main tracks. The first track covers dynamic treemaps, the challenges related to evaluating such techniques, and the proposal of a new stable algorithm. The second track follows the same organization, with an evaluation of dynamic projection techniques, the introduction of new stable methods, and, finally, \eduardo{an application chapter}.
+This thesis is structured in two main tracks. The first track covers dynamic treemaps, the challenges related to evaluating such techniques, and the proposal of a new stable algorithm. The second track follows the same organization, with an evaluation of dynamic projection techniques, the introduction of new stable methods, and, finally, an application chapter.
 
 Chapter~\ref{ch:soft-eval} is an evaluation of treemap methods in the context of dynamic trees extracted from Open Source software repository. In this initial contribution, we propose new ways of effectively quantifying the relationship between data change and visual change. The metrics and concepts presented in this chapter are the base that the whole treemap track is built upon. For this evaluation, instead of using general tree datasets and having to handle the challenges of data from different sources with a wide range of attributes and traits, for the sake of simplicity, we chose the smaller scope of software evolution datasets.
 
@@ -151,10 +148,8 @@ Chapter~\ref{ch:proj-eval} starts the projection track of the thesis. Following 
 Given that the results of Chapter~\ref{ch:proj-eval} reveal no ``best'' method for both visual quality and stability, in Chapter~\ref{ch:proj-algo} we propose two new algorithms that strive to strike a better balance between the aforementioned metrics, making them better suited methods for dynamic projections. 
 We propose PCD-tSNE and LD-tSNE, which use global guides to steer projection points in an attempt to avoid unstable movement while keeping t-SNE’s neighborhood preservation ability. 
 
-\eduardo{In Chapter~\ref{ch:nemo},}
-
-Finally, Chapter~\ref{ch:conclusion} summarizes the work conducted in this thesis, discusses the strengths and weaknesses of our proposed approaches, and suggests directions for \eduardo{future work}.
+In Chapter~\ref{ch:nemo}, we present a real-world application for the dynamic projection methods introduced in \cref{ch:proj-eval,ch:proj-algo} in the context of hyperkinetic movement disorder analysis. These disorders manifest as abnormal involuntary movements that highly affect the quality of life of the people who suffer from them, and computer supported diagnosis is desired given the complexity of their manifestation.
 
 
-\eduardo{quotes come from here http://www.cs.umd.edu/hcil/treemap-history/index.shtml}
+Finally, Chapter~\ref{ch:conclusion} summarizes the work conducted in this thesis, discusses the strengths and weaknesses of our proposed approaches, and suggests directions for future work.
 
