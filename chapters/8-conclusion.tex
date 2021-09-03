@@ -39,3 +39,14 @@ This is preliminary investigation, and many points are still open e.g., the actu
 
 
 \section{Future work}
+
+There are several possible directions for future work:
+
+\noindent\textbf{Streaming data:} For our algorithm designs, we assumed a finite temporal aspect to the time series we are handling, and we allow our algorithms to ``look into the future'' and adapt accordingly to the changes in the data that are yet to come. 
+When dealing with streaming data, we don't have this ability, we can't ``look into the future'', and the algorithm must try to adapt to any unpredictable changes in the data, making the design of this class of methods even more challenging.
+In addition, studying this class of (underserved) algorithms implies the design of new quality metrics and the collection of new suitable datasets. This applies both to streaming treemaps and streaming projections.
+
+\noindent\textbf{Deep learning dynamic projections:} Recently, we have seen the use of deep neural networks to produce static projections with a significant computational speed-up while maintaining high-quality metrics and out-of-sample capability \citep{MateusEspadoto}. We believe a similar approach could be investigated for dynamic projections, granting similar benefits to the temporal counterpart.
+
+\noindent\textbf{Extending benchmarks:} 
+We can extend our benchmarks with new methods, better ways to choose hyperparameters, new datasets, and new metrics. With a larger number of datasets, we can perform robust tests on the impact of dataset traits on the quality of our projections and treemaps. We can also integrate streaming data techniques, streaming datasets, and dedicated task-based tests. 
