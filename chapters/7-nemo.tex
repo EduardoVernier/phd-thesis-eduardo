@@ -2,7 +2,7 @@
 \label{ch:nemo}
 
 \textit{
-In this chapter, we present a real-world application for the dynamic projection methods introduced in \cref{ch:proj-eval,ch:proj-algo} to visualize hyperkinetic movement disorder patient data. Hyperkinetic movement disorders manifest as abnormal involuntary movements that highly affect the quality of life of the people who suffer from them. These involuntary movements may present a wide range of tendencies: they may be regular and rhythmic, as in tremors; swift ``lightning-like'' jerks or twitches, as in myoclonus; sustained and repetitive movements resulting in abnormal postures, as seen in dystonia; they may present a random, brief, and non-rhythmic character, as in chorea; or can be temporarily suppressible jerks, as in tics.
+In this chapter, we present a real-world application for the dynamic projection methods introduced in \cref{ch:proj-eval,ch:proj-algo} in the context of hyperkinetic movement disorder analysis. These disorders manifest as abnormal involuntary movements that highly affect the quality of life of the people who suffer from them. These involuntary movements may present a wide range of tendencies: they may be regular and rhythmic, as in tremors; swift ``lightning-like'' jerks or twitches, as in myoclonus; sustained and repetitive movements resulting in abnormal postures, as seen in dystonia; they may present a random, brief, and non-rhythmic character, as in chorea; or can be temporarily suppressible jerks, as in tics.
 The diagnosis of these disorders is carried out via careful professional observation. It can be extra challenging due to the circumstantial emergence of certain behaviors (trigged by specific postures or tasks) and their manifestation via compound movements, including a combination of the various hyperkinesias. All these factors lead to professionals often disagreeing with diagnosis. 
 This chapter describes how we transform the data collected during clinical experiments, present our visual analytics tool, and show an example of data exploration that leads to valuable clinical insights using spectral analysis and temporal dimensionality reduction.
 }
@@ -10,53 +10,45 @@ This chapter describes how we transform the data collected during clinical exper
 \vspace{5mm} %5mm vertical space
 
 
-\eduardo{This in an initial report, not necessarily what the chapter/paper will look like. It is supposed to help me think about how to write about this project and guide me through preliminary patient data analysis.
-\\
-In the introduction and initial sections we will need to: \\
-1 - introduce hyperkinectic movement disorders \\ 
-2 - talk about how their manifestation in different people can differ wildly and how that makes them challenging to classify/diagnose even for medical specialists. \\
-3 - talk about our goals creating this visual exploration tool and how this differs from a more traditional supervised learning approach. \\
-\\
-\\
-After that we'll probably need a section introducing the different disorders and possibly explaining how they manifest in some of the tasks for illustration. \\
-One thing that I'm not sure about is how familiar we expect the reader to be about these disorders.
-\\
-Then I think we should start to describe our contribution. And I would start by (1) describing the data itself and all the choices/transformations we make along the way until we get to the dynamic projection. 
-\\
-This includes: \\
-\\
-1 - Showing what the RAW data looks like \\
-1.1 - General description of the experiment, including the tasks, sensor types, and possibly the different disorders (which must be introduced in a previous section). \\
-1.2 - Show 3 axis accelerometer plot for 3 patients (e.g. healthy vs tremor vs chorea) \\
-1.3 - Show spectrogram, interpret it, and talk about synchosqueezing \\ 
-1.4 - Show how we get that spectrogram into a 'projectable' format: binning of the freqs + sliding window (width, stride) \\
-1.5 - Show initial projections --  not sure what data to use here, maybe the 3 patients from before? Probably a more meaningful subset of the data would be better. Right now we have G-PCA, G-tSNE, and PCD-tSNE implemented. Explain dynamic projections and why they are useful and suitable for this application. Maybe do a trail vs single point comparison.
-\\
-\\
-Next we need to move into data exploration, where we want to find examples of when dynamic projections can bring us insights into the data dynamics and the high dimensional space. Here we will be interested in looking for clusters, outliers, erratic/regular behaviour, failures in the data collection, etc.
-\\ 
-}
-
-\eduardo{CODE: Check code to make sure I can switch sensors (DONE) and that I can 'stack' more than one sensor (NOT DONE))}
-
-\noindent \textbf{Abstract:}
+% \noindent \textbf{Abstract:}
 
 \section{Introduction}
-Hyperkinetic movement disorders are a class of disorders that are characterised by excessive and involuntary motor movements. These disorders include a range of different  phenotypes such as myoclonus, dystonia, tremor, chorea and tics. Since the clinical presentation and ethiology differs between these disorders, different protocols are required for clinical treatment. These treatments differ in e.g., the choice of additional diagnostic tests, medication prescriptions, and deep brain stimulation targets. It is therefore of utmost importance to ensure accurate phenotypic classification. As hyperkinetic movement disorders have no clear anatomical abnormalities, classification is based on clinical definitions and thus on expert opinion. What makes this increasingly difficult is that complex and mixed forms of phenotypes occur in many patients, and many clinical features of these disorders also correspond to clinical features of other movement disorders classes such as ataxia, spasticity, and functional movement disorders. Moreover, there is large inter- and intra-observer classification variability in expert clinicians (REF 1-4).
 
-To improve hyperkinetic movement disorder phenotyping, the Next Move in Movement Disorders (NEMO) study was set up at the University Medical Center Groningen, The Netherlands. The aim of this study is to build computer aided hyperkinetic movement disorders classification tools to assist healthcare professionals in phenotyping. To this end, a large dataset is being collected from hyperkinectic movement disorder patients and healthy controls while they perform 40 (motor and non-motor) tasks in different settings. During these tasks, data is measured using electromyography (EMG), motion sensors (accelerometry), 2D & 3D video, positron emission tomography (PET), and functional magnetic resonance imaging (fMRI). Patients are included in this study based on independent expert panel agreement on their hyperkinetic movement disorder phenotype. 
+Hyperkinetic movement disorders are a class of disorders that are characterised by excessive and involuntary motor movements. These disorders include a range of different phenotypes such as myoclonus, dystonia, tremor, chorea and tics. Since the clinical presentation and etiology differs between these disorders, each of these disorders requires a different clinical treatment strategy. These treatment strategies differ in e.g., the choice of additional diagnostic tests, medication prescriptions, and deep brain stimulation targets. For the correct treatment, it is of utmost importance to ensure accurate phenotypic classification. As hyperkinetic movement disorders have no clear anatomical abnormalities, classification is based on clinical definitions and thus on expert opinion. What makes this increasingly difficult is that complex and mixed forms of phenotypes occur in many patients, and many clinical features of these hyperkinetic movement disorders also correspond to clinical features of other movement disorders classes such as ataxia, spasticity, and functional movement disorders. Moreover, there is large inter- and intra-observer classification variability in expert clinicians (REF 1-4).
 
-The current chapter focuses on the EMG amd accelerometry data of the NEMO study. Accelerometry is applied in clinical practice to support hyperkenitic movement disorder phenotyping and in particular for myoclonus, tremor, and dystonia patients. Typically, muscle activation pattenrs, tremor burst duratons, and frequecies are used for such assesments.
+To improve hyperkinetic movement disorder phenotyping, the Next Move in Movement Disorders (NEMO) study was set up at the University Medical Center Groningen, The Netherlands. The aim of this study is to build computer aided hyperkinetic movement disorder classification tools to assist healthcare professionals in phenotyping. To this end, a large data set is being collected from hyperkinetic movement disorder patients and healthy controls while they perform 37 motor and 3 non-motor tasks in different settings. During these tasks, data is collected using electromyography (EMG), motion sensors (accelerometry), 2D \& 3D video, positron emission tomography (PET), and functional magnetic resonance imaging (fMRI). Importantly, disorder phenotype classification in this data set is based on independent expert panel agreement. 
 
->> DESCRIBE ACCELEROMETRY IN MORE DETAIL HERE INCLUDING PROS AND CONS. THIS WILL BRIDGE TO THE CURRENT GOALS OF VISUALIZING THE DATA WITH DYNAMIC PROJECTION METHODS. See e.g., https://doi.org/10.1016/j.parkreldis.2021.07.033 << 
+The current chapter focuses on the EMG and accelerometry data of the NEMO study. EMG is a technique in which the electrical activity in skeletal muscles is measured. This can either be done by placing an electrode inside the muscle of interest, or on the skin above the muscle. The latter technique is referred to as surface EMG and is employed in the current study. The simplest application of EMG is to determine whether a muscle is active. In clinical practise, EMG is combined with accelerometry, a method focused on limb displacement rather than muscle activity. By assessment of several characteristics of the patient’s movement pattern, such as muscle activation patterns, movement burst duration and frequency analysis, these techniques can help support classification of tremor, myoclonus or dystonia.
+
+Unfortunately, there are several known limitations to the diagnostic value of EMG and accelerometry features in movement disorders classification, three of which we will discuss briefly. First of all, high-level evidence for the differentiating value of each feature is sparse. Only a limited number of diagnostic test accuracy studies exist, most of which report on tremor patients. Many of the features that are currently a part of the diagnostic criteria for movement disorders have only been reported in descriptive studies, but have not been compared between patient groups (e.g., in myoclonus versus tremor patients). As a consequence, incorporation of these features in clinical practise is largely based on clinical observations and on expert opinion. Secondly, proper application of EMG and accelerometry techniques and interpretation of the results requires training and experience. Both practise and quality range widely between different medical centres, and diagnostic accuracy is highest in specialised centres. Thirdly, application of EMG and accelerometry features is complicated by the inherent nature of movement disorders themselves: as all of these disorders are defined by excessive involuntary movement, it is only to be expected that many movement disorder phenotypes share overlapping features. Combined, these three factors currently limit the diagnostic value of EMG and accelerometry features for movement disorders.
+
+In this chapter, we explore the idea of using dimensionality reduction (DR) methods in order to support the exploration of the data collected in the NEMO experiments. We are not directly trying to solve the clinical problem of phenotypical classification of movement disorders. This is much harder problem, the pursuit of which could be its own thesis. Our goal is to understand the technical challenges associated with applying DR methods to this complex time-dependent dataset, supporting effective data exploration. We show evidence that our modern dynamic projection methods are suitable to handle such complex data and generate interesting insights in this particular clinical setting, opening new possible paths of analysis, previously impossible due to technical limitations. 
+
+\jelle{>> Describe EMG and accelerometry in more detail here. We need a short general introduction of these methods, how they are used and what the pros and cons are in the context of the problem definition (e.g., it's very complex to interpret the high dimensional data, it also needs expert opinion and there is no consensus on which features best explain the difference between multiple hyperkinetic movement disorders). The goal of this paragraph is to bridge the problem definition of the clinical setting to the dynamic projection solutions offered in this chapter. See e.g., https://doi.org/10.1016/j.parkreldis.2021.07.033 << }
+\\
 
 
-Currently used refs: 
 
-1. 	Defazio G, Abbruzzese G, Livrea P, Berardelli A. Epidemiology of primary dystonia. Lancet Neurol. 2004;3(11):673-678. doi:10.1016/S1474-4422(04)00907-X
-2. 	Eggink H, Kremer D, Brouwer OF, et al. Spasticity, dyskinesia and ataxia in cerebral palsy: Are we sure we can differentiate them? Eur J Paediatr Neurol. 2017;21(5):703-706. doi:10.1016/j.ejpn.2017.04.1333
-3. 	Beghi E, Regio V, Papantonio A, et al. Reliability of clinical diagnosis of dystonia. Neuroepidemiology. 2014;43(3-4):213-219. doi:10.1159/000367628
-4. 	van der Salm SMA, de Haan RJ, Cath DC, van Rootselaar A-F, Tijssen MAJ. The eye of the beholder: inter-rater agreement among experts on psychogenic jerky movement disorders. J Neurol Neurosurg Psychiatry. 2013;84(7):742-747. doi:10.1136/jnnp-2012-304113
+MADELEIN: 
+I've tried to fix this (Jelle's comment) for you. See the two paragraphs above.  The ref to use would be the one Jelle mentioned: 
+van der Veen S, Klamer MR, Elting JWJ, Koelman JHTM, Van der Stouwe AMM, Tijssen MAJ. The diagnostic value of clinical neurophysiology in hyperkinetic movement disorders: a systematic review. Parkinsonism Relat Disord [Internet]. 2021 Jul [cited 2021 Aug 26]; Available from: https://pubmed.ncbi.nlm.nih.gov/34362669/
+
+You do need to make a short bridge from the problems I'm describing to your own work, but that should be easy now.
+
+Additionally, please refer to the NEMO methods paper in the second paragraph: 
+van der Stouwe AMM, Tuitert I, Giotis I, Calon J, Gannamani R, Dalenberg JR, et al. The next move in movement disorders (NEMO): developing a computer aided classification tool for hyperkinetic movement disorders. BMJ Open. 2021; Accepted. 
+
+
+Currently used refs (Jelle): 
+
+1. Defazio G, Abbruzzese G, Livrea P, Berardelli A. Epidemiology of primary dystonia. Lancet Neurol. 2004;3(11):673-678. doi:10.1016/S1474-4422(04)00907-X
+
+2. Eggink H, Kremer D, Brouwer OF, et al. Spasticity, dyskinesia and ataxia in cerebral palsy: Are we sure we can differentiate them? Eur J Paediatr Neurol. 2017;21(5):703-706. doi:10.1016/j.ejpn.2017.04.1333
+
+3. Beghi E, Regio V, Papantonio A, et al. Reliability of clinical diagnosis of dystonia. Neuroepidemiology. 2014;43(3-4):213-219. doi:10.1159/000367628
+
+4. van der Salm SMA, de Haan RJ, Cath DC, van Rootselaar A-F, Tijssen MAJ. The eye of the beholder: inter-rater agreement among experts on psychogenic jerky movement disorders. J Neurol Neurosurg Psychiatry. 2013;84(7):742-747. doi:10.1136/jnnp-2012-304113
+
 
 
 
@@ -158,7 +150,7 @@ G-tSNE is a relatively unstable technique, as benchmarked in \cref{ch:proj-eval}
 
 \section{Data exploration}
 
-This section presents an example of the kind of data exploration that our tool supports. The NEMO project has over 100 participants diagnosed with six different disorders \eduardo{how many?}. Each participant performed over 30 tasks whiled being measured by tens of sensors.
+This section presents an example of the kind of data exploration that our tool supports. The NEMO project has over 150 participants diagnosed with six different disorders. Each participant performed over 30 tasks whiled being measured by tens of sensors.
 
 There are many ways to conduct data exploration, depending on the goal of the analysis. Some relevant examples from a clinical standpoint are:
 \begin{itemize}
@@ -251,10 +243,39 @@ All the previous analysis was done atop of a single G-PCA projection. However, t
 \label{fig:diff-projs}
 \end{figure}
 
+Our analysis so far focused on comparing control subjects to tremor patients, but another important clinical question concerns comparing different disorders and patient groups to better comprehend their manifestation and support challenging phenotypic classification. As previously pointed out, cross-analysis is an understudied topic. \cref{fig:MvsT} shows patients classified with Myoclonus and Essential Tremors on the same projection, referring to a relevant clinical question given that Myoclonus can manifest itself in the form of periodic jerks that closely resemble tremors. Being able to correctly perform the phenotypic classification is critical for effective treatment of the disorders.
+We can see that our methods \eduardo{continue from here}
+
+
+
+\begin{figure}
+\centering
+\begin{tabular}{c}
+\subfloat[G-PCA]{\includegraphics[width=.8\linewidth]{figures/nemo/MvsT-pca.png}} \\
+\subfloat[G-tSNE]{\includegraphics[width=.8\linewidth]{figures/nemo/MvsT-tsne.png}}
+\end{tabular}
+\caption{G-PCA and G-tSNE projections of 16 Myoclonus patients (blue) and 11 essential tremor (red) patients for the same task and sensor placement with window size of 1s and stride of 0.5s. Some separation can be seen, which is a good indicative that the methods we developed can be used to support the classification of patients groups, which is one of the ultimate goals of the NEMO project, but falls outside the scope of this thesis.}
+\label{fig:MvsT}
+\end{figure}
+
+
+
 
 \section{Discussion}
 
 % right now we are only doing task-wise analysis, maybe we want to change the focus to the analysis of a given patient given what we know is normal and abnormal behaviour.
+
+\eduardo{Jelle suggestions: \\
+    Can we add individuals to the projection and get an idea to which patient group they belong? \\
+    Can we identify data features that explain why patient groups differ from each other in the projects? \\
+    Does this solve specific issues experienced using current methodology? \\
+    How should we continue development of this tool? \\
+    What are the limitations of this tool? \\
+    Are we able to find nuances within patient groups (interindividual differences)? \\
+    Can we also use the tool to make data quality judgements? \\
+    No single useful projection method. Combination of views is best. \\
+    Use reverse projections (PCA and even the NN based one from Alex) to learn about the feature space.
+}
 
 \section{Conclusions}
 
