@@ -1,0 +1,235 @@
+% exemplo genérico de uso da classe iiufrgs.cls
+% $Id: iiufrgs.tex,v 1.1.1.1 2005/01/18 23:54:42 avila Exp $
+%
+% This is an example file and is hereby explicitly put in the
+% public domain.
+%
+\documentclass[ppgc,tese,english]{iiufrgs}
+% Para usar o modelo, deve-se informar o programa e o tipo de documento.
+% Programas :
+%   * cic       -- Graduação em Ciência da Computação
+%   * ecp       -- Graduação em Ciência da Computação
+%   * ppgc      -- Programa de Pós Graduação em Computação
+%   * pgmigro   -- Programa de Pós Graduação em Microeletrônica
+%   
+% Tipos de Documento:
+%   * tc                -- Trabalhos de Conclusão (apenas cic e ecp)
+%   * diss ou mestrado  -- Dissertações de Mestrado (ppgc e pgmicro)
+%   * tese ou doutorado -- Teses de Doutorado (ppgc e pgmicro)
+%   * ti                -- Trabalho Individual (ppgc e pgmicro)
+% 
+% Outras Opções:
+%   * english    -- para textos em inglês
+%   * openright  -- Força início de capítulos em páginas ímpares (padrão da
+%                   biblioteca)
+%   * oneside    -- Desliga frente-e-verso
+%   * nominatalocal -- Lê os dados da nominata do arquivo nominatalocal.def
+
+
+% Use unicode
+\usepackage[utf8]{inputenc}   % pacote para acentuação
+
+% Necessário para incluir figuras
+\usepackage{graphicx}           % pacote para importar figuras
+
+
+\usepackage{times}              % pacote para usar fonte Adobe Times
+% \usepackage{palatino}
+% \usepackage{mathptmx}          % p/ usar fonte Adobe Times nas fórmulas
+
+\usepackage[alf,abnt-emphasize=bf]{abntex2cite}	% pacote para usar citações abnt
+
+%% Eduardo's additions
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{2010}{-}% support older LaTeX versions
+\usepackage{rotating}
+\usepackage[font=itshape]{quoting}
+\newcommand{\eduardo}[1]{\textcolor{red}{#1}}
+\newcommand{\alex}[1]{\textcolor{blue}{#1}}
+\newcommand{\joao}[1]{\textcolor{blue}{#1}}
+\newcommand{\jelle}[1]{\textcolor{purple}{\textbf{#1}}}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\usepackage[fleqn]{amsmath}
+\usepackage{amsthm}
+\usepackage[libertine]{newtxmath}
+\usepackage{mathtools}
+\usepackage[bb=pazo,bbscaled=0.94,cal=cm,calscaled=0.96]{mathalfa}
+\usepackage{cleveref}
+
+%
+% Informações gerais
+%
+\title{Visualization of Dynamic Multidimensional and Hierarchical Datasets}
+
+\author{Faccin Vernier}{Eduardo}
+% alguns documentos podem ter varios autores:
+%\author{Flaumann}{Frida Gutenberg}
+%\author{Flaumann}{Klaus Gutenberg}
+
+% orientador e co-orientador são opcionais (não diga isso pra eles :))
+\advisor[Prof.~Dr.]{Comba}{João Luiz Dihl}
+\coadvisor[Prof.~Dr.]{Telea}{Alexandru C.}
+
+% a data deve ser a da defesa; se nao especificada, são gerados
+% mes e ano correntes
+\date{January}{2022}
+
+% o local de realização do trabalho pode ser especificado (ex. para TCs)
+% com o comando \location:
+%\location{Itaquaquecetuba}{SP}
+
+% itens individuais da nominata podem ser redefinidos com os comandos
+% abaixo:
+% \renewcommand{\nominataReit}{Prof\textsuperscript{a}.~Wrana Maria Panizzi}
+% \renewcommand{\nominataReitname}{Reitora}
+% \renewcommand{\nominataPRE}{Prof.~Jos{\'e} Carlos Ferraz Hennemann}
+% \renewcommand{\nominataPREname}{Pr{\'o}-Reitor de Ensino}
+% \renewcommand{\nominataPRAPG}{Prof\textsuperscript{a}.~Joc{\'e}lia Grazia}
+% \renewcommand{\nominataPRAPGname}{Pr{\'o}-Reitora Adjunta de P{\'o}s-Gradua{\c{c}}{\~a}o}
+% \renewcommand{\nominataDir}{Prof.~Philippe Olivier Alexandre Navaux}
+% \renewcommand{\nominataDirname}{Diretor do Instituto de Inform{\'a}tica}
+% \renewcommand{\nominataCoord}{Prof.~Carlos Alberto Heuser}
+% \renewcommand{\nominataCoordname}{Coordenador do PPGC}
+% \renewcommand{\nominataBibchefe}{Beatriz Regina Bastos Haro}
+% \renewcommand{\nominataBibchefename}{Bibliotec{\'a}ria-chefe do Instituto de Inform{\'a}tica}
+% \renewcommand{\nominataChefeINA}{Prof.~Jos{\'e} Valdeni de Lima}
+% \renewcommand{\nominataChefeINAname}{Chefe do \deptINA}
+% \renewcommand{\nominataChefeINT}{Prof.~Leila Ribeiro}
+% \renewcommand{\nominataChefeINTname}{Chefe do \deptINT}
+
+% A seguir são apresentados comandos específicos para alguns
+% tipos de documentos.
+
+% Relatório de Pesquisa [rp]:
+% \rp{123}             % numero do rp
+% \financ{CNPq, CAPES} % orgaos financiadores
+
+% Trabalho Individual [ti]:
+% \ti{123}     % numero do TI
+% \ti[II]{456} % no caso de ser o segundo TI
+
+% Monografias de Especialização [espec]:
+% \espec{Redes e Sistemas Distribuídos}      % nome do curso
+% \coord[Profa.~Dra.]{Weber}{Taisy da Silva} % coordenador do curso
+% \dept{INA}                                 % departamento relacionado
+
+%
+% palavras-chave
+% iniciar todas com letras minúsculas, exceto no caso de abreviaturas
+%
+\keyword{Treemaps}
+\keyword{Projections}
+\keyword{Movement analysis}
+
+%
+% inicio do documento
+%
+\begin{document}
+
+% folha de rosto
+% às vezes é necessário redefinir algum comando logo antes de produzir
+% a folha de rosto:
+% \renewcommand{\coordname}{Coordenadora do Curso}
+\maketitle
+
+% dedicatoria
+\clearpage
+\begin{flushright}
+\mbox{}\vfill
+{\sffamily\itshape
+``Just about anything looks better from a distance.
+''\\}
+--- \textsc{Haruki Murakami}
+\end{flushright}
+
+% Agradecimentos
+\chapter*{Acknowledgments}
+I would like to thank my advisors Prof. Alexandru Telea and Prof. Jo\~{a}o Comba for all the support and guidance they so skillfully and kindly provided me during my PhD. I couldn't possibly imagine better companions for this journey.
+\\
+I would like to thank my family for their love, their patience, their inspiration, and for always providing me all I've ever needed to succeed.
+\\
+I would also like to thank all my friends both in Brazil and in the Netherlands. Krislen, Lianne, Alister, Samuel, Stefan, and Agathe, thank you for lifting me up whenever I was down.
+\bigbreak
+This thesis was financed in part by CAPES (Finance Code 001, Scholarship Code 88882.345509/2019-01), CNPq (Process 304336/2019-0), and by the University of Groningen. 
+My sincere thanks to these organizations for their support.
+
+
+% resumo na língua do documento
+\begin{abstract}
+When it comes to tools and techniques designed to help understanding complex abstract data, visualization methods play a prominent role. They enable human operators to leverage their pattern finding, outlier detection, and questioning abilities to visually reason about a given dataset. Many methods exist that create suitable and useful visual representations of \emph{static} abstract, non-spatial, data. However, for \emph{temporal} abstract, non-spatial, datasets, in which the data changes and evolves through time, far fewer visualization techniques exist.
+\\
+This thesis focuses on the particular cases of temporal hierarchical data representation via dynamic treemaps, and temporal high-dimensional data visualization via dynamic projections. We tackle the joint question of how to extend projections and treemaps to stably, accurately, and scalably handle temporal multivariate and hierarchical data. The literature for static visualization techniques is rich and the state-of-the-art methods have proven to be valuable tools in data analysis. Their temporal/dynamic counterparts, however, are not as well studied, and, until recently, there were few hierarchical and high-dimensional methods that explicitly took into consideration the temporal aspect of the data. In addition, there are few or no metrics to assess the quality of these temporal mappings, and even fewer comprehensive benchmarks to compare these methods. 
+\\
+This thesis addresses the abovementioned shortcomings. For both dynamic treemaps and dynamic projections, we propose ways to accurately measure temporal stability; we evaluate existing methods considering the tradeoff between stability and visual quality; and we propose new methods that strike a better balance between stability and visual quality than existing state-of-the-art techniques. We demonstrate our methods with a wide range of real-world data, including an application of our new dynamic projection methods to support the analysis and classification of hyperkinetic movement disorder data.
+\end{abstract}
+
+% resumo na outra língua
+% como parametros devem ser passados o titulo e as palavras-chave
+% na outra língua, separadas por vírgulas
+\begin{englishabstract}{}{Treemaps. Projeções. Análise de movimentos}
+Quando se trata de ferramentas e técnicas projetadas para ajudar na compreensão dados abstratos complexos, métodos de visualização desempenham um papel proeminente. Eles permitem que os operadores humanos alavanquem suas habilidades de descoberta de padrões, detecção de valores discrepantes, e questionamento visual para a raciocinar sobre um determinado conjunto de dados. 
+Existem muitos métodos que criam representações visuais adequadas e úteis de para dados \emph{estáticos}, abstratos, e não-espaciais. No entanto, para dados \emph{temporais}, abstratos, e não-espaciais, isto é, dados que mudam e evoluem no tempo, existem poucas técnicas apropriadas.
+\\
+Esta tese concentra-se nos casos específicos de representação temporal de dados hierárquicos por meio de treemaps dinâmicos, e visualização temporal de dados de alta dimensionalidade via projeções dinâmicas. Nós abordar a questão conjunta de como estender projeções e treemaps de forma estável, precisa e escalável para lidar  com conjuntos de dados hierárquico-temporais e multivariado-temporais.
+Em ambos os casos, a literatura para técnicas estáticas é rica e os métodos estado da arte provam ser ferramentas valiosas em análise de dados. Suas contrapartes temporais/dinâmicas, no entanto, não são tão bem estudadas e, até recentemente, existiam poucos métodos hierárquicos e de alta dimensão que explicitamente levavam em consideração o aspecto temporal dos dados. Além disso, existiam poucas métricas para avaliar a qualidade desses mapeamentos visuais temporais, e ainda menos benchmarks abrangentes para comparação esses métodos. 
+\\
+Esta tese aborda as deficiências acima mencionadas para treemaps dinâmicos e projeções dinâmicas. Propomos maneiras de medir com precisão a estabilidade temporal; avaliamos os métodos existentes, considerando o compromisso entre estabilidade e qualidade visual; e propomos novos métodos que atinjem um melhor equilíbrio entre estabilidade e a qualidade visual do que as técnicas estado da arte atuais. Demonstramos nossos métodos com uma ampla gama de dados do mundo real, incluindo uma aplicação de nossos novos métodos de projeção dinâmica para apoiar a análise e classificação dos dados de transtorno de movimentos.   
+\end{englishabstract}
+
+% lista de abreviaturas e siglas
+% o parametro deve ser a abreviatura mais longa
+\begin{listofabbrv}{SPMD}
+        \item[SMP] Symmetric Multi-Processor
+        \item[NUMA] Non-Uniform Memory Access
+        \item[SIMD] Single Instruction Multiple Data
+        \item[SPMD] Single Program Multiple Data
+        \item[ABNT] Associação Brasileira de Normas Técnicas
+\end{listofabbrv}
+
+% idem para a lista de símbolos
+%\begin{listofsymbols}{$\alpha\beta\pi\omega$}
+%       \item[$\sum{\frac{a}{b}}$] Somatório do produtório
+%       \item[$\alpha\beta\pi\omega$] Fator de inconstância do resultado
+%\end{listofsymbols}
+
+\listoffigures
+
+\listoftables
+
+\tableofcontents
+
+\input{chapters/1-introduction}
+\input{chapters/2-initial-treemap-evaluation}
+% \input{chapters/3-treemap-evaluation}
+% \input{chapters/4-treemap-algorithm}
+% \input{chapters/5-projection-evaluation}
+% \input{chapters/6-projection-algorithm}
+% \input{chapters/7-nemo}
+% \input{chapters/8-conclusion}
+% \appendix
+% %-------------------------------------------------------------------------
+% \input{chapters/6-projection-algorithm-appendix}
+
+\bibliographystyle{abntex2-alf}
+\bibliography{bibliography/bib-vissoft-treemaps,bibliography/bib-eurovis-treemaps,bibliography/bib-git-treemaps,bibliography/bib-eurovis-projection-eval,bibliography/bib-eurovis-projection-algo,bibliography/bib-extra}
+
+\appendix
+
+\chapter{Resumo expandido}
+
+\noindent
+\textbf{Resolução 02/2021 -- Redação de Teses e Dissertações em Inglês}
+Dissertações de Mestrado e Teses de Doutorado do PPGC, bem como outros
+trabalhos escritos tais como Proposta de Tese e PEP, poderão ser
+redigidas em inglês desde que contenham um título e resumo expandido
+redigidos em português. O resumo expandido deve conter no mínimo duas
+páginas inteiras, deve aparecer como apêndice e deve conter as
+principais contribuições e resultados do trabalho.
+
+
+\end{document}
