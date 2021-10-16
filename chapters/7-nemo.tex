@@ -131,7 +131,7 @@ For our purposes, the time-frequency representation is essential as it facilitat
 \subsection{Data normalization}
 \label{sec:nemo_pipeline_datanorm}
 %
-The acceleration time plots and spectrograms discussed so far are quite effective in studying the data of a \emph{single} subject. However, as outlined earlier in the chapter, our goal is to compare \emph{multiple} subjects in order to find out which data aspects make them similar or different. For this, we need a way to `normalize' the collected data collected from each measurement (experiment) so that it becomes comparable across multiple measurements.
+The acceleration time plots and spectrograms discussed so far are quite effective in studying the data of a \emph{single} subject. However, as outlined earlier in the chapter, our goal is to compare \emph{multiple} subjects in order to find out which data aspects make them similar or different. For this, we need a way to `normalize' the data collected from each measurement (experiment) so that it becomes comparable across multiple measurements.
 
 As seen in \cref{fig:freq}, time-frequency information can vary slightly from recording to recording. These recordings can have different lengths and different frequency ranges. Both of these are due to the difference in experiment duration. Experiments that last more have longer spectrograms and a higher frequency range since we can detect more frequencies in the lower range. The sampling rate of the sensor sets the upper range of the frequency spectrum. The accelerometers we used can collect 148 readings per second, so the maximum frequency we can detect is 74 Hz. We also limit our frequency range to 100 logarithmic bins in the range of $0-74$ Hz. 
 

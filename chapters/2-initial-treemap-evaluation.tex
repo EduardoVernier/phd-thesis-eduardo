@@ -13,7 +13,7 @@ As outlined in Chapter \ref{ch:intro}, one of our two research questions concern
 Dynamic treemaps are one of the methods of choice for displaying large hierarchies that change over time, such as those encoding the structure of evolving software systems. While quality criteria (and algorithms that optimize for them) are known for static trees, far less has been studied for treemapping dynamic trees. We address this gap by proposing a methodology and associated quality metrics to measure the quality of dynamic treemaps for the specific use-case and context of software evolution visualization. We apply our methodology on a benchmark containing a wide range of real-world software repositories and 12 well-known treemap algorithms. Based on our findings, we discuss the observed advantages and limitations of various treemapping algorithms for visualizing software structure evolution, and propose ways for users to choose the most suitable treemap algorithm based on the targeted criteria of interest.
 
 \section{Introduction}
-%
+\label{sec:treemap_eval_intro}
 %
 Hierarchies play a central role in understanding large software systems. Such systems evolve over hundreds of revisions or more, and can have thousands of elements or more, which are typically organized hierarchically (\emph{e.g.} in folders, files, classes, and methods). Hence, tools for visually understanding evolving hierarchies are a key component in the program comprehension arsenal. Treemaps are a well known method for visualizing hierarchical data. Given an input tree whose leafs have several attributes, treemaps recursively partition a 2D spatial region into cells whose area, color, shading, or labels encode the tree's data attributes. Compared to other methods such as node-link~\citep{harel,frick} or Sunburst~\citep{sunburst,sunburst2} techniques, treemaps use all available screen pixels to show data and thus can handle trees of tens of thousands of nodes.
 
@@ -144,7 +144,7 @@ We evaluate all above treemap methods on a collection of 28 datasets (Tab.~\ref{
 \subsection{Metrics}
 \label{sec:mat_metrics}
 %
-Let $w_k$ and $h_k$ be the weight and height of cell $c_k$; and $(W,H)$ the width and height of the screen space we draw the treemap in. With these, we consider the following metrics.
+Let $w_k$ and $h_k$ be the width and height of cell $c_k$; and $(W,H)$ the width and height of the screen space we draw the treemap in. With these, we consider the following metrics.
 
 \subsubsection{Spatial quality metric}
 \label{sec:mat_met_spatial}
@@ -156,7 +156,7 @@ Q^{AR}_k = \min(w_k,h_k)/\max(w_k,h_k).
 \label{eqn:spatial_ratio}
 \end{equation}
 %
-Introduced in~\cite{sqr}, this metric has been since then used all treemap evaluations to capture spatial quality. As such, we keep it in our evaluation. It is designed to give high scores for rectangles with sides of similar length, and low scores otherwise.
+Introduced in~\cite{sqr}, this metric has been since then used by all treemap evaluations to capture spatial quality. As such, we keep it in our evaluation. It is designed to give high scores for rectangles with sides of similar length, and low scores otherwise.
 %
 
 \subsubsection{Stability metrics}
@@ -218,7 +218,7 @@ of the signals $\{\delta c_k\}$ and $\{\delta a_k\}$ for all cells $c_k \in T$, 
 
 \subsubsection{Metric weighting}
 %
-As mentioned in Sec.~\ref{sec:intro}, very small but bad aspect-ratio cells may not strongly influence the overall perceived spatial quality of a treemap, since they are barely visible. The same argument could be made for very small unstable cells \emph{vs} the overall perceived stability. To model these, when computing the average value of the metrics $Q^{AR}$, $Q^{RATIO}$, $Q^{MOD}$, and $Q^{UNAV}$, we weigh the respective per-cell values $Q^{AR}_k$ (and the other three ones) by the sizes $a_k$ of their cells. We used such weighted metrics in all experiments described next in Secs.~\ref{sec:q2}-\ref{sec:q4}. However, the obtained results showed that the aggregated weighted metric values differ only very slightly from their unweighted versions. As such, in the following we will only consider the unweighted metric versions.
+As mentioned in Sec.~\ref{sec:treemap_eval_intro}, very small but bad aspect-ratio cells may not strongly influence the overall perceived spatial quality of a treemap, since they are barely visible. The same argument could be made for very small unstable cells \emph{vs} the overall perceived stability. To model these, when computing the average value of the metrics $Q^{AR}$, $Q^{RATIO}$, $Q^{MOD}$, and $Q^{UNAV}$, we weigh the respective per-cell values $Q^{AR}_k$ (and the other three ones) by the sizes $a_k$ of their cells. We used such weighted metrics in all experiments described next in Secs.~\ref{sec:q2}-\ref{sec:q4}. However, the obtained results showed that the aggregated weighted metric values differ only very slightly from their unweighted versions. As such, in the following we will only consider the unweighted metric versions.
 
 
 \section{Result Exploration}
