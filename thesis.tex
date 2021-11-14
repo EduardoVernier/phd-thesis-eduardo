@@ -19,6 +19,12 @@
 \DeclareUnicodeCharacter{2010}{-}% support older LaTeX versions
 \usepackage{rotating}
 \usepackage[font=itshape]{quoting}
+% table position and legend number
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+\usepackage{chngcntr}
+\counterwithin{table}{chapter}
 \newcommand{\eduardo}[1]{\textcolor{red}{#1}}
 \newcommand{\alex}[1]{\textcolor{blue}{#1}}
 \newcommand{\joao}[1]{\textcolor{blue}{#1}}

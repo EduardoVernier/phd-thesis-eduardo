@@ -19,7 +19,7 @@ In this thesis, we attack a part of the above problem by focusing on abstract da
 \item\emph{Time-dependent:} We consider data that changes over time, also called \emph{temporal} or \emph{dynamic} data. Here, the samples of a dataset consist of both measurements taken at the same time instant and measurements taken at different, consecutive, time instants. 
 \end{itemize}
 
-In isolation, information visualization provides many methods to depict data which is hierarchical, high-dimensional, or temporal. However, the combination of at least two of the above three data aspects immediately makes the visualization problem far harder to address. In particular, we are interested in exploring how to visualize abstract datasets which are \emph{hierarchical and time-dependent}, respectively \emph{high-dimensional and time-dependent}. We outline the two separate challenges -- visualizing abstract data which is hierarchical and temporal, respectively high-dimensional and temporal, in Secs.~\ref{sec:ch1_tempo} and~\ref{sec:ch1_highdim} next.
+In isolation, information visualization provides many methods to depict data which is hierarchical, high-dimensional, or temporal. However, the combination of at least two of the above three data aspects immediately makes the visualization problem far harder to address. In particular, we are interested in exploring how to visualize abstract datasets which are \emph{hierarchical and time-dependent}, respectively \emph{high-dimensional and time-dependent}. We outline the two separate challenges -- visualizing abstract data which is hierarchical and temporal, respectively high-dimensional and temporal in Secs.~\ref{sec:ch1_tempo} and~\ref{sec:ch1_highdim} next.
 
 
 \section{Visualizing temporal hierarchical data}
@@ -27,7 +27,7 @@ In isolation, information visualization provides many methods to depict data whi
 %
 Hierarchical datasets are trees, or hierarchies, with weighted nodes. Typically, weights are given for leaf nodes and computed for non-leaf nodes as the sum of their children's weights. One example of a hierarchical dataset is a computer's file system -- the ``shape of the tree'' is given by the organization of the directories, and the weight of the leaf nodes can be defined as a file attribute such as size. Many other examples exist. As already hinted at earlier in this chapter, virtually any tabular dataset can be reduced to such a hierarchy, by grouping rows (samples) successively on multiple criteria, each of them based on the similarity of the rows according to a given table column. Hence, any tabular dataset can lead to multiple hierarchies. Apart from that, inherently hierarchical datasets do exist, such as the file system example mentioned earlier.
 
-The temporal aspect is introduced when data changes over time. Building upon the file system example, if we collect "snapshots", as in a Git repository or periodic backups of a hard drive, our data would be an evolving tree -- its organization (hierarchy) changes as we create and delete folders and files, and the weight of the leaf nodes change as files are edited.
+The temporal aspect is introduced when data changes over time. Building upon the file system example, if we collect ``snapshots'', as in a Git repository or periodic backups of a hard drive, our data would be an evolving tree -- its organization (hierarchy) changes as we create and delete folders and files, and the weight of the leaf nodes change as files are edited.
 
 There is a range of visual encodings suitable/designed for displaying hierarchical data, including node-link diagrams, icicle plots, sunburst plots, and, the focus of our research, \emph{treemaps}.
 Given an input weighted tree, treemaps recursively partition a 2D spatial region into cells whose area (and possibly color, shading, and labels) encode the tree's data attributes. Treemaps have several major advantages compared to other visualizations of hierarchical data: They are visually compact -- every single screen pixel is used to convey data, which favors them for visualizing large hierarchies; and they are simple to understand.
@@ -35,11 +35,11 @@ Given an input weighted tree, treemaps recursively partition a 2D spatial region
 Connecting back to our initial example, the first treemaping algorithm \citep{shneiderman92} was, in fact, designed for the purpose of displaying the contents and use of a file system by Ben Shneiderman:
 
 \begin{quoting}
-    "During 1990, in response to the common problem of a filled hard disk, I became obsessed with the idea of producing a compact visualization of directory tree structures. Since the 80 Megabyte hard disk in the HCIL was shared by 14 users it was difficult to determine how and where space was used. Finding large files that could be deleted, or even determining which users consumed the largest shares of disk space were difficult tasks".
+    ``During 1990, in response to the common problem of a filled hard disk, I became obsessed with the idea of producing a compact visualization of directory tree structures. Since the 80 Megabyte hard disk in the HCIL was shared by 14 users it was difficult to determine how and where space was used. Finding large files that could be deleted, or even determining which users consumed the largest shares of disk space were difficult tasks''.
 \end{quoting}
 
 Compared to other hierarchical visualization methods, treemaps scale well, making use of all available screen pixels to show data and thus able to handle trees of thousands of nodes. As Shneiderman realized when trying to reason and make decisions about the use of space in his lab's hard drives:
-\textit{"Tree structured node-link diagrams grew too large to be useful, so I explored ways to show a tree in a space-constrained layout."}
+\textit{``Tree structured node-link diagrams grew too large to be useful, so I explored ways to show a tree in a space-constrained layout.''}
 
 Over the years, a range of different treemapping techniques was proposed, each designed to optimize different goals such as cell aspect ratio of cells (tied to readability), order preservation, similarity-based placement, and portrayal of uncertainty. The most common form of treemaps are rectangular treemaps, but a range of alternative models exist, such as Voronoi treemaps~\citep{balzer05,balzer05b}, orthoconvex~\citep{deberg14}, Bubble~\citep{bubble}, and Jigsaw treemaps~\citep{jigsaw}.
 
@@ -112,7 +112,7 @@ Before our work, there were no methods designed to measure instability that took
 
 \subsection*{B. Evaluate methods in the literature considering the tradeoff between stability and visual quality}
 
-As already hinted, tens of methods for constructing treemaps and projections exist. However, and as also already hinted, few if none of these methods were gauged from the perspective of stability -- one reason thereof being the lack of a \emph{measure} for stability. Having developed such a measure, as mentioned above at point (A), we next use it to produce comprehensive evaluations for dynamic treemaps and projections from the stability perspective. Our contributions in this direction entail work along the following axes:
+As already hinted, tens of methods for constructing treemaps and projections exist. However, and as also already hinted, few if none of these methods were gauged from the perspective of stability -- one reason being the lack of a \emph{measure} for stability. Having developed such a measure, as mentioned above at point (A), we next use it to produce comprehensive evaluations for dynamic treemaps and projections from the stability perspective. Our contributions in this direction entail work along the following axes:
 
 \begin{itemize}
     \item \emph{Metrics:} We proposed and implemented a novel set of metrics that reliably measures visual quality and stability.
@@ -143,7 +143,7 @@ In Chapter~\ref{ch:tree-eval}, we build upon the foundations of Chapter~\ref{ch:
 
 In Chapter~\ref{ch:git}, we conclude the treemap track of this thesis introducing Greedy Insertion Treemaps, a novel (stateful) method that jointly optimizes spatial quality and stability. Note that GIT was proposed before the publication of Chapter~\ref{ch:tree-eval}, so, even though in this chapter we only benchmark GIT on software repository datasets, its results for generalized temporal tree data are also available in Chapter~\ref{ch:tree-eval}, which supports its status as a state-of-the-art dynamic treemapping method. 
 
-Chapter~\ref{ch:proj-eval} starts the projection track of the thesis. Following the approach of Chapters \ref{ch:soft-eval} and \ref{ch:tree-eval}, we present an extensive evaluation of dynamic projection algorithms. For such an evaluation, we collect/implement/modify a set of projection methods, we gather time-dependent multidimensional datasets, and we introduce new suitable ways to define and quantify the stability of dynamic projection methods.
+Chapter~\ref{ch:proj-eval} starts the projection track of the thesis. Following the approach of Chapters \ref{ch:soft-eval} and \ref{ch:tree-eval}, we present an extensive evaluation of dynamic projection algorithms. For such an evaluation, we collect, implement, and modify a set of projection methods, we gather time-dependent multidimensional datasets, and we introduce new suitable ways to define and quantify the stability of dynamic projection methods.
 
 Given that the results of Chapter~\ref{ch:proj-eval} reveal no ``best'' method for both visual quality and stability, in Chapter~\ref{ch:proj-algo} we propose two new algorithms that strive to strike a better balance between the aforementioned metrics, making them better suited methods for dynamic projections. 
 We propose PCD-tSNE and LD-tSNE, which use global guides to steer projection points in an attempt to avoid unstable movement while keeping t-SNE’s neighborhood preservation ability. 

@@ -4,7 +4,7 @@
 % In Ch 5, we evaluated dyn projs from the dual perspective of visual quality and stability, just as we did for dyn TM algos in Chs 2-3. And, just as for the dyn TM algos, we found that there is no winning dyn projection that scores best for both vis quality and stability. In this chapter, similar to our earlier attempt in Ch 4 to improve dyn TMs, we aim to improve dyn projections from the perspective of the two aforementioned metrics.  For this, we propose two new dyn proj algos [….etc etc, link to the existing abstract]
 
 \textit{
-In Chapter \ref{ch:proj-eval}, we evaluated dynamic projections from the dual perspective of visual quality and stability, just as we did for dynamic treemap algorithms in Chapters \ref{ch:soft-eval}-\ref{ch:tree-eval}. And, just as for dynamic treemap algorithms, we found that there is no winning dynamic projection method that scores best for both visual quality and stability. In this chapter, similar to our earlier work in Chapter \ref{ch:git} to improve dynamic treemaps, we aim to improve dynamic projections from the perspective of the two aforementioned metrics. For this, we propose two new dynamic projection algorithms: PCD-tSNE and LD-tSNE. The former uses information given by the Principal Components of the data over all timesteps to stabilize tSNE. The latter makes use of landmarks that guide points through stable trajectories. We compare these two new algorithms with existing methods for dynamic projection, and show their advantages, following the benchmark proposed in Chapter \ref{ch:proj-eval}.
+In Chapter \ref{ch:proj-eval}, we evaluated dynamic projections from the dual perspective of visual quality and stability, just as we did for dynamic treemap algorithms in Chapters \ref{ch:soft-eval}-\ref{ch:tree-eval}. And, just as for dynamic treemap algorithms, we found that there is no winning dynamic projection method that scores best for both visual quality and stability. In this chapter, similar to our earlier work in Chapter \ref{ch:git} to improve dynamic treemaps, we aim to improve dynamic projections from the perspective of the two aforementioned metrics. For this, we propose two new dynamic projection algorithms: PCD-tSNE and LD-tSNE. The former uses information given by the Principal Components of the data over all timesteps to stabilize tSNE. The latter makes use of landmarks that guide points through stable trajectories. We compare these two new algorithms with existing methods for dynamic projection, and show their advantages, following the benchmark proposed in Chapter~\ref{ch:proj-eval}.
 }
 
 \vspace{5mm} %5mm vertical space
@@ -13,7 +13,7 @@ In Chapter \ref{ch:proj-eval}, we evaluated dynamic projections from the dual pe
 \noindent \textbf{Abstract:}
 Projections aim to convey the relationships and similarity of high-dimensional data in a low-dimensional representation.
 Most such techniques are designed for static data. When used for time-dependent data, they usually fail to create a stable and suitable low dimensional representation.
-We propose two dynamic projection methods (PCD-tSNE and LD-tSNE) that use global guides to steer projection points. This avoids unstable movement that does not encode data dynamics while keeping t-SNE's neighborhood preservation ability. PCD-tSNE scores a good balance between stability, neighborhood preservation, and distance preservation, while LD-tSNE allows creating stable and customizable projections. We compare our methods to 11 other techniques using quality metrics and datasets provided by a recent benchmark for dynamic projections.
+We propose two dynamic projection methods (PCD-tSNE and LD-tSNE) that use global guides to steer projection points. This avoids unstable movement that does not encode data dynamics while keeping t-SNE's neighborhood preservation ability. PCD-tSNE scores a good balance between stability, neighborhood preservation, and distance preservation, while LD-tSNE allows creating stable and customizable projections. We compare our methods to 11 other techniques using the quality metrics and datasets presented in \cref{ch:proj-eval}.
     
 \section{Introduction}
 %
@@ -22,7 +22,7 @@ Many domains produce datasets with large numbers of observations (also called sa
 
 The literature on static projections -- that address the visualization of time-independent datasets -- is quite rich, with many techniques, surveys, and benchmarks on the subject\,\citep{Nonato2019,Espadoto19,sorzano14_survey,cunningham15_survey}. In contrast, far fewer techniques and comparisons thereof exist for projecting time-dependent datasets, in which the sample values change over time -- which is a much harder problem.
 
-Besides faithfully capturing the data structure -- a desiderate shared with static projections -- dynamic projections also face the challenge of maintaining temporal coherence. Failing this will create false motion artifacts in the projection, which can mislead the user into thinking there are data changes where none exist, or conversely. Figure~\ref{fig:demo-instability} illustrates this: We have a 100-dimensional dataset of 2000 samples covering 10 distinct isotropic Gaussian distributions that collapse into 10 single points over 10 timesteps\,\citep{Rauber2016}. The images depict the results of three dynamic projection techniques (G-PCA, TF-PCA~\citep{pca}, and TF-tSNE\citep{vanderMaaten2008}) for this dataset, showing the trajectories of all data points over the ten timesteps. Knowing the dataset, we can tell that G-PCA renders quite faithfully the data dynamics and structure; TF-PCA creates an artificial amount of spiraling; and TF-tSNE creates a very large amount of apparently random and unstable motion that is not present in the data. If such variability in the projection results is seen for this simple, synthetic dataset, the choice of a good dynamic projection method for real-world datasets is clearly very hard.
+Besides faithfully capturing the data structure -- a desiderate shared with static projections -- dynamic projections also face the challenge of maintaining temporal coherence. Failing this will create false motion artifacts in the projection, which can mislead the user into thinking there are data changes where none exist, or conversely. Figure~\ref{fig:demo-instability} illustrates this: We have a 100-dimensional dataset of 2000 samples covering 10 distinct isotropic Gaussian distributions that collapse in linear trajectories into 10 single points over 10 timesteps\,\citep{Rauber2016}. The images depict the results of three dynamic projection techniques (G-PCA, TF-PCA~\citep{pca}, and TF-tSNE~\citep{vanderMaaten2008}) for this dataset, showing the trajectories of all data points over the ten timesteps. Knowing the dataset, we can tell that G-PCA renders quite faithfully the data dynamics and structure; TF-PCA creates an artificial amount of spiraling; and TF-tSNE creates a very large amount of apparently random and unstable motion that is not present in the data. If such variability in the projection results is seen for this simple, synthetic dataset, the choice of a good dynamic projection method for real-world datasets is clearly very hard.
 
 
 % \red{There are different ways to project a dynamic dataset \red{(cite a few non-animation works)}, but we will focus on creating animation-like representations, where we project the $N$ samples of the original dataset into $2D$ space for each timestep $t$, as demonstrated in Fig.\,\ref{fig:animation}.}
@@ -49,7 +49,7 @@ Motivated by these challenges of understanding and quantifying the quality of dy
 We aim to cover the above-identified gap by proposing ways to add stability to the neighborhood preservation ability of static projections, in particular t-SNE. We propose two approaches that use global influences to steer projected points:
 Our first method, LD-tSNE, offers similar flexibility in steering dynamic projections via landmarks as known for static projections, and also reaches good quality values. Our second method, PCD-tSNE, increases neighborhood influences atop an already stable Global PCA dynamic projection, scoring better than all compared counterparts in terms of spatial quality combined with stability. The global influence of both methods can be controlled via simple user parameters to find the best balance between stability and spatial quality. We compare our methods with 11 existing dynamic projections on a benchmark of 10 high-dimensional datasets using 12 metrics for both spatial quality and stability. 
 
-Section~\ref{sec:background} overviews related work on dynamic projections of high-dimensional data. Section~\ref{sec:methods} introduces our two new methods. Section~\ref{sec:experimental-setup} presents the experimental setup we used in comparing our new methods with existing ones. Section~\ref{sec:results} presents and discusses the evaluation results. Finally, Section~\ref{sec:conclusion-5} concludes the paper.
+Section~\ref{sec:background} overviews related work on dynamic projections of high-dimensional data. Section~\ref{sec:methods} introduces our two new methods. Section~\ref{sec:experimental-setup} presents the experimental setup we used in comparing our new methods with existing ones. Section~\ref{sec:results} presents and discusses the evaluation results. Finally, Section~\ref{sec:conclusion-5} concludes the chapter.
 
   
 %-------------------------------------------------------------------------
@@ -59,8 +59,7 @@ Section~\ref{sec:background} overviews related work on dynamic projections of hi
 
 \subsection{Preliminaries}
 %
-We first introduce some notations. Let
-$\mathbf{x} \in \mathbb{R}^n$
+Following the same notation of \cref{ch:proj-eval}, let $\mathbf{x} \in \mathbb{R}^n$
 be an $n$-dimensional sample (also called data point or observation). A timestep $\mathbf{D}^t = \{\mathbf{x}_i^t\}$ of our data consists of a set of $N$ samples $\mathbf{x}_i^t$, $1 \leq i \leq N$, 
 measured at the same time moment $t$. A dynamic dataset $\mathbf{D}$ is a list of $T$ timesteps $\mathbf{D}= ( \mathbf{D}^{t} ), 1 \leq t \leq T$. For simplicity of exposition and implementation, but without loss of generality, we consider next that the sample count $N$ is constant over time. In this case, $\mathbf{D}$ can be represented as a set of $T$ $N$-by-$n$ matrices, one per timestep $t$.
 
@@ -110,7 +109,7 @@ Importantly, while guided strategies mainly aim to address \emph{scalability} fo
 \label{sec:ld-tsne}
 %
 One idea that has been successfully used in the static case, and can be utilized to our advantage for dynamic data, is the use of \emph{landmarks}. 
-Landmarks or similar control point-based mechanisms are well known and have been used to aid different tasks on static data. Examples include performance improvement\citep{Pekalska1999,DeSilva2003,DeSilva2004,Vladymyrov2013,Paulovich2008,Kruiger2017a}, support of out-of-sample capability\citep{Boytsov2017,Policar2019}, and projection customization\citep{Joia2011,updis}.
+Landmarks or similar control point-based mechanisms are well known and have been used to aid different tasks on static data. Examples include performance improvement~\citep{Pekalska1999,DeSilva2003,DeSilva2004,Vladymyrov2013,Paulovich2008,Kruiger2017a}, support of out-of-sample capability~\citep{Boytsov2017,Policar2019}, and projection customization~\citep{Joia2011,updis}.
 Yet, we are not aware of any work that combines landmarks or control points to stabilize \emph{dynamic} projections. We use landmarks to give the base projection $P_B$ method a sense of global structure, in an attempt to reduce the instability inherent to neighborhood-based projection techniques such as t-SNE.
 
 Two main aspects must be considered when using landmarks as guides: how to generate the landmarks and how to use the landmarks to steer points, as follows.\\
@@ -170,7 +169,7 @@ From Eqns.~\ref{eqn:grad_tsne}, \ref{eqn:c_ours}, and~\ref{eqn:c_land}, we find 
 \begin{equation*}
   \begin{aligned}
     \frac{\partial C}{\partial \mathbf{y}_{i}} =(1-\lambda)\left(4 \sum_{j}\left(p_{i j}-q_{i j}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{j}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{j}\right\|^{2}\right)^{-1}\right) \\
-    +\lambda\left(4 \sum_{l \in L}\left(p_{i | l}-q_{i j}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{j}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{j}\right\|^{2}\right)^{-1}\right).
+    +\lambda\left(4 \sum_{l \in L}\left(p_{i | l}-q_{i l}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{l}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{l}\right\|^{2}\right)^{-1}\right).
   \end{aligned}
 \end{equation*}
 
@@ -180,7 +179,7 @@ To accelerate convergence, improve initialization, and create tighter clusters, 
 \begin{equation*}
  \begin{aligned}
   \frac{\partial C}{\partial \mathbf{y}_{i}} =(1-\lambda)\left(4 \sum_{j}\left(\alpha p_{i j}-q_{i j}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{j}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{j}\right\|^{2}\right)^{-1}\right) \\
-  +\lambda\left(4 \sum_{l \in L}\left(\beta p_{i | l}-q_{i j}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{j}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{j}\right\|^{2}\right)^{-1}\right).
+  +\lambda\left(4 \sum_{l \in L}\left(\beta p_{i | l}-q_{i l}\right)\left(\mathbf{y}_{i}-\mathbf{y}_{l}\right)\left(1+\left\|\mathbf{y}_{i}-\mathbf{y}_{l}\right\|^{2}\right)^{-1}\right).
  \end{aligned}
 \end{equation*}
 %
@@ -199,10 +198,10 @@ Regarding algorithmic complexity, the original unoptimized implementation of the
 \subsection{Principal Component Dynamic t-SNE (PCD-tSNE)} 
 \label{sec:pcd-tsne}
 %
-Our second dynamic projection, PCD-tSNE, is a guided method that allies the stability of G-PCA with the neighborhood preservation capabilities of t-SNE.
+Our second dynamic projection, PCD-tSNE, is a guided method that combines the stability of G-PCA with the neighborhood preservation capabilities of t-SNE.
 Just like D-tSNE and LD-tSNE, it includes an additional term to the t-SNE cost function that adds stabilization to the otherwise unstable C-tSNE. 
 
-The first step in PCD-tSNE is to compute a projection matrix $W$ constructed from the top-$q$ eigenvectors of the covariance matrix of $\mathbf{D}$. Simply put, $W$ describes the (two, in our case) orthogonal axes of largest data variation over the whole dataset. For each point $\mathbf{x}_i \in \mathbf{D}$, we apply a transformation $\mathbf{x}_i W$ to map $\mathbf{x}_i$ to $\mathbb{R}^q$. More specifically, this places $\mathbf{x}_i$ exactly as G-PCA would, which was proven earlier\,\citep{Vernier2020} to create \emph{stable} projections.
+The first step in PCD-tSNE is to compute a projection matrix $W$ constructed from the top-$q$ eigenvectors of the covariance matrix of $\mathbf{D}$. Simply put, $W$ describes the (two, in our case) orthogonal axes of largest data variation over the whole dataset. For each point $\mathbf{x}_i \in \mathbf{D}$, we apply a transformation $\mathbf{x}_i W$ to map $\mathbf{x}_i$ to $\mathbb{R}^q$. More specifically, this places $\mathbf{x}_i$ exactly as G-PCA would, which was proven earlier in \cref{ch:proj-eval} to create \emph{stable} projections.
 
 The placement of each projection point $\mathbf{y}_i$ is next given by two factors (see Fig.~\ref{fig:pcdtsne}): an attraction to the position $\mathbf{x}_i W$, marked in light blue in Fig.~\ref{fig:pcdtsne}a; and the influence of all other points in $\mathbf{D}^t$ 
 upon $\mathbf{y}_i$, as given by tSNE, these points being shown in gray in Fig.~\ref{fig:pcdtsne}b. With these elements, the gradient of our cost function is given by:  
@@ -229,19 +228,20 @@ Here, $\lambda \in [0,1]$, similarly to LD-tSNE, weighs the balance of local and
 \end{figure}
 
 Regarding complexity, for PCD-tSNE, the first step is to compute the top-2 eigenvectors of the original data. There are many numerical methods designed to efficiently perform this computation  with cost as low as $\mathcal{O}(kn)$ for $k$ singular values \citep{svd-complexity,cline2006computatio}.
-Once the PCD-tSNE optimization starts, the additional term introduced on Equation \ref{eqn:pcd-tsne} represents a simple convex function, which means that convergence is reached efficiently and PCD-tSNE performs similarly to C-tSNE, that is, in $\mathcal{O}(n^2)$ time.
+Once the PCD-tSNE optimization starts, the additional term introduced in Equation~\ref{eqn:pcd-tsne} represents a simple convex function, which means that convergence is reached efficiently and PCD-tSNE performs similarly to C-tSNE, that is, in $\mathcal{O}(n^2)$ time.
 
 
 %-------------------------------------------------------------------------
 \section{Evaluation procedure} 
 \label{sec:experimental-setup}
 %
-We next present our evaluation of the two proposed dynamic projection methods, LD-tSNE and PCD-tSNE. For the evaluation, we started with the benchmark in \cite{Vernier2020}, which is to our knowledge the only benchmark dedicated specifically to dynamic projections. The implementation of per-timeframe and global methods were provided by\,\cite{Vernier2020}; D-tSNE was provided by\,\cite{Rauber2016};  the remaining techniques considered in our evaluation (Sec.~\ref{sec:methods}) were implemented by ourselves. All source code, datasets, and obtained results can be found in our online repository\,\citep{repo-guided}. 
+We next present our evaluation of the two proposed dynamic projection methods, LD-tSNE and PCD-tSNE. We build upon the work done in \cref{ch:proj-eval}, using the same set of metrics and datasets, while adding 4 new methods (LD-tSNE, PCD-tSNE, C-tSNE, and C-UMAP) to the evaluation.  
+All source code, datasets, and obtained results can be found in our online repository\,\citep{repo-guided}. 
 
 \subsection{Methods}
 \label{sec:eval-methods}
 
-The \cite{Vernier2020} benchmark (described in the previous chapter) contained 9 methods -- five global ones (G-AE, G-VAE, G-tSNE, G-UMAP, G-PCA), three per-timeframe ones (TF-tSNE, TF-UMAP, TF-PCA), and one continuous (D-tSNE).  Atop of those we added C-tSNE and C-UMAP, and the two newly proposed methods, LD-tSNE and PCD-tSNE. The parameters used in the benchmark are available in \cref{ch:projection-algorithm-appendix}.
+The \cite{Vernier2020} benchmark (described in the previous chapter) contains 9 methods -- five global ones (G-AE, G-VAE, G-tSNE, G-UMAP, G-PCA), three per-timeframe ones (TF-tSNE, TF-UMAP, TF-PCA), and one continuous (D-tSNE).  Atop of those, we added C-tSNE and C-UMAP, and the two newly proposed methods, LD-tSNE and PCD-tSNE. The parameters used in the benchmark are available in \cref{ch:projection-algorithm-appendix}.
 
 \subsection{Quality Metrics}
 \label{sec:metrics}
@@ -251,35 +251,24 @@ Following the methodology of the previous chapter, we used 8 \emph{spatial} and 
 \subsubsection{Spatial metrics}
 \label{sec:spatial}
 
-Spatial metrics measure how well a projection maps the underlying high-dimensional data, and can be divided into neighborhood preservation metrics ($S_{NP}, S_{NH}, S_{Trust}, S_{Cont}$) and distance preservation metrics ($S_{Stress}, S_{Pearson}, S_{Spearman}, S_{Kendall}$ ). Note that these do not necessarily relate to how humans perceive the projection \citep{Wang2018}.\\
+Spatial metrics measure how well a projection maps the underlying high-dimensional data, and can be divided into neighborhood preservation metrics ($S_{NP}, S_{NH}, S_{Trust}, S_{Cont}$) and distance preservation metrics ($S_{Stress}, S_{Pearson}, S_{Spearman}, S_{Kendall}$ ). Note that these do not necessarily relate to how humans perceive the projection \citep{Wang2018}. Next, follows a short summary of each metric, for the full definition, see \cref{sec:spatial-4}\\
 
 \noindent\textbf{Neighborhood preservation ($S_{NP}$)} is the fraction of the $k$-nearest neighbors of $\mathbf{x} \in \mathbf{D}$ whose projections are in the $k$-nearest neighbors of $P(\mathbf{x})$.\\
 
-\noindent\textbf{Trustworthiness ($S_{Trust}$)} measures how well the $k$ nearest neighbors $\nu^k(P(\mathbf{x}))$ of a projected point $P(\mathbf{x})$ match the $k$ nearest neighbors $\nu^k(\mathbf{x})$ of a data point $\mathbf{x}$, specifically, how \emph{few} missing neighbors\,\citep{Martins2014} a projected point has. If $U^k(\mathbf{x})$ is the set of points in $\mathbf{D}$ that project in $\nu^k(P(\mathbf{x}))$ but are not in $\nu^k(\mathbf{x})$,
-and $r^P(\mathbf{x},\mathbf{y})$ is the rank of $\mathbf{y}$ in the ordered set of nearest neighbors $\nu^k(P(\mathbf{x}))$, trustworthiness is defined as \linebreak
-$1-\frac{2}{N k(2 N-3 k-1)} \sum_{x=1}^{N} \sum_{y \in U^k(\mathbf{x})}(r^P(\mathbf{x}, \mathbf{y})-k)$.\\
-%$1 - \sum_{\mathbf{y} \in U^k(\mathbf{x})}(r(\mathbf{x}, \mathbf{y})-k)$.
+\noindent\textbf{Trustworthiness ($S_{Trust}$)} measures how well the $k$ nearest neighbors $\nu^k(P(\mathbf{x}))$ of a projected point $P(\mathbf{x})$ match the $k$ nearest neighbors $\nu^k(\mathbf{x})$ of a data point $\mathbf{x}$, specifically, how \emph{few} missing neighbors\,\citep{Martins2014} a projected point has.\\
 
-\noindent\textbf{Continuity ($S_{Cont}$)} measures how \emph{many} missing neighbors a projected point has. Let $V^k(\mathbf{x})$
-be the points that are in $\nu^k(\mathbf{x})$ but do not project in $\nu^k(P(\mathbf{x}))$. Let ${r}(\mathbf{x}, \mathbf{y})$ be the rank of $\mathbf{y}$ in the ordered set of neighbors $\nu^k(\mathbf{x})$. Continuity is then defined as \linebreak
-$1-\frac{2}{N k(2 N-3 k-1)} \sum_{x=1}^{N} \sum_{y \in V^k(\mathbf{x})}({r}(\mathbf{x}, \mathbf{y})-k)$.\\
-%$1- \sum_{\mathbf{y} \in V^k(\mathbf{x})}({r}(\mathbf{x}, \mathbf{y})-k)$.
-% We compute all the above metrics locally for each projection point $P(\mathbf{x})$ and, for presentation purposes, average them next as required by the analysis at hand.
+\noindent\textbf{Continuity ($S_{Cont}$)} measures how \emph{many} missing neighbors a projected point has. \\
 
-\noindent\textbf{Neighborhood hit ($S_{NH}$)} is the fraction of the $k$-nearest neighbors of a projected point $P(\mathbf{x})$ that have the same class label as $P(\mathbf{x})$. Since we use labeled datasets with reasonably well-separated classes in $\mathbb{R}^n$ (see next Sec.~\ref{sec:datasets}), a projection $P$ that is good for class-separation tasks should have a high $S_{NH}$ value.\\
+\noindent\textbf{Neighborhood hit ($S_{NH}$)} is the fraction of the $k$-nearest neighbors of a projected point $P(\mathbf{x})$ that have the same class label as $P(\mathbf{x})$.\\
 
 All the above metrics range in $[0,1]$, with 1 indicating optimal value. 
 We compute $S_{NP}$, $S_{Trust}$, and $S_{Cont}$ for multiple (20) neighborhood sizes equally spread between $k=1\%$ and $k=20\%$ of the point count $N$. For $S_{NH}$, we use 20 values for $k$, ranging from 0.25\% to 5\% of $N$. 
 We next average the results for different neighborhood sizes $k$, following\,\citep{Vernier2020,Martins2015}.\\
 
 
-\noindent\textbf{Normalized stress ($S_{Stress}$)} measures the pairwise difference of distances of points in $\mathbf{D}$ and $P(\mathbf{D})$. We define $S_{Stress}$ as $\sum_t \sum_{ij}(d_{ij}^t - {\delta_{ij}^t})^{2} / T\sum_{ij} (\delta_{ij}^t)^{2}$, where $d_{ij}^t$ and ${\delta_{ij}^t}$ are the Euclidean distances between data points $\mathbf{x}_i^t$ and $\mathbf{x}_j^t$, and between their projections $P(\mathbf{x}_i^t)$ and $P(\mathbf{x}_j^t)$, respectively for every point pair $(i,j)$ and timeframe $1 \leq t \leq T$. To ease analysis, we scale distances using standardization.\\
-% $\mathbf{x}^{norm} = \frac{\mathbf{x} - X_{min}}{X_{max}-X_{min}} $
-% $\mathbf{x}^{std} = \frac{\mathbf{x} - \mu(X)}{\sigma(X)}$.
+\noindent\textbf{Normalized stress ($S_{Stress}$)} measures the pairwise difference of distances of points in $\mathbf{D}$ and $P(\mathbf{D})$. \\
 
-\noindent\textbf{Shepard diagram metrics.} The Shepard diagram is a scatterplot of $d_{ij}$ by $\delta_{ij}$, for every point pair $(i,j)$\,\citep{Joia2011}. A diagram close to a diagonal line indicates good distance preservation.
-Scatterplots spreading above or below the diagonal indicate distance compression (potential false neighbors), respectively stretching (potential missing neighbors) from $\mathbf{D}$ to $P(\mathbf{D})$. We use Pearson correlation, Spearman rank, and Kendall tau to measure the linearity and monotonicity of the relationship of $d_{ij}$ with $\delta_{ij}$ in Shepard diagrams. The three resulting metrics $S_{Pearson}, S_{Spearman}, S_{Kendall}$ range in $[-1,1]$, with 1 being the ideal distance-preservation case.
-
+\noindent\textbf{Shepard diagram metrics ($S_{Pearson}, S_{Spearman}, S_{Kendall}$)}. Based on a scatterplot of $\mathbf{D}$ and $P(\mathbf{D})$, we use Pearson correlation, Spearman rank, and Kendall tau to measure the linearity and monotonicity of their relationship.\\
 
 \subsubsection{Temporal stability metrics}
 %
@@ -295,30 +284,9 @@ between $c_i^t$ and $\kappa_i^t$ for every sample $i$ and timestep $t$. High val
 \subsection{Datasets}
 \label{sec:datasets}
 %
-We used 10 public datasets extracted from different sources and portraying a wide range of temporal phenomena, such as videos, sound recordings, sports statistics, algorithm behavior, and a few synthetic datasets with easily recognizable dynamics\,\citep{repo-guided}. The collection also exhibits significant variations in measurable traits such as the number of samples $N$, the number of timesteps $T$, dimensionality $n$, intrinsic dimensionality $\rho_n$ (percentage of dimensions that describe 95\% of the data variance), and sparsity ratio $\sigma_n$ (percentage of zeros in the data), as shown by Table~\ref{tab:datasets}. These traits have been used earlier\,\citep{Espadoto19} to indicate that a benchmark captures an as wide as possible (within the benchmark's size bounds) spread of phenomena of different natures.\\
-
-\noindent\textbf{cartolastd:} This dataset has player statistics for the second turn of the 2017 Brazilian soccer championship. Data was extracted from an open-source project\,\citep{dataset:cartola} that scrapes the Cartola FC\,\citep{dataset:cartola} platform. Each of the 19 timesteps is a tournament round. Samples are players, with dimensions being per-match performance (number of goals, assistances, fouls, defenses) and player position (goalkeeper, right or left-back, defender, midfield, forward).\\
-
-\noindent\textbf{cifar10cnn:} Samples are images classified by a convolutional network trained for the CIFAR10\,\citep{dataset:cifar10} dataset. 
-Dimensions are activations of neurons of the network's last hidden layers. Timesteps represent training epochs. This dataset is similar to the one produced for MNIST\,\citep{dataset:mnist} by\,\cite{Rauber2017}, but consider the significantly harder-to-classify CIFAR10 dataset.\\
-
-\noindent \textbf{esc50:} Sound samples of 8 classes (brushing teeth, chainsaw, crying baby, engine, laughing, rain, siren, wind) compressed to 128 frequencies and smoothed over time. Extracted from Piczak's ESC50 dataset\,\citep{dataset:esc50}.\\
-
-\noindent \textbf{fashion:} This is a subsample of 100 images from each of the 10 classes (T-shirt/top, trouser, pullover, dress, coat, sandal, shirt, sneaker, bag, ankle boot) of the FashionMNIST\,\citep{dataset:Xiao2017} dataset. Each image is recorded over 10 timesteps, with decreasing amounts of noise over time.\\
-
-\noindent \textbf{gaussians:} Isotropic gaussian blobs in $\mathbb{R}^{100}$ with diminishing spread over time. Used originally to evaluate D-tSNE\,\citep{Rauber2016}.\\
-
-\noindent \textbf{nnset:} Internal states (weights and biases) of several neural networks during 30 training epochs to learn classifying the MNIST dataset. The networks have the same architecture but use different optimizers, batch sizes, and training-set sizes.\\
-
-\noindent \textbf{qtables:} Internal state of agents learning to move a car up a hill using the reinforcement learning algorithm Q-learning\,\citep{qlearning}. The nine classes represent variations of learning rates and discounts.\\
-
-\noindent \textbf{quickdraw:} Drawing sequences for 600 objects of 6 different classes drawn by random people. Samples represent the pixels of individual drawings. Timesteps (89) represent the drawing stage. Data is extracted from the ``Quick, Draw!'' Google AI experiment\,\citep{dataset:quickdraw}.\\
-
-\noindent \textbf{sorts:} This dataset was designed to compare eight sorting algorithms. They sort each different arrays of 100 random values in $[0,1]$. 
-We take snapshots of the algorithms' intermediate states until sorting completion. A sample is an (algorithm, array) run, its dimensions being the partially-sorted array values at a given sorting step.\\
-
-\noindent \textbf{walk:} Synthetic dataset similar to \emph{gaussians}\,\citep{Rauber2016}, but with more complex dynamics. It contains 3 high-dimensional clusters that oscillate (approach, mingle, cross, and then drift apart) in $\mathbb{R}^{100}$ over 50 timesteps. This dataset tests how well the studied projections can capture the approaching, mingling, and drifting-away dynamics mentioned above.
-% Consider 3 points in $a$, $b$, and $c$ in 1D. Each located roughly at coordinates -1, 0, and +1, respectively. Consider that point $a$ is moving in a jittery motion towards point $c$'s initial position and vice versa. Point $b$ jitters roughly around its starting position. Next, extrapolate this dynamic for 100 dimensions and 100 points for each of the three initial positions (classes).
+We used the same 10 public datasets as in the previous chapter (described in \cref{subsec:datasets}).  
+These were all extracted from different sources and portray a wide range of temporal phenomena, such as videos, sound recordings, sports statistics, algorithm behavior, and a few synthetic datasets with easily recognizable dynamics\,\citep{repo-guided}.
+The collection also exhibits significant variations in measurable traits such as the number of samples $N$, the number of timesteps $T$, dimensionality $n$, intrinsic dimensionality $\rho_n$ (percentage of dimensions that describe 95\% of the data variance), and sparsity ratio $\sigma_n$ (percentage of zeros in the data), as shown by Table~\ref{tab:datasets}. These traits have been used earlier\,\citep{Espadoto19} to indicate that a benchmark captures an as wide as possible (within the benchmark's size bounds) spread of phenomena of different natures. For more information on the nature, source, and meaning of each dataset, see \cref{subsec:datasets}.
 
 \begin{table}
 \centering
@@ -369,6 +337,7 @@ For a direct impression, the animations of each (dataset, method) pair can be fo
 We start with a simple, visual comparison of dynamic projection results. Figure~\ref{fig:cifar} shows the trail-sets -- curves linking $P(\mathbf{x}_i^t)$ for all $t$ -- for the \emph{cifar10cnn} dataset, created by the 13 tested dynamic projection methods, organized following the taxonomy in Sec.~\ref{sec:taxonomy}. Points represent the last layer of neural network activations trained to classify the dataset, over 30 training epochs. Given the problem, we \emph{expect} that activations `segregate' into 10 distinct sets, corresponding to the 10 classes of images in the dataset. The trails should start from a roughly common area (middle of the projection), indicating lack of differentiation at training start, and evolve \emph{smoothy}, that is, without major twists and bends, over epochs, to increasingly differentiated clusters, a phenomenon shown earlier in for the (far) easier-to-classify MNIST dataset\,\citep{Rauber2017} by C-tSNE. We see that only a few dynamic projections exhibit this pattern: G-VAE, G-UMAP, and our proposals, PCD-tSNE and LD-tSNE. All other dynamic projections do not show the convergence of trails to (ten) distinct clusters (red circles in the figure). Saliently, all TF variants show far too high dynamics - long trails turning and twisting, suggesting chaotic dynamics, which we know it is not the case from\,\cite{Rauber2017}. Other projections (G-AE, G-PCA, G-tSNE, C-UMAP, D-tSNE) do not show a clear convergence of trails into 10 clusters, which again, we know should be expected. Overall, we argue that PCD-tSNE and LD-tSNE capture the (known) ground-truth of the training dynamics better than most tested counterparts.
 
 \subsection{Overview of quality metrics}
+\label{sec:overview_quality_metric}
 %
 Figure \ref{fig:swarm} shows the results for each method separated by metric class. The three swarm plots\,\citep{swarm} in the figure address each of the three metric categories outlined above (distance preservation, neighborhood preservation, temporal stability). Columns in a plot indicate methods. Each point in a column corresponds to the averaged result over the four normalized metrics in the respective class for a (method, dataset) pair. Methods in each plot are ordered by how high they score for a given metric class, with methods to the left scoring higher. Methods are categorically color-coded to ease comparison between the plots.
 
@@ -420,13 +389,13 @@ If we use high $\lambda$ values (close to 1), PCD-tSNE gets very close to G-PCA,
 with low $\lambda$ values (close to 0), no global influences act upon PCD-tSNE, which turns into C-tSNE, a method that has high neighborhood preservation, but low stability and distance preservation (Fig.~\ref{fig:lambda}). 
 For each dataset (rows), we compute the mean distance preservation (MDP), mean neighborhood preservation (MNP), and mean temporal stability (MTS) over the respective metrics in each class (see Sec.~\ref{sec:metrics}). For each table row, we normalize values between 0 and 1, to better see the spread of values of the respective metric for each dataset.
 The leftmost column shows the metric results of G-PCA; the rightmost one shows the results of C-tSNE. The six middle columns
-show the results of PCD-tSNE with $\lambda$ in $\{10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}\}$. Cells are colored using an ordinal colormap (dark green=low, bright yellow=high metric values) on the normalized values. The color gradients show that PCD-tSNE indeed yields metric values that are very similar, for high, respectively low, $\lambda$ to those of G-PCA, respectively C-tSNE. Also, we see that PCD-tSNE can integrate characteristics of both C-tSNE and G-PCA and achieves the best balance between all quality metrics, as shown by the overall brightest columns in the middle of the table. Interestingly, PCD-tSNE is also often able to achieve the best result for certain quality metrics (maximum averages, marked bold in Fig.~\ref{fig:lambda}). This shows that PCD-tSNE doesn't simply \emph{interpolate} projections (like, for example, in\,\cite{kruiger_mdpi}), but uses the characteristics of both C-tSNE and G-PCA to create a better projection. In Fig.~\ref{fig:lambda}, note that different rows show different trends, which is expected since we consider different datasets and metrics. 
+show the results of PCD-tSNE with $\lambda$ in $\{10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}\}$. Cells are colored using an ordinal colormap (dark green=low, bright yellow=high metric values) on the normalized values. The color gradients show that PCD-tSNE indeed yields metric values that are very similar, for high, respectively low, $\lambda$ to those of G-PCA, respectively C-tSNE. Also, we see that PCD-tSNE can integrate characteristics of both C-tSNE and G-PCA and achieves the best balance between all quality metrics, as shown by the overall brightest columns in the middle of the table. Interestingly, PCD-tSNE is also often able to achieve the best result for certain quality metrics (maximum averages, marked bold in Fig.~\ref{fig:lambda}). This shows that PCD-tSNE does mpt simply \emph{interpolate} projections (like, for example, in\,\cite{kruiger_mdpi}), but uses the characteristics of both C-tSNE and G-PCA to create a better projection. In Fig.~\ref{fig:lambda}, note that different rows show different trends, which is expected since we consider different datasets and metrics. 
 
 Finally, Figure~\ref{fig:lambda} shows that G-PCA and C-tSNE are not always optimal -- the best projection lies sometimes in between, which is what PCD-tSNE obtains. Separately, it shows that optimal parameters depend on the dataset. The considered MDP, MNP, and MTS quality metrics could be used for automatic finding of such optimal parameters -- or good preset values for all datasets -- by grid search, following the approach in\,\cite{Espadoto19} for static projections.
 
 % https://docs.google.com/drawings/d/18Y6EjHYnk1McBokhSRCSHwiHzoDtwdT-Ddccpk9r-og/edit
 \begin{figure}[htb!]\centering
- \includegraphics[width=.7\linewidth]{figures/projection-algorithm/lambda-influence-on-metrics.pdf}
+ \includegraphics[width=.65\linewidth]{figures/projection-algorithm/lambda-influence-on-metrics.pdf}
  \caption{
 Mean distance preservation (MDP), mean neighborhood preservation (MNP), and mean temporal stability (MTS) per dataset, as in Figs.~\ref{fig:swarm} and~\ref{fig:star}, but normalized over the 8 runs in each subplot.
   The leftmost column is for G-PCA. The next 6 columns are for PCD-tSNE with $\lambda \in \{10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}\}$. The rightmost column is for C-tSNE.
